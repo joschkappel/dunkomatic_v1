@@ -1,0 +1,12 @@
+a:8:{s:7:"attribs";a:4:{s:5:"xmlns";s:36:"http://pear.php.net/dtd/rest.package";s:9:"xmlns:xsi";s:41:"http://www.w3.org/2001/XMLSchema-instance";s:11:"xmlns:xlink";s:28:"http://www.w3.org/1999/xlink";s:18:"xsi:schemaLocation";s:80:"http://pear.php.net/dtd/rest.package    http://pear.php.net/dtd/rest.package.xsd";}s:1:"n";s:17:"HTTP_FloodControl";s:1:"c";s:12:"pear.php.net";s:2:"ca";a:2:{s:7:"attribs";a:1:{s:10:"xlink:href";s:12:"/rest/c/HTTP";}s:8:"_content";s:4:"HTTP";}s:1:"l";s:4:"LGPL";s:1:"s";s:48:"Detect and protect from attempts to flood a site";s:1:"d";s:627:"The HTTP_FloodControl package can be used to detect and protect a
+ Web site from attempts to flood it with too many requests. It also allows to
+ protect the site from automatic downloading many pages or files from the same
+ IP address, session ID or other unique identifier.
+
+ The detection of flood is determine according to a set of parameters indicating
+ the maximal allowed number of requests for the certain time interval. It is
+ possible to set several parameters at once in order to perform more effective
+ protection.
+
+ The package uses various storage containers (regular files, DB, MDB, MDB2) to
+ handle counter logs.";s:1:"r";a:1:{s:7:"attribs";a:1:{s:10:"xlink:href";s:25:"/rest/r/http_floodcontrol";}}}

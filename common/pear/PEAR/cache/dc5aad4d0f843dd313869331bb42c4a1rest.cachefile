@@ -1,0 +1,12 @@
+a:8:{s:7:"attribs";a:4:{s:5:"xmlns";s:36:"http://pear.php.net/dtd/rest.package";s:9:"xmlns:xsi";s:41:"http://www.w3.org/2001/XMLSchema-instance";s:11:"xmlns:xlink";s:28:"http://www.w3.org/1999/xlink";s:18:"xsi:schemaLocation";s:80:"http://pear.php.net/dtd/rest.package    http://pear.php.net/dtd/rest.package.xsd";}s:1:"n";s:22:"PEAR_Command_Packaging";s:1:"c";s:12:"pear.php.net";s:2:"ca";a:2:{s:7:"attribs";a:1:{s:10:"xlink:href";s:12:"/rest/c/PEAR";}s:8:"_content";s:4:"PEAR";}s:1:"l";s:16:"PHP License 3.01";s:1:"s";s:68:"make-rpm-spec command for managing RPM .spec files for PEAR packages";s:1:"d";s:613:"This command is an improved implementation of the standard makerpm command,
+  and contains several enhancements that make it far more flexible. Similar 
+  functions for other external packaging mechanisms may be added at a later date.
+
+  Enhanced features over the original PEAR "makerpm" command include:
+  
+  - Ability to define a release on the command line
+  - Allows more advanced customisation of the generated package name
+  - Allows virtual Provides/Requires that differ in format from the package name
+    format 
+  - tries to intelligently distinguish between PEAR and PECL when generating 
+    packages";s:1:"r";a:1:{s:7:"attribs";a:1:{s:10:"xlink:href";s:30:"/rest/r/pear_command_packaging";}}}

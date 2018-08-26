@@ -1,0 +1,4 @@
+schiris pro verein und jahr der letzten änderung
+
+select c.shortname, left(r.lastchange,4), count(*) from referee r, club c where left(r.lastchange,4) in ('2005','2006') and r.club_id=c.club_id group by 1,2
+

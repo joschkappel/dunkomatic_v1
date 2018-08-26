@@ -1,0 +1,9 @@
+a:8:{s:7:"attribs";a:4:{s:5:"xmlns";s:36:"http://pear.php.net/dtd/rest.package";s:9:"xmlns:xsi";s:41:"http://www.w3.org/2001/XMLSchema-instance";s:11:"xmlns:xlink";s:28:"http://www.w3.org/1999/xlink";s:18:"xsi:schemaLocation";s:80:"http://pear.php.net/dtd/rest.package    http://pear.php.net/dtd/rest.package.xsd";}s:1:"n";s:9:"File_MARC";s:1:"c";s:12:"pear.php.net";s:2:"ca";a:2:{s:7:"attribs";a:1:{s:10:"xlink:href";s:20:"/rest/c/File+Formats";}s:8:"_content";s:12:"File Formats";}s:1:"l";s:33:"GNU Lesser General Public License";s:1:"s";s:38:"Parse, modify, and create MARC records";s:1:"d";s:581:"The standard for machine-readable cataloging (MARC) records
+ is documented at http://loc.gov/marc/. This package enables you to read
+ existing MARC records from a file, string, or (using the YAZ extension), from
+ a Z39.50 source. You can also use this package to create new MARC records.
+
+ This package is based on the PHP MARC package, originally called
+ "php-marc", that is part of the Emilda Project (http://www.emilda.org). 
+ Christoffer Landtman generously agreed to make the "php-marc" code available
+ under the GNU LGPL so it could be used as the basis of this PEAR package.";s:1:"r";a:1:{s:7:"attribs";a:1:{s:10:"xlink:href";s:17:"/rest/r/file_marc";}}}

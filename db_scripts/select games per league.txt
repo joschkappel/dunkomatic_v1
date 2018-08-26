@@ -1,0 +1,26 @@
+Spiele einer Staffel
+
+SELECT game_id, game_no, game_team_home, game_team_guest, game_date, game_time, game_gym  
+FROM `game`  WHERE league_id = 45  ORDER BY `game_no` ASC
+
+
+
+Fehlende Heimspiele
+
+select shortname, count(*) from game g, club c
+WHERE g.club_id=c.club_id
+and (IFNULL(game_time,'00:00:00')='00:00:00')
+and team_id_guest != 0 
+GROUP BY shortname order by 2 desc
+
+
+alle spiele für Schiriliste
+
+SELECT g.game_id, l.shortname, g.game_no, g.game_team_home, g.game_team_guest, g.game_date, g.game_time, g.game_gym 
+FROM game g, league l where g.league_id=l.league_id 
+ORDER BY g.game_date, SUBSTRING(g.game_team_home,1,4), g.game_gym, g.game_time
+
+teams einer runden
+select * from game
+where league_id=12
+and (char_team_home=3 or char_team_guest=3)

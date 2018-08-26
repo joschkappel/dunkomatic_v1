@@ -1,0 +1,253 @@
+/* --------------------------general stuff ------------------------*/
+.SiteBody{
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	padding: 0px;
+	margin: 1px 0px 0px;
+	width: 100%;
+	height: 100%;
+	background-color: #FFFFFF;
+}
+.TopLink{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: underline;
+}
+.TopLink:hover{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	text-decoration: underline;
+}
+.MainSiteBox{
+	font-family: Arial, Helvetica, sans-serif;
+	border: 1px solid #C9B4D8;
+	width:760px;
+	height:97%;
+	background-color: #FFFFFF;
+}
+.TopLinkRow{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	background-color: #82C0FF;
+	text-align: left;
+	width:100%;
+	padding-left:4px;
+}
+.TopLogoRow{
+	text-align: right;
+	width:100%;
+	padding-right:4px;
+}
+.SiteTitleRow{
+	background-color: #82C0FF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	border-bottom: 2px solid #FF9900;
+	text-align: left;
+	width:100%;
+	padding-left:4px;
+}
+.ContentDiv{
+	width:100%;
+	text-align: left;
+}
+.TheContent{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	width:100%;
+}
+.MenuBox{
+	border: 1px solid #C9B4D8;
+	background-color: #FFFFFF;
+	width:150px;
+}
+.MenuBoxTitle{
+	background-color: #82C0FF;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	padding-right:3px;
+	height:20px;
+}
+.MenuBoxLinks{
+	padding-left:4px;
+}
+.MenuLink{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	color: #000000;
+	text-decoration: underline;
+}
+.MenuLink:hover{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #000000;
+	text-decoration: underline;
+}
+.ContentLink{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	color: #0000CC;
+	text-decoration: underline;
+}
+.ContentLink:hover{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	color: #825495;
+	text-decoration: underline;
+}
+.PageTitle{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+}
+.ExplainText{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+}
+/* -----------form objects-------------- */
+.FormObjects{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	background-color: #FFFFCC;
+}
+.FormCheckbox{
+}
+.FormText{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	background-color: #FFFFFF;
+}
+.FormHidden{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 8px;
+	background-color: #F0F0F0;
+    display: none;
+}
+.FormSelectbox{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	background-color: #FFFFFF;
+}
+.FormTextarea{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	background-color: #FFFFFF;
+}
+.FormPassword{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	background-color: #FFFFFF;
+}
+.GeneralForm{
+	margin: 0px;
+	padding: 0px;
+}
+.FormFieldHeading{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #003366;
+	white-space: nowrap;
+}
+.FormFieldView{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+.FormFieldExplain{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+.FormButton{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #003366;
+	cursor:pointer;
+	cursor:hand;
+	background-color: #CFD8DF;
+	padding:0px;
+	border:1px solid #003366;
+}
+.FormButtonOnMouse{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #003366;
+	cursor:pointer;
+	cursor:hand;
+	background-color: #FF9900;
+	padding:0px;
+	border:1px solid #003366;
+}
+.FormActionLink{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #003366;
+	text-decoration: underline;
+}
+.FormActionLink:hover{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #FF9900;
+	text-decoration: underline;
+}
+.FormActionLink:active{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #FF9900;
+	text-decoration: underline;
+}
+.FormMethodSuccessMessage{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FF0000;
+}
+
+/* --------form objects end------------- */
+/*-------------------------------pagers--------------------*/
+.PagerPageNumber{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+.TablePager{
+	border-top:1px solid #000000;
+	border-right:1px solid #000000;
+}
+.TablePagerHeading{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight:bold;
+	border-bottom:1px solid #000000;
+	border-left:1px solid #000000;
+}
+.TablePagerCell{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	border-bottom:1px solid #000000;
+	border-left:1px solid #000000;
+}
+.RowPagerMainFieldText{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight:bold;
+}
+.RowPagerText{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+/*-------------------------------pagers end--------------------*/
+

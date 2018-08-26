@@ -1,0 +1,7 @@
+ADODB - 3.5
+SMarty 2.6.2
+PhpMailer 1.71
+
+dtree 2.05
+htmlArea 3.0
+jsCalendar 0.96

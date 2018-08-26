@@ -1,0 +1,8 @@
+# Secure access to donwloads
+<Files ~ "\.(xls)$">
+#SetEnvIfNoCase Referer "^http://www.dunkomatic.de" local_ref=1
+#SetEnvIfNoCase Referer "^http://dunkomatic.de" local_ref=1
+SetEnvIfNoCase Referer "^$" local_ref=1
+Order Allow,Deny
+Deny from env=local_ref
+</Files>

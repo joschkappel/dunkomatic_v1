@@ -1,0 +1,1 @@
+UPDATE game SET game_no = (SELECT @a := @a + 1 FROM (SELECT @a := 0) s) where league_id=94 ORDER BY game_date asc, game_time asc;

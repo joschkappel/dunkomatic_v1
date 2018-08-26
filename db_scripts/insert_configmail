@@ -1,0 +1,16 @@
+INSERT INTO `settings` (`region`, `mod_online`, `setting_name`, `description`, `setting_comment`, `setting_remark`, `setting_var`, `setting_default`) VALUES 
+('HBV', 1, 'editContactEmail', 'eMail Spielleitung', 'vollständige eMail Addresse', 'wird als Absender bei Systemmails benutzt', 'CONFIG_contactEmail', 'webmaster@dunkomatic.de'),
+('HBV', 1, 'editContactName', 'Name Spielleitung', 'vollständiger Name', 'wird als Absender bei Systemmails benutzt', 'CONFIG_contactName', 'die Spielleitung'),
+('HBVDA', 1, 'editContactEmail', 'eMail Spielleitung', 'vollständige eMail Addresse', 'wird als Absender bei Systemmails benutzt', 'CONFIG_contactEmail', 'webmaster@dunkomatic.de'),
+('HBVDA', 1, 'editContactName', 'Name Spielleitung', 'vollständiger Name', 'wird als Absender bei Systemmails benutzt', 'CONFIG_contactName', 'die Spielleitung'),
+('HBVF', 1, 'editContactEmail', 'eMail Spielleitung', 'vollständige eMail Addresse', 'wird als Absender bei Systemmails benutzt', 'CONFIG_contactEmail', 'webmaster@dunkomatic.de'),
+('HBVF', 1, 'editContactName', 'Name Spielleitung', 'vollständiger Name', 'wird als Absender bei Systemmails benutzt', 'CONFIG_contactName', 'die Spielleitung'),
+('HBVGI', 1, 'editContactEmail', 'eMail Spielleitung', 'vollständige eMail Addresse', 'wird als Absender bei Systemmails benutzt', 'CONFIG_contactEmail', 'webmaster@dunkomatic.de'),
+('HBVGI', 1, 'editContactName', 'Name Spielleitung', 'vollständiger Name', 'wird als Absender bei Systemmails benutzt', 'CONFIG_contactName', 'die Spielleitung'),
+('HBVKS', 1, 'editContactEmail', 'eMail Spielleitung', 'vollständige eMail Addresse', 'wird als Absender bei Systemmails benutzt', 'CONFIG_contactEmail', 'webmaster@dunkomatic.de'),
+('HBVKS', 1, 'editContactName', 'Name Spielleitung', 'vollständiger Name', 'wird als Absender bei Systemmails benutzt', 'CONFIG_contactName', 'die Spielleitung'),
+('HBV', 1, 'runGameReport', 'Spielplan-Listen erzeugen', 'Y=Ja, N=Nein', 'J=die Spielplanlisten werden jeden Tag aktualisiert', 'CONFIG_runLeagueReports','N'),
+('HBVF', 1, 'runGameReport', 'Spielplan-Listen erzeugen', 'Y=Ja, N=Nein', 'J=die Spielplanlisten werden jeden Tag aktualisiert', 'CONFIG_runLeagueReports','N'),
+('HBVDA', 1, 'runGameReport', 'Spielplan-Listen erzeugen', 'Y=Ja, N=Nein', 'J=die Spielplanlisten werden jeden Tag aktualisiert', 'CONFIG_runLeagueReports','N'),
+('HBVKS', 1, 'runGameReport', 'Spielplan-Listen erzeugen', 'Y=Ja, N=Nein', 'J=die Spielplanlisten werden jeden Tag aktualisiert', 'CONFIG_runLeagueReports','N'),
+('HBVGI', 1, 'runGameReport', 'Spielplan-Listen erzeugen', 'Y=Ja, N=Nein', 'J=die Spielplanlisten werden jeden Tag aktualisiert', 'CONFIG_runLeagueReports','N');

@@ -1,0 +1,5 @@
+// if a games have been generated for a league: use this script to roll it back:
+
+UPDATE league SET changeable='Y' WHERE league_id=87;
+UPDATE team SET changeable='Y' WHERE league_id=87;
+DELETE FROM game WHERE league_id=87;	

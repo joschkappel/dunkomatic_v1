@@ -1,0 +1,40 @@
+-- phpMyAdmin SQL Dump
+-- version 2.9.2
+-- http://www.phpmyadmin.net
+-- 
+-- Host: localhost
+-- Erstellungszeit: 04. Mai 2007 um 12:15
+-- Server Version: 5.0.33
+-- PHP-Version: 5.2.1
+-- 
+-- Datenbank: 'dunkomatic'
+-- 
+
+-- --------------------------------------------------------
+
+-- 
+-- Tabellenstruktur für Tabelle 'schedule_group'
+-- 
+DROP TABLE IF EXISTS `schedule_group`;
+
+CREATE TABLE schedule_group (
+  group_id smallint(6) NOT NULL default '0',
+  group_name varchar(30) NOT NULL default '',
+  PRIMARY KEY  (group_id)
+) TYPE=MyISAM;
+
+-- 
+-- Daten für Tabelle 'schedule_group'
+-- 
+
+INSERT INTO schedule_group (group_id, group_name) VALUES 
+(6, 'Oberliga'),
+(7, 'Landesliga'),
+(8, '2. Regionalliga'),
+(10, '1. Regionalliga'),
+(1, 'Senioren'),
+(2, 'Jugend U14-U20'),
+(3, 'Jugend U10-U12'),
+(4, 'Oberliga Jugend 10er'),
+(5, 'Oberliga Jugend 8er'),
+(9, 'Jugendpokal');

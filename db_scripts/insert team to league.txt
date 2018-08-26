@@ -1,0 +1,2 @@
+update game set club_id=39, team_id_home=278, game_team_home='GOST1' where char_team_home=6 and league_id=20;
+update game set club_id_guest=39, team_id_guest=278, game_team_guest='GOST1' where char_team_guest=6 and league_id=20;

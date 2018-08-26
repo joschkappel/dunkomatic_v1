@@ -1,0 +1,67 @@
+schiri anzahl pro verein+lizenz
+
+SELECT shortname, lic_type, count(*) FROM referee as r, club as c
+where r.club_id=c.club_id
+group by shortname, lic_type
+
+
+anzahl spiele pro spieltag
+
+SELECT game_date, count(*) 
+FROM game
+GROUP BY game_date
+
+
+anzahl spiele pro verein und tag
+
+SELECT g.game_date, c.shortname, count(*)
+FROM club c, game g
+WHERE g.club_id=c.club_id or g.club_id_guest = c.club_id
+GROUP BY g.game_date, c.shortname
+
+
+
+
+SELECT g.game_date, g.game_team_home, g.game_team_guest, count(*) FROM game g, referee r
+WHERE g.game_date='2005-09-17' and r.club_id=48
+GROUP BY g.game_date, g.game_team_home, g.game_team_guest
+
+
+nicht verfügbare schiris pro spieltag und verein
+
+SELECT g.game_date, shortname, count( * )
+FROM game g, referee r, club c
+WHERE (
+(
+r.club_id = g.club_id
+OR g.club_id_guest = r.club_id
+)
+AND (
+r.player_league = g.league_id
+OR r.coach_league = g.league_id
+)
+)
+AND r.club_id = c.club_id
+GROUP BY shortname, g.game_date
+ORDER BY game_date
+
+
+
+SCHIRI PRÜFUNGEN / KONTROLLE
+
+alle spiele wo schiri verein nicht existiert
+SELECT game_no FROM game LEFT JOIN club ON game.game_team_ref1=club.shortname
+                                       WHERE club.club_id IS NULL  and game_team_ref1!=''
+
+
+alle spiele wo schiri = team home or guest
+SELECT * FROM `game` where game_team_ref1=SUBSTRING(game_team_home,1,4) and game_team_ref1!=''
+
+
+
+alle spiele wo schiri fehlt
+SELECT * FROM game where game_team_ref1 =''
+
+
+
+

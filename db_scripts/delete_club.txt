@@ -1,0 +1,9 @@
+select * from member where club_id=xxxx
+
+delete from team where club_id=xxxx;
+delete from member where club_id=xxxx;
+delete from gymnasium where club_id=xxxx;
+delete from referee where club_id=xxxx;
+delete from game where (club_id=xxxx or club_id_guest=xxxx);
+delete from system_manager where system_manager_id in (yyyy);
+delete from club where club_id=xxxx;
