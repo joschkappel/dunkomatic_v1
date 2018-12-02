@@ -1,7 +1,0 @@
-a:8:{s:7:"attribs";a:4:{s:5:"xmlns";s:36:"http://pear.php.net/dtd/rest.package";s:9:"xmlns:xsi";s:41:"http://www.w3.org/2001/XMLSchema-instance";s:11:"xmlns:xlink";s:28:"http://www.w3.org/1999/xlink";s:18:"xsi:schemaLocation";s:80:"http://pear.php.net/dtd/rest.package    http://pear.php.net/dtd/rest.package.xsd";}s:1:"n";s:27:"PEAR_PackageFileManager_Cli";s:1:"c";s:12:"pear.php.net";s:2:"ca";a:2:{s:7:"attribs";a:1:{s:10:"xlink:href";s:12:"/rest/c/PEAR";}s:8:"_content";s:4:"PEAR";}s:1:"l";s:4:"LGPL";s:1:"s";s:51:"A command line interface to PEAR_PackageFileManager";s:1:"d";s:347:"A command line interface to PEAR_PackageFileManager. Use this
-tool as a quick alternative to writing a php script to create or edit your
-package xml files.
- 
-This tool is currently in an alpha release state. Feel free to test it out and 
-raise any bugs or feature requests with the functionality or user interface. 
-Feedback is always appreciated.";s:1:"r";a:1:{s:7:"attribs";a:1:{s:10:"xlink:href";s:35:"/rest/r/pear_packagefilemanager_cli";}}}

@@ -1,6 +1,0 @@
-a:8:{s:7:"attribs";a:4:{s:5:"xmlns";s:36:"http://pear.php.net/dtd/rest.package";s:9:"xmlns:xsi";s:41:"http://www.w3.org/2001/XMLSchema-instance";s:11:"xmlns:xlink";s:28:"http://www.w3.org/1999/xlink";s:18:"xsi:schemaLocation";s:80:"http://pear.php.net/dtd/rest.package    http://pear.php.net/dtd/rest.package.xsd";}s:1:"n";s:14:"Net_URL_Mapper";s:1:"c";s:12:"pear.php.net";s:2:"ca";a:2:{s:7:"attribs";a:1:{s:10:"xlink:href";s:18:"/rest/c/Networking";}s:8:"_content";s:10:"Networking";}s:1:"l";s:15:"New BSD License";s:1:"s";s:75:"Provides a simple and flexible way to build nice URLs for web applications.";s:1:"d";s:382:"Net_URL_Mapper provides a simple and flexible way to build nice URLs for your web applications.
-
-The URL syntax is similar to what can be found in Ruby on Rails or Python Routes module 
-and as such, this package can be compared to what they call a router. Still, Net_URL_Mapper 
-does not perform the dispatching like these frameworks and therefore can be used with your 
-own router.";s:1:"r";a:1:{s:7:"attribs";a:1:{s:10:"xlink:href";s:22:"/rest/r/net_url_mapper";}}}
