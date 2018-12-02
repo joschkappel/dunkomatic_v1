@@ -1,1 +1,6 @@
 /logs
+/ddl
+**/*config.php
+oldhot.config.php
+v3test.config.php
+hot.config.php
