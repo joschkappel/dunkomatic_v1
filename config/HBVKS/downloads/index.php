@@ -1,4 +1,4 @@
-<?php 
+<?php
 /***************************************************************************
 
 snif 1.5.2
@@ -25,13 +25,13 @@ GNU General Public License for more details: <http://www.gnu.org/licenses/gpl.tx
 ****************************************************************************
 
 	+------------------------------------------------------------------------+
-	| TRANSLATIONS:                                                          |
+	| TRANSLATIONS:                                                           |
 	+------------------------------------------------------------------------+
 	| If you'd like to translate snif into your language, have a look at     |
 	| the $languageStrings variable at the end of the advanced settings, add |
 	| your language and send me the PHP snippet containing your translation. |
 	+------------------------------------------------------------------------+
-	
+
 To do:
 Make download icon bigger?
 pdf and ppt and xls should have own icons as well not just listed as binary
@@ -150,7 +150,7 @@ v1.2.7  12-09-03
 	fixed a bug with the new hidden file wildcards
 
 v1.2.6  12-06-03
-	improved external icons: you may now mix external and internal icons 
+	improved external icons: you may now mix external and internal icons
 	improved directory sorting (thanks to mpember at mpember dot net dot au)
 	improved default hidden files wildcards, now also hides .* (thanks to Charles Hill)
 	fixed a minor bug in file type detection (thanks to Charles Hill)
@@ -219,12 +219,12 @@ the descriptions in a file align or not, just use one tab.
 If you use a description for the current directory (.) as in the first line
 in the above example, it will be used as a heading in the directory listing.
 
-Put your descriptions in a text file within the same directory as the files 
-to describe. Then put the text file's name in the $useDescriptionsFrom 
+Put your descriptions in a text file within the same directory as the files
+to describe. Then put the text file's name in the $useDescriptionsFrom
 variable below. It is suggested that you use the same description file name
 in all subdirectories you want to list. Reason: Read the next paragraph.
 
-To make it even easier: For my download folder at 
+To make it even easier: For my download folder at
 http://www.bitfolge.de/download, I have put the description file at
 http://www.bitfolge.de/download/descript.ion
 You can download it and use it as another example.
@@ -242,12 +242,12 @@ $descriptionFilenamesCaseSensitive variable in the advanced settings.
 Say you've put the snif index.php into www.yourhost.com/download.
 Now somebody makes a request to www.yourhost.com/download/releases. In
 order to deal with this properly, you would have to copy the snif index.php
-to that directory, too. But this will prevent the user to go to 
+to that directory, too. But this will prevent the user to go to
 www.yourhost.com/download from www.yourhost.com/download/releases
 directly by selecting the .. link.
 
 If you have this situation, use the index.php file from the subdirectory
-called "subdir" in the snif archive file. All it does is automatically 
+called "subdir" in the snif archive file. All it does is automatically
 forward the user to the parent directory and set URL parameters so that
 the real snif will handle the request.
 
@@ -268,7 +268,7 @@ OK, that may be confusing. Again, a simple example:
 
 If a users points his browser to
   www.yourhost.com/download/releases/nightly/
-  
+
 The small index.php will forward him to
   www.yourhost.com/download/releases/?path=nightly/
 
@@ -291,6 +291,7 @@ the user typed as an URL.
 /* These settings configure the most basic functions of snif. You should   */
 /* be able to understand them quickly.                                     */
 /***************************************************************************/
+date_default_timezone_set('Europe/Berlin');
 
 /**
  * Specify which files should be hidden in the file listing using
@@ -326,7 +327,7 @@ $useAutoThumbnails = true;
  * Cache any thumbnails created for later use in a subdirectory called
  * .snifthumbs. This subdirectory is created in every directory and contains
  * the cached thumbnails of its parent directory. This directory is hidden
- * by the default settings of snif. If an image file is updated, so is the 
+ * by the default settings of snif. If an image file is updated, so is the
  * thumbnail. If an image is removed though, the thumbnail has to be removed
  * manually.
  **/
@@ -341,7 +342,7 @@ $cacheThumbnails = true;
 
 /**
  * Set the server name to be reported on generated pages. Use this only if
- * your server reports the wrong name if $_SERVER['HTTP_HOST'] (which is 
+ * your server reports the wrong name if $_SERVER['HTTP_HOST'] (which is
  * the default) is used.
  **/
 $snifServer = $_SERVER['HTTP_HOST'];
@@ -361,7 +362,7 @@ $snifDateFormat = 'd-m-y';
  * These patterns will be merged with $hiddenFilesWildcards.
  **/
 $hiddenFilesRegex = Array();
- 
+
 /**
  * Description file, leave blank for no descriptions.
  **/
@@ -409,7 +410,7 @@ $externalIcons = Array (
 $externalStylesheet = "";
 
 /**
- * Use an external configuration file. This can be used to configure multiple 
+ * Use an external configuration file. This can be used to configure multiple
  * installations of snif on the same machine the same way without changing
  * the individual scripts. Should be an absolute path, like "/etc/snif.conf".
  * Set to an empy string to use the settings that are set in this file.
@@ -429,7 +430,7 @@ $externalConfig = "";
 
 /**
  * Filenames in description files are case insensitive. If a file in a
- * directory is called MyProgram.ZIP, adding a description line for 
+ * directory is called MyProgram.ZIP, adding a description line for
  * myprogram.zip will be used for this file.
  * If you set this to true, filenames in description files and directories
  * must be exactly the same.
@@ -453,7 +454,7 @@ $usePaging = 0;
 $directDirectoryLinks = false;
 
 /**
- * Sets the maximum size of thumbnails. Images with one dimension bigger than 
+ * Sets the maximum size of thumbnails. Images with one dimension bigger than
  * the respective value will be downsized. Smaller images will stay unchanged.
  * Defaults to 50 height and 150 width.
  **/
@@ -524,7 +525,7 @@ $protectDirsWithHtaccess = true;
  * Specifies whether to use automatic translation selection (default) or always
  * use the same language. Set to an empty string to enable automatic selection,
  * or set to a two-character language code.
- * Valid language codes are: de, en, nl, no, pl, sv (for a complete and 
+ * Valid language codes are: de, en, nl, no, pl, sv (for a complete and
  * up-to-date list, see the $languageStrings array below.
  **/
 $alwaysUseLanguage = "de";
@@ -538,7 +539,7 @@ $languageStrings = Array(
 	"en" => Array(
 		// only serves as the default language, no translations needed
 		// if you don't translate a string, the english version will be used
-		
+
 		"Index of" => "", // displayed in the page title
 		"name" => "", // column name in the file listing
 		"type" => "", // column name in the file listing
@@ -575,7 +576,7 @@ $languageStrings = Array(
 		"previous" => "", // as in "previous page"
 		"next" => "" // as in "next page"
 	),
-	
+
 	"de" => Array(
 		"Index of" => "Inhalt von",
 		"name" => "Name",
@@ -631,7 +632,7 @@ $languageStrings = Array(
 function translate($string) {
 	GLOBAL $languageStrings, $alwaysUseLanguage;
 	static $requestLanguage;
-	
+
 	if ($requestLanguage=="") {
 		$validLanguages = array_keys($languageStrings);
 		if ($alwaysUseLanguage!="" && in_array($alwaysUseLanguage, $validLanguages)) {
@@ -651,7 +652,7 @@ function translate($string) {
 			}
 		}
 	}
-	
+
 	$stringTranslated = $languageStrings[$requestLanguage][$string];
 	if ($stringTranslated!="") {
 		return $stringTranslated;
@@ -694,13 +695,13 @@ if (!$allowSubDirs) {
 	$path = "";
 } else {
 	$path = $_GET["path"];
-	
+
 	// ignore any potentially malicious paths
 	$path = safeDirectory($path);
 }
 
 // default sorting is by name
-if ($_GET["sort"]=="") 
+if ($_GET["sort"]=="")
 	$_GET["sort"] = "name";
 
 // default order is ascending
@@ -717,7 +718,7 @@ if ($useDescriptionsFrom=="") {
 		unset($displayColumns[$index]);
 	}
 }
-	
+
 // add files used by snif to hidden file list
 if ($useDescriptionsFrom!="") {
 	$hiddenFilesWildcards[] = $useDescriptionsFrom;
@@ -784,7 +785,7 @@ if ($_GET["getimage"]!="") {
 		Header("Expires: ".createHTTPDate(time()+$maxAge));
 		echo $imageDataRaw;
 	}
-	
+
 	die();
 }
 
@@ -792,7 +793,7 @@ if ($_GET["getimage"]!="") {
 if ($_GET["thumbnail"]!="") {
 	GLOBAL $thumbnailHeight, $cacheThumbnails;
 	$thumbnailCacheSubdir = ".snifthumbs";
-	
+
 	$file = safeDirectory(urldecode($_GET["thumbnail"]));
 	doConditionalGet($_GET["thumbnail"],filemtime($file));
 
@@ -829,7 +830,7 @@ if ($_GET["thumbnail"]!="") {
 	$srcWidth = imagesx($src);
 	$srcHeight = imagesy($src);
 	$srcAspectRatio = $srcWidth / $srcHeight;
-	
+
 	$maxAge = 3600; // one hour
 	Header("Cache-Control: public, max-age=$maxAge, must-revalidate");
 	Header("Expires: ".createHTTPDate(time()+$maxAge));
@@ -849,7 +850,7 @@ if ($_GET["thumbnail"]!="") {
 			$thumb = imagecreatetruecolor($thumbWidth, $thumbHeight);
 		} else {
 			$thumb = imagecreate($thumbWidth, $thumbHeight);
-		} 
+		}
 		imagecopyresampled($thumb, $src, 0, 0, 0, 0, $thumbWidth, $thumbHeight, $srcWidth, $srcHeight);
 		Header("Content-Type: image/jpeg");
 		if ($cacheThumbnails) {
@@ -871,7 +872,7 @@ if ($_GET["download"]!="") {
 		!file_exists($filename)
 		OR fileIsHidden($filename)
 		OR (substr(strtolower($filename), -4)==".php" AND !$allowPHPDownloads)) {
-		
+
 		Header("HTTP/1.0 404 Not Found");
 		$displayError[] = sprintf(translate("File not found: %s"), $filename);
 	} else {
@@ -908,7 +909,7 @@ function doConditionalGet($file, $timestamp) {
 		stripslashes($_SERVER['HTTP_IF_MODIFIED_SINCE']) :
 		false;
 	$if_none_match = isset($_SERVER['HTTP_IF_NONE_MATCH']) ?
-		stripslashes($_SERVER['HTTP_IF_NONE_MATCH']) : 
+		stripslashes($_SERVER['HTTP_IF_NONE_MATCH']) :
 		false;
 	if (!$if_modified_since && !$if_none_match) {
 		return;
@@ -954,16 +955,16 @@ function niceSize($size) {
 		$sizeUnits[] = translate("GB");
 		$sizeUnits[] = translate("TB");
 	}
-	
+
 	if ($size==="")
 		return "";
-	
+
 	$unitIndex = 0;
 	while ($size>SIZESTEP) {
 		$size = $size / SIZESTEP;
 		$unitIndex++;
 	}
-	
+
 	if ($unitIndex==0) {
 		return number_format($size, 0)."&nbsp;".$sizeUnits[$unitIndex];
 	} else {
@@ -977,7 +978,7 @@ function niceSize($size) {
 function myCompare($arrA, $arrB, $caseSensitive=false) {
 	$a = $arrA[$_GET["sort"]];
 	$b = $arrB[$_GET["sort"]];
-	
+
 	// sort .. first
 	if ($arrA["isBack"]) return -1;
 	if ($arrB["isBack"]) return 1;
@@ -997,7 +998,7 @@ function myCompare($arrA, $arrB, $caseSensitive=false) {
 			$result = $a-$b;
 		}
 	}
-	
+
 	if (strtolower($_GET["order"])=="desc") {
 		return -$result;
 	} else {
@@ -1072,7 +1073,7 @@ function getFileType($fileInfo) {
 			return "folder";
 		}
 	}
-	
+
 	$type = $extensions[strtolower($extension)];
 	if ($type=="") {
 		return "unknown";
@@ -1105,7 +1106,7 @@ function dirContainsHtAccess($dirname) {
 // checks if a file is hidden from view
 function fileIsHidden($filename) {
 	GLOBAL $hiddenFilesWholeRegex,$protectDirsWithHtaccess;
-	
+
 	if (is_dir($filename) && $protectDirsWithHtaccess) {
 		if (!($filename=="." || $filename=="..")) {
 			$d = dir($filename);
@@ -1133,7 +1134,7 @@ function getVersion($filename) {
  **/
 function getDescription($filename) {
 	GLOBAL $descriptions, $descriptionFilenamesCaseSensitive;
-	
+
 	if (!$descriptionFilenamesCaseSensitive) {
 		$filename = strtolower($filename);
 	}
@@ -1164,7 +1165,7 @@ function getPagingHeader() {
 		$displayPages[] = $pagingNumberOfPages-1;
 		$displayPages = array_unique($displayPages);
 	}
-	
+
 	$header = translate("pages")."&nbsp;&nbsp;";
 	if ($pageStart>0) {
 		$header.= getPageLink($pageStart-$usePaging, "&laquo;", translate("previous"));
@@ -1182,7 +1183,7 @@ function getPagingHeader() {
 			$header.= getPageLink($pageNumber*$usePaging, $pageNumber+1);
 		}
 	}
-	
+
 	return $header;
 }
 
@@ -1201,7 +1202,7 @@ function getPathLink($directory) {
  * If there is no '.', the string is truncated after the last ' ' character.
  * If the string is truncated, " ..." is appended.
  * If the string is already shorter than $length, it is returned unchanged.
- * 
+ *
  * @static
  * @param string    string A string to be truncated.
  * @param int        length the maximum length the string should be truncated to
@@ -1214,7 +1215,7 @@ function iTrunc($string, $length) {
 	if (strlen($string)<=$length) {
 		return $string;
 	}
-	
+
 	$pos = strrpos($string,".");
 	if ($pos>=$length-4) {
 		$string = substr($string,0,$length-4);
@@ -1223,7 +1224,7 @@ function iTrunc($string, $length) {
 	if ($pos>=$length*0.4) {
 		return substr($string,0,$pos+1)."...";
 	}
-	
+
 	$pos = strrpos($string," ");
 	if ($pos>=$length-4) {
 		$string = substr($string,0,$length-4);
@@ -1232,7 +1233,7 @@ function iTrunc($string, $length) {
 	if ($pos>=$length*0.4) {
 		return substr($string,0,$pos)."...";
 	}
-	
+
 	return substr($string,0,$length-4)."...";
 }
 
@@ -1241,7 +1242,7 @@ function getDirSize($dirname) {
 	$dir = dir($dirname);
 	$fileCount = 0;
 	while ($filename = $dir->read()) {
-		if (!fileIsHidden($dirname."/".$filename)) 
+		if (!fileIsHidden($dirname."/".$filename))
 			$fileCount++;
 	}
 	return $fileCount-2; // . and .. do not count
@@ -1260,7 +1261,7 @@ if ($path!="") {
 		$displayError[] = sprintf(translate("%s is not a subdirectory of the current directory."), $path);
 		$path = "";
 	}
-} 
+}
 $dir = dir(".");
 
 // parsing description file
@@ -1284,18 +1285,18 @@ while($entry = $dir->read()) {
 	// if the filename matches one of the hidden files wildcards, skip the file
 	if (fileIsHidden($entry))
 		continue;
-		
+
 	// if the file is a directory and if directories are forbidden, skip it
 	if (!$allowSubDirs AND is_dir($entry))
 		continue;
-	
+
 	$f = Array();
 
 	$f["name"] = $entry;
 	$f["isDownloadable"] = (substr(strtolower($entry), -4)!=".php") || $allowPHPDownloads;
 	$f["isDirectory"] = is_dir($entry);
 	$fDate = @filemtime($entry);
-	$f["date"] = $fDate;
+  $f["date"] = $fDate;
 	$f["fullDate"] = date("r", $fDate);
 	$f["shortDate"] = date(translate("DATEFORMAT"), $fDate);
 	//setlocale(LC_ALL,"German");
@@ -1305,13 +1306,13 @@ while($entry = $dir->read()) {
 		$f["type"] = "&lt;DIR&gt;";
 		$f["size"] = "";
 		$f["niceSize"] = "";
-		
+
 		// building the link
 		if ($entry=="..") {
 			// strip the last directory from the path
 			$pathArr = explode("/",$path);
 			$link = implode("/",array_slice($pathArr,0,count($pathArr)-2));
-			
+
 			// if there is no path set, don't add it to the link
 			if ($link=="") {
 				// we're already in $baseDir, so skip the file
@@ -1406,17 +1407,17 @@ echo "<?php xml version=\"1.0\" encoding=\"UTF-8\"?>";
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<title><?php echo translate("Index of")." ".htmlentities(dirname($_SERVER["PHP_SELF"])."/".$path);?></title>
-		<?php 
+		<?php
 		if ($externalStylesheet!="") {
 			?>
 			<link rel="stylesheet" type="text/css" href="<?php echo $externalStylesheet?>" />
-			<?php 
+			<?php
 		}
 		?>
 		<style type="text/css">
-		
+
 			/*** COLORS ***/
-			<?php 
+			<?php
 			if ($externalStylesheet=="") {
 			?>
 			body.snif {
@@ -1471,10 +1472,10 @@ echo "<?php xml version=\"1.0\" encoding=\"UTF-8\"?>";
 			.snWhite {
 				color: white;                    /* active page in paging header */
 			}
-			<?php 
+			<?php
 			}
 			?>
-			
+
 			/*** FONTS ***/
 			.snif * {
 				font-family: Arial, Helvetica, sans-serif;
@@ -1499,11 +1500,11 @@ echo "<?php xml version=\"1.0\" encoding=\"UTF-8\"?>";
 			tr.snHeading, td.snHeading, td.snHeading a {
 				font-weight: bold;
 			}
-			
-			
+
+
 			/*** MARGINS AND POSITIONS ***/
 			table.snif {
-				<?php 
+				<?php
 				if ($tableWidth100Percent) {
 					echo "width:100%;";
 				}
@@ -1542,7 +1543,7 @@ echo "<?php xml version=\"1.0\" encoding=\"UTF-8\"?>";
 		</style>
 	</head>
 <body class="snif">
-<?php 
+<?php
 if (count($displayError)>0) {
 	foreach($displayError AS $error) {
 		echo "<b style=\"color:red\">$error</b><br/>";
@@ -1553,7 +1554,7 @@ if (count($displayError)>0) {
 <table cellpadding="0" cellspacing="0" class="snif">
 	<tr>
 		<td class="snDir" colspan="<?php echo count($displayColumns)?>">
-			<?php 
+			<?php
 			$baseDirname = $snifServer.htmlentities(dirname($_SERVER["PHP_SELF"]));
 			$pathToSnif = explode("/",$baseDirname);
 			echo "http://".join("/",array_slice($pathToSnif, 0, -1))."/";
@@ -1567,97 +1568,97 @@ if (count($displayError)>0) {
 			<span class="snifSmaller"><?php echo $descriptions["."];?></span>
 		</td>
 	</tr>
-	<?php 
+	<?php
 	if ($pagingInEffect) {
 	?>
 	<tr class="snHeading">
 		<td class="snHeading" colspan="<?php echo count($displayColumns)?>">
-			<?php 
+			<?php
 			echo getPagingHeader();
 			?>
 		</td>
 	</tr>
-<?php 
+<?php
 	}
 ?>
 	<tr class="snHeading">
-		<?php 
+		<?php
 		foreach($displayColumns AS $column) {
 			switch ($column) {
 				case "download":
 					?>
 					<td class="snHeading littlepadding">&nbsp;</td>
-					<?php 
+					<?php
 					break;
 				case "icon":
 					?>
 					<td class="snHeading littlepadding">&nbsp;</td>
-					<?php 
+					<?php
 					break;
 				case "name":
 					?>
 					<td class="snHeading">
 						<!--<img src="<?php echo $PHP_SELF?>?getimage=blank" alt="" width="30" height="16" style="vertical-align:middle;"/>--><a href="<?php echo getNewSortURL("name");?>"><?php echo translate("name");?></a>
-						<?php 
+						<?php
 						$sort = $_GET["sort"];
 						if ($sort=="name")
 							echo "<img src=\"".getIcon($_GET["order"])."\" width=\"5\" height=\"3\" style=\"vertical-align:middle;\" alt=\"".translate($_GET["order"])."\"/>";
 						?>
 					</td>
-					<?php 
+					<?php
 					break;
 				case "type":
 					?>
 					<td class="snHeading">
 						<a href="<?php echo getNewSortURL("type");?>"><?php echo translate("type");?></a>
-						<?php 
+						<?php
 						if ($sort=="type")
 							echo "<img src=\"".getIcon($_GET["order"])."\" width=\"5\" height=\"3\" style=\"vertical-align:middle;\" alt=\"".translate($_GET["order"])."\"/>";
 						?>
 					</td>
-					<?php 
+					<?php
 					break;
 				case "size":
 					?>
 					<td class="snHeading" align="right">
-						<?php 
+						<?php
 						if ($sort=="size")
 							echo "<img src=\"".getIcon($_GET["order"])."\" width=\"5\" height=\"3\" style=\"vertical-align:middle;\" alt=\"".translate($_GET["order"])."\"/>";
 						?>
 						<a href="<?php echo getNewSortURL("size");?>"><?php echo translate("size");?></a>
 					</td>
-					<?php 
+					<?php
 					break;
 				case "date":
 					?>
 					<td class="snHeading">
 						<a href="<?php echo getNewSortURL("date");?>"><?php echo translate("date");?></a>
-						<?php 
+						<?php
 						if ($sort=="date")
 							echo "<img src=\"".getIcon($_GET["order"])."\" width=\"5\" height=\"3\" style=\"vertical-align:20%;\" alt=\"".translate($_GET["order"])."\"/>";
 						?>
 					</td>
-					<?php 
+					<?php
 					break;
 				case "description":
 					?>
 					<td class="snHeading"<?php if ($descriptionColumnWidth>0) echo " style=\"width:".$descriptionColumnWidth."px;\"";?>><?php echo translate("description");?></td>
-					<?php 
+					<?php
 					break;
 				case "cvsversion":
 					?>
 					<td class="snHeading"><?php echo translate("CVS");?></td>
-					<?php 
+					<?php
 					break;
 			}
 		}
 		?>
 	</tr>
-	<?php 
+	<?php
 	for ($i=$pageStart;$i<$pageEnd;$i++) {
 	?>
 	<tr class="snF <?php echo ($i%2==0) ? "snEven" : "snOdd"?>">
-		<?php 
+		<?php
 		foreach($displayColumns AS $column) {
 			switch ($column) {
 				case "download":
@@ -1665,11 +1666,11 @@ if (count($displayError)>0) {
 					if ($files[$i]["isDirectory"] OR !$files[$i]["isDownloadable"]) {
 					?>
 						<img src="<?php echo $PHP_SELF?>?getimage=blank" alt="" width="7" height="16" style="vertical-align:middle;"/>
-					<?php 
+					<?php
 					} else {
 					?>
 						<a href="<?php echo $PHP_SELF?>?path=<?php echo rawurlencode($path)?>&amp;download=<?php echo rawurlencode($files[$i]["name"]);?>"><img src="<?php echo getIcon("download")?>" alt="<?php echo translate("download");?>" title="<?php echo translate("download");?>" width="7" height="16" style="vertical-align:middle;"/></a>
-					<?php 
+					<?php
 					}
 					echo "</td>";
 					break;
@@ -1677,22 +1678,22 @@ if (count($displayError)>0) {
 					echo "<td class=\"littlepadding\">";
 					?>
 					<a href="<?php echo $files[$i]["link"];?>" title="<?php echo htmlentities($files[$i]["name"]);?>"><img src="<?php echo $files[$i]["icon"]?>" alt="" title="<?php echo translate($files[$i]["filetype"])?>" width="16" height="16" style="vertical-align:middle;"/></a>
-					<?php 
+					<?php
 					echo "</td>";
 					break;
 				case "name":
 					echo "<td>";
-					?><a href="<?php echo $files[$i]["link"];?>" title="<?php echo htmlentities($files[$i]["name"]);?>"><?php 
+					?><a href="<?php echo $files[$i]["link"];?>" title="<?php echo htmlentities($files[$i]["name"]);?>"><?php
 					echo $files[$i]["displayName"]."&nbsp;</a>";
 					echo "</td>";
 					break;
-				
+
 				case "type":
 					echo "<td>";
 					echo $files[$i]["type"];
 					echo "</td>";
 					break;
-				
+
 				case "size":
 					echo "<td align=\"right\">";
 					if ($files[$i]["fullSize"]!="") echo "	<span title=\"".$files[$i]["fullSize"]." ".translate("Bytes")."\">";
@@ -1700,24 +1701,24 @@ if (count($displayError)>0) {
 					if ($files[$i]["fullSize"]!="") echo "  </span>";
 					echo "</td>";
 					break;
-				
+
 				case "date":
 					echo "<td>";
 					echo "<span title=\"".$files[$i]["fullDate"]."\">".$files[$i]["shortDate"]."</span>";
 					echo "</td>";
 					break;
-				
+
 				case "description":
 					?><td class="snW" style="white-space: normal;">
-					<?php 
+					<?php
 					if ($files[$i]["filetype"]=="image") {
 						echo $files[$i]["thumbnail"];
 					}
 					?>
 					<?php echo $files[$i]["description"];?>
-					</td><?php 
+					</td><?php
 					break;
-				
+
 				case "cvsversion":
 					echo "<td>";
 					echo $files[$i]["cvsversion"];
@@ -1726,18 +1727,18 @@ if (count($displayError)>0) {
 			}
 		}
 		?>
-	</tr><?php 
+	</tr><?php
 	}
 	if ($pagingInEffect) {
 	?>
 	<tr class="snHeading">
 		<td class="snHeading" colspan="<?php echo $columns?>">
-			<?php 
+			<?php
 			echo getPagingHeader();
 			?>
 		</td>
 	</tr>
-<?php 
+<?php
 	}
 ?>
 </table>
