@@ -1,7 +1,7 @@
 <?php
 include_once('root.inc.php');
 
-	
+
 include_once($FW_ROOT."/config.php");
 include_once($ROOT.'appconfig.php');
 include_once($ROOT.'libs/common.lib.php');
@@ -28,7 +28,7 @@ run_handler();
 
 
 //PMA_setFontSizes();
- 
+
 include($FW_ROOT.'templates/basketapp_tpl/header_tpl.php');
 
 include($FW_ROOT.'templates/basketapp_tpl/top_bar_tpl.php');
@@ -43,13 +43,20 @@ include($FW_ROOT.'templates/basketapp_tpl/side_menu_tpl.php');
 
 		<h3>Neuerungen:</h3>
   <ol>
+		<li>Version 2.1</li>
+  	<ol>
+  		<li>Verschlüsselte Verbindung (HTTPS)<br/></li>
+  		<li>Gastzugang zu Addressdaten ist jetzt abegschaltet<br/></li>
+  		<li>...<br/></li>
+  	</ol>
+
   	<li>Version 2.0</li>
   	<ol>
   		<li>Prozesse... Menu für Listen und Sonderaktionen<br/></li>
   		<li>Einfacher wechsle von Jugendpokal-/Meisterschaftsrunden<br/></li>
   		<li>Automatische Benachrichtigung bei fehlenden Heimspielterminen<br/></li>
   	</ol>
-  	
+
 
   	<li>Version 1.4</li>
   	<ol>
@@ -67,8 +74,8 @@ include($FW_ROOT.'templates/basketapp_tpl/side_menu_tpl.php');
     	</li>
   	</ol>
   </ol>
-  
-  
+
+
      </td>
     </tr>
    </table>
