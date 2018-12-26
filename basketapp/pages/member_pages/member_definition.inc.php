@@ -161,6 +161,7 @@ $fields_arr["email2"]=$form_field19;
 $form_field20=new form_checkbox_field("hasaccess");
 $form_field20->set_search_in_field(false);
 $form_field20->set_show_in_list(false);
+$form_field20->set_default_selected(true);
 $fields_arr["hasaccess"]=$form_field20;
 
 $form_field21=new form_hidden_field("system_manager_id");

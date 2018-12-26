@@ -102,7 +102,7 @@ class security_handler extends db_object_handler{
 		}
 
 
-		$sql="SELECT `".$_REQUEST["object_id"]."`,`security_group_id`, `system_manager_name`, `active` FROM `".$_REQUEST["object_name"]."` WHERE `".$_REQUEST["object_user"]."`='".$_REQUEST["username"]."' AND `".$_REQUEST["object_pass"]."`=".$this->encript($_REQUEST["password"]);
+		$sql="SELECT `".$_REQUEST["object_id"]."`,`security_group_id`, `system_manager_name`, `active`, `email` FROM `".$_REQUEST["object_name"]."` WHERE `".$_REQUEST["object_user"]."`='".$_REQUEST["username"]."' AND `".$_REQUEST["object_pass"]."`=".$this->encript($_REQUEST["password"]);
 		$recordSet = $this->conn->Execute($sql);
 
 		//print_r($_SESSION["region"]);
@@ -164,16 +164,17 @@ class security_handler extends db_object_handler{
 
 		$_SESSION[$_REQUEST["object_name"]."_logged_id"]=$recordSet->fields[$_REQUEST["object_id"]];
 		$_SESSION[$_REQUEST["object_name"]."_name"]=$recordSet->fields["system_manager_name"];
-        $_SESSION[$_REQUEST["object_name"]."_username"]=$_REQUEST["username"];
-        $_SESSION[$_REQUEST["object_name"]."_password"]=md5($_REQUEST["password"]);
-        $_SESSION["session_security_group_id"]=$recordSet->fields["security_group_id"];
+    $_SESSION[$_REQUEST["object_name"]."_username"]=$_REQUEST["username"];
+    $_SESSION["user_email"]=$recordSet->fields["email"];
+    $_SESSION[$_REQUEST["object_name"]."_password"]=md5($_REQUEST["password"]);
+    $_SESSION["session_security_group_id"]=$recordSet->fields["security_group_id"];
 		$_SESSION["session_security_level"]=$recordSet2->fields["security_level"];
 		$_SESSION["session_menu_level"]=$recordSet2->fields["menu_level"];
-        $_SESSION[$_REQUEST["object_name"]."_object_id"]=$_REQUEST["object_id"];
-        $_SESSION[$_REQUEST["object_name"]."_object_pass"]=$_REQUEST["object_pass"];
+    $_SESSION[$_REQUEST["object_name"]."_object_id"]=$_REQUEST["object_id"];
+    $_SESSION[$_REQUEST["object_name"]."_object_pass"]=$_REQUEST["object_pass"];
 
-        $sql="INSERT INTO login_log (system_manager_id,username,login_date,login_action,region) VALUES (".$_SESSION[$_REQUEST["object_name"]."_logged_id"].",'".$_REQUEST["username"]."','".date(DB_DATE_FORMAT_FOR_PHP_DATE_FUNCTION)."','LOGIN','".$_SESSION['region']."')";
-        $rs = $this->conn->Execute($sql);
+    $sql="INSERT INTO login_log (system_manager_id,username,login_date,login_action,region) VALUES (".$_SESSION[$_REQUEST["object_name"]."_logged_id"].",'".$_REQUEST["username"]."','".date(DB_DATE_FORMAT_FOR_PHP_DATE_FUNCTION)."','LOGIN','".$_SESSION['region']."')";
+    $rs = $this->conn->Execute($sql);
 
 
 		if (isset($_REQUEST["remember_me"]) && $_REQUEST["remember_me"]=="1")
