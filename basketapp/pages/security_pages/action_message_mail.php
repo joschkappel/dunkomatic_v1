@@ -4,102 +4,108 @@ $obj_name="messages";
 include_once($ROOT.'libs/basketapp_header.inc.php');
 include_once($ROOT.'libs/basketapp_controller.inc.php');
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require $FW_ROOT.'common/phpmailer/Exception.php';
+require $FW_ROOT.'common/phpmailer/PHPMailer.php';
+require $FW_ROOT.'common/phpmailer/SMTP.php';
+
 $success=false;
 // get message
 $objid=$obj_name.'_id_selected';
 $rs2=$conn->Execute("select setting_value from messages where settings_id=".$_REQUEST[$objid]);
 $mailtext=$rs2->fields['setting_value'];
-$htmltext = trim( $mailtext, " "); 
+$htmltext = trim( $mailtext, " ");
 
-if ($htmltext != ""){
+if (($htmltext != "") AND ($_SESSION['CONFIG_mail']!='N')){
+  // print("send mail");
 
-	$htmltext = nl2br( $htmltext);
+  $htmltext = nl2br( $htmltext);
+  $mail = new PHPMailer(true);
+
+  //Server settings
+  $mail->SMTPDebug = 0;                                       // Enable verbose debug output
+  $mail->isSMTP();                                            // Set mailer to use SMTP
+  $mail->Host       = 'dunkomatic.de';  // Specify main and backup SMTP servers
+  $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+  $mail->Username   = 'dunkmaster@dunkomatic.de';                     // SMTP username
+  $mail->Password   = 'W0q6nb6%';                               // SMTP password
+  $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
+  $mail->Port       = 587;                                    // TCP port to connect to
+  $mail->SMTPOptions = array(
+      'ssl' => array(
+          'verify_peer' => false,
+          'verify_peer_name' => false,
+          'allow_self_signed' => true
+      )
+  );
+  //Recipients
+  $mail->setFrom('dunkmaster@dunkomatic.de', 'Dunk-O-Matic');
 
 
-	// read table and send email to clubs  and league lead
-	if ($_SESSION['CONFIG_mail']!='N') {
-	// send mails to clubs
+  $rs='';
+  $tomsg='An:';
+	$i=0;
 
-		$rs='';
-		$to='';
-		$tomsg='';
-		$i=0;
-		
-		//  get all club leads
-		if ($_SESSION['region']=='HBV') {
-			$sql = "SELECT firstname, lastname, email FROM member WHERE member_role_id='0' AND email!='' ";
-		} else {
-			$sql = "SELECT firstname, lastname, email FROM member WHERE region='".$_SESSION['region']."' AND member_role_id='0' AND email!='' ";
+	//  get all club leads
+	if ($_SESSION['region']=='HBV') {
+		$sql = "SELECT firstname, lastname, email FROM member WHERE member_role_id='0' AND email!='' ";
+	} else {
+		$sql = "SELECT firstname, lastname, email FROM member WHERE region='".$_SESSION['region']."' AND member_role_id='0' AND email!='' ";
+	}
+
+  $rs=$conn->Execute($sql);
+  while (!$rs->EOF){
+
+	  if (  filter_var ($rs->fields["email"], FILTER_VALIDATE_EMAIL ) !== false ) {
+        if ($_SESSION['CONFIG_mail']=='Y'){
+      	   $mail->addBCC($rs->fields["email"],$rs->fields["firstname"].' '.$rs->fields["lastname"] );
+        }
+				$tomsg .= "\n".$rs->fields["firstname"].' '.$rs->fields["lastname"].' '.$rs->fields["email"];
 		}
-		
-		$rs=$conn->Execute($sql);
-		while (!$rs->EOF){
-			
-			if (  filter_var ($rs->fields["email"], FILTER_VALIDATE_EMAIL ) !== false ) {   
+		$i+=1;
 
-				if ($to==''){
-					$to =  $rs->fields["email"];
-					$tomsg = "An:\n".$rs->fields["firstname"].' '.$rs->fields["lastname"].' '.$rs->fields["email"];				
-				} else {
-					$to .= ', '.$rs->fields["email"];
-					$tomsg .= "\n".$rs->fields["firstname"].' '.$rs->fields["lastname"].' '.$rs->fields["email"];				
-					
-				}
-			}	
-			$i+=1;
+    $rs->MoveNext();
 
-		$rs->MoveNext();
-							
-		}	
-		
-	// get emails for cc:
-	
-		$rs='';
-		$cc='';
-		$ccmsg='';
-		
-		//  get emails for league leads
-		if ($_SESSION['region']=='HBV') {
-			$sql = "SELECT firstname, lastname, email FROM member WHERE member_role_id in (2,3) AND email!='' ";
-		} else {
-			$sql = "SELECT firstname, lastname, email FROM member WHERE region='".$_SESSION['region']."' AND member_role_id in (2,3) AND email!='' ";
+  }
+
+  // get emails for cc:
+
+  $rs='';
+  $ccmsg='Kopie:';
+
+	//  get emails for league leads
+	if ($_SESSION['region']=='HBV') {
+		$sql = "SELECT firstname, lastname, email FROM member WHERE member_role_id in (2,3) AND email!='' ";
+	} else {
+		$sql = "SELECT firstname, lastname, email FROM member WHERE region='".$_SESSION['region']."' AND member_role_id in (2,3) AND email!='' ";
+	}
+
+  $rs=$conn->Execute($sql);
+	while (!$rs->EOF){
+
+		if (  filter_var ($rs->fields["email"], FILTER_VALIDATE_EMAIL ) !== false ) {
+      if ($_SESSION['CONFIG_mail']=='Y'){
+        $mail->addBCC($rs->fields["email"],$rs->fields["firstname"].' '.$rs->fields["lastname"]);
+      }
+			$ccmsg .= "\n".$rs->fields["firstname"].' '.$rs->fields["lastname"].' '.$rs->fields["email"];
 		}
-		
-	    $rs=$conn->Execute($sql);
-		while (!$rs->EOF){
 
-			if (  filter_var ($rs->fields["email"], FILTER_VALIDATE_EMAIL ) !== false ) {
-					
-				if ($cc==''){
-					$cc =  $rs->fields["email"];		
-					$ccmsg = "Kopie:\n".$rs->fields["firstname"].' '.$rs->fields["lastname"].' '.$rs->fields["email"];				
-					
-				} else {
-					$cc .= ', '.$rs->fields["email"];
-					$ccmsg .= "\n".$rs->fields["firstname"].' '.$rs->fields["lastname"].' '.$rs->fields["email"];				
-					
-				}
-			}		
-			
-		$rs->MoveNext();
-							
-		}		
-		
+	  $rs->MoveNext();
 
+	}
 
-		$subject = "Dunk-O-Matic: Nachricht von der Spielleitung";
-
-		$headers  = "MIME-Version: 1.0\r\n"; 
-		$headers .= "Content-type: text/html; charset=UTF-8\r\n"; 
-		$headers .= "From: Spielleitung ".$_SESSION['CONFIG_region']."<".$_SESSION['CONFIG_contactEmail'].">\r\n";
-
+  $mail->isHTML(true);
+	$mail->Subject = "Dunk-O-Matic: Nachricht von der Spielleitung";
+  $mail->setFrom($_SESSION['CONFIG_contactEmail'], 'Spielleitung '.$_SESSION['CONFIG_region']);
 
 	//build TO and FROM headers
 	if ($_SESSION['CONFIG_mail']=='Y'){
 
-		$headers .= "Cc: Spielleitung ".$_SESSION['CONFIG_region']."<".$_SESSION['CONFIG_contactEmail'].">\r\n";
-		$headers .= "Bcc: ".$cc." , ".$to."\r\n";
-		$message = "
+		$mail->addCC( $_SESSION['CONFIG_contactEmail'], "Spielleitung ".$_SESSION['CONFIG_region']);
+    $mail->addAddress('webmaster@dunkomatic.de');
+		$mail->Body = "
 			<html>
 			<head>
 			<title>Wichtige Nachricht an alle Vereine!</title>
@@ -114,24 +120,18 @@ if ($htmltext != ""){
 			</body>
 			</html>
 			";
-		$fromto = $_SESSION['CONFIG_contactEmail'];
-		$success = mail( '', $subject, $message, $headers);
-		
-						
-	} else {
 
-		$to_test = $to;
-		$cc_test = $cc;
-		$to = 'webmaster@dunkomatic.de, jkappel@onlinehome.de';
-		$headers .= "Bcc: ".$to."\r\n";
-		$message = "
+	} else {
+		$mail->addAddress('webmaster@dunkomatic.de');
+    $mail->addAddress('jkappel@onlinehome.de');
+		$mail->Body = "
 			<html>
 			<head>
 			<title>Wichtige Nachricht an alle Vereine!</title>
 			</head>
 			<body>
-			<p>".$to_test."</p>
-		    <p>".$cc_test."</p>
+			<p>".$to_msg."</p>
+		    <p>".$cc_msg."</p>
 			<p></p>
 			<p>Mit sportlichen Gruessen</p>
 			<p></p>
@@ -139,34 +139,29 @@ if ($htmltext != ""){
 			</body>
 			</html>
 			";
-		
-	$success = mail( '', $subject, $message, $headers);
-	
+
 	}
-		
+
+  try {
+      $mail->send();
+      $ACTION_RESULT = "Nachricht an ".$i." Vereine verschickt";
+      $ACTION_COLOR = "green";
 
 
-			//	print_r($message); 
-		
-	
+  } catch (Exception $e) {
+	    $ACTION_RESULT = "Nachricht konnte NICHT verschickt werden. Mailer Error: ".$mail->ErrorInfo;
+      $ACTION_COLOR = "red";
 	}
+
+  $ACTION_DATA = $tomsg;
+  $ACTION_ERROR = $ccmsg;
+
+
+} else {
+  $ACTION_RESULT = "Das Versenden von Nachrichten ist ausgeschaltet! ";
+  $ACTION_COLOR = "red";
 }
-		
-
-$ACTION_RESULT = "Nachricht an ".$i." Vereine verschickt";
-if ($success) {
-	$ACTION_COLOR = "green";
-	//log action run
-	}
-else {
-	$ACTION_COLOR = "red";
-	};
-$ACTION_DATA = $tomsg;
-$ACTION_ERROR = $ccmsg;
-	
 
 include($FW_ROOT."templates/common_tpl/action_result.php");
-
-
 include_once($ROOT.'libs/basketapp_footer.inc.php');
 ?>

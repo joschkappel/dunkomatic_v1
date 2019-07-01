@@ -3,11 +3,11 @@
 if( !defined( "PHP_SIMPLE_XLS_GEN" ) ) {
    define( "PHP_SIMPLE_XLS_GEN", 1 );
 
-ini_set( "include_path", ( "/home/josch/workspace/Dunkomatic/common/pear/PEAR" .":" .ini_get("include_path")));
-ini_set( "include_path", ( "/var/www/html/web873/html/dunkomatic/common/pear/PEAR" .":" .ini_get("include_path")));
-ini_set( "include_path", ( "/Users/josch/workspace/Dunkomatic/common/pear/PEAR" .":" .ini_get("include_path")));
+//ini_set( "include_path", ( "/home/josch/workspace/Dunkomatic/common/pear/PEAR" .":" .ini_get("include_path")));
+ini_set( "include_path", ( "/var/www/html/web873/httpdocs/dunkomatic/common/pear/PEAR" .":" .ini_get("include_path")));
+//ini_set( "include_path", ( "/Users/josch/workspace/Dunkomatic/common/pear/PEAR" .":" .ini_get("include_path")));
 require_once "Spreadsheet/Excel/Writer.php";
-   
+
 
    class  PhpSimpleXlsGen {
       var  $class_ver = "0.2";    // class version
@@ -28,7 +28,7 @@ require_once "Spreadsheet/Excel/Writer.php";
 	  var  $titleFormat = "";
 	  var  $cellFormat = "";
 	  var  $hdrFormat = "";
-      
+
 
      // Default constructor
      function  PhpSimpleXlsGen()
@@ -55,7 +55,7 @@ require_once "Spreadsheet/Excel/Writer.php";
         }
 
 
-  
+
         reset ($this->headerline);
         foreach ( $this->headerline as $headers){
         	$this->sheet->writeString($this->crow,$this->ccol, $headers, $this->titleFormat );
@@ -65,11 +65,11 @@ require_once "Spreadsheet/Excel/Writer.php";
         	$this->sheet->write($this->crow,$this->ccol+3,'',$this->titleFormat);
         	$this->sheet->write($this->crow,$this->ccol+4,'',$this->titleFormat);
         	$this->sheet->write($this->crow,$this->ccol+5,'',$this->titleFormat);
-        	        	        	
+
 	        $this->crow += 1;
     	    $this->ccol = 0;
         }
-        
+
         $this->sheet->writeString($this->crow,$this->ccol, " Erzeugt von Dunk-O-Matic am ".date("d.m.Y"), $this->titleFormat);
        	$this->sheet->write($this->crow,$this->ccol+1,'',$this->titleFormat);
        	$this->sheet->write($this->crow,$this->ccol+2,'',$this->titleFormat);
@@ -77,7 +77,7 @@ require_once "Spreadsheet/Excel/Writer.php";
        	$this->sheet->write($this->crow,$this->ccol+4,'',$this->titleFormat);
        	$this->sheet->write($this->crow,$this->ccol+5,'',$this->titleFormat);
 
-        
+
         $this->crow += 2;
         $this->ccol = 0;
      }
@@ -107,7 +107,7 @@ require_once "Spreadsheet/Excel/Writer.php";
      }
 
 
-    
+
      // change the default saving directory
      function ChangeDefaultDir( $newdir )
      {
@@ -130,16 +130,16 @@ require_once "Spreadsheet/Excel/Writer.php";
        	$this->xls_data = & new Spreadsheet_Excel_Writer($this->fname);
        	$this->xls_data->setTempDir($this->default_dir);
        	// Setting workbook version 8
-		$this->xls_data->setVersion(8);       	
+		$this->xls_data->setVersion(8);
        } else {
        	$this->xls_data = & new Spreadsheet_Excel_Writer();
        	$this->xls_data->setTempDir($this->default_dir);
         $this->xls_data->send($this->filename);
        	$this->xls_data->setVersion(8);
        }
-       
-       
-       
+
+
+
        $this->sheet =& $this->xls_data->addWorksheet($this->sheetname);
        // Setting worksheet encoding to UTF-8
      	$this->sheet->setInputEncoding('utf-8');

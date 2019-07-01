@@ -34,7 +34,7 @@ if ( !is_dir( DDIR_CLUBS)){
 	umask(0);
 	mkdir( DDIR_CLUBS,0777);
 	}
-	
+
 define('DDIR_LEAGUES', DOWNLOAD_DIR.'Runden');
 if ( !is_dir( DDIR_LEAGUES)){
 	umask(0);
@@ -62,7 +62,7 @@ class Reporter {
 	var $errno = 0; // 0=no error
 	var $error = ""; // error string
 	var $pdflibpath =  '';
-	
+
 	/* File Formats */
 
 	const FILEFMT_CSV = 'CSV';
@@ -71,13 +71,13 @@ class Reporter {
 	const FILEFMT_EXCEL5 = 'EXCEL5';
 	const FILEFMT_EXCEL7 = 'EXCEL2007';
 	const FILEFMT_RTF = 'RTF';
-	
+
 	const WRITE_ALLSHEETS = 99;
-	
+
 	const SHEET_LIST = 0;
 	const SHEET_ADRLIST = 1;
 	const SHEET_CONTACTS = 2;
-		
+
 	// Default constructor
 	function __construct() {
 		//-------------------------run class method and security check------------------
@@ -88,24 +88,24 @@ class Reporter {
 		$sql="set character set utf8";
 		$this->dbconn->Execute($sql);
 		//----------------------------------------
-		
+
 		$this->pdflibpath = $GLOBALS['APLICATION_ROOT'];
 	}
-	
+
 	function __destruct() {
 		// clear workbook from memory
 		if ( isset( $this->wbook )) {
 			$this->wbook->disconnectWorksheets();
 			unset($this->wbook);
-		}				
+		}
 	}
 
 	function destroyWorkbook() {
 		// clear workbook from memory
 		$this->wbook->disconnectWorksheets();
-		unset($this->wbook);				
+		unset($this->wbook);
 	}
-	
+
 	function createWorkbook( $filename, $title, $subtitle, $desc ){
 	// PHPExcel configuration
 
@@ -129,10 +129,10 @@ class Reporter {
 		$this->wbook->getProperties()->setSubject( $subtitle );
 		$this->wbook->getProperties()->setDescription( $desc );
 		$this->fname = $filename;
-		
+
 		return  $this->wbook;
 
-	}		
+	}
 
 	function writeWorkbook ( $format, $aSheet ){
 
@@ -141,7 +141,7 @@ class Reporter {
 
 				$rendererName = PHPExcel_Settings::PDF_RENDERER_MPDF;
 				$rendererLibrary = 'MPDF54';
-				
+
 				$rendererLibraryPath =  $this->pdflibpath.'common/'. $rendererLibrary;
 
 				if (!PHPExcel_Settings::setPdfRenderer(
@@ -154,7 +154,7 @@ class Reporter {
 					' as appropriate for your directory structure'
 					);
 				}
-				$objWriter = new PHPExcel_Writer_PDF($this->wbook);			
+				$objWriter = new PHPExcel_Writer_PDF($this->wbook);
 				if ($aSheet == self::WRITE_ALLSHEETS ) {  $objWriter->writeAllSheets();  };
 				$objWriter->save( $this->fname.".pdf");
 				echo date("d.m.Y H:i:s ->").$this->fname.'.pdf  created \n';
@@ -162,26 +162,38 @@ class Reporter {
 				ob_flush();
 				break;
 			case ( self::FILEFMT_HTML ):
-				$objWriter = new PHPExcel_Writer_HTML($this->wbook);			
+				$objWriter = new PHPExcel_Writer_HTML($this->wbook);
 				if ($aSheet == self::WRITE_ALLSHEETS ) {  $objWriter->writeAllSheets();  };
 				$objWriter->save( $this->fname.".html");
 				echo date("d.m.Y H:i:s ->").$this->fname.'.html  created /n';
 				flush();
-				ob_flush();				
+				ob_flush();
+				break;
+			case ( "DOWNLOAD" ):
+			  // Redirect output to a client’s web browser (Excel2007)
+				header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+				header('Content-Disposition: attachment;filename="'.$this->fname.'.xlsx"');
+				header('Cache-Control: max-age=0');
+				$objWriter = new PHPExcel_Writer_EXCEL2007($this->wbook);
+				$objWriter->setOffice2003Compatibility(true);
+				$objWriter->save('php://output');
+				echo date("d.m.Y H:i:s ->").$this->fname.'.xlsx  created /n';
+				flush();
+				ob_flush();
 				break;
 			case ( self::FILEFMT_EXCEL7 ):
-				$objWriter = new PHPExcel_Writer_EXCEL2007($this->wbook);			
+				$objWriter = new PHPExcel_Writer_EXCEL2007($this->wbook);
 				$objWriter->setOffice2003Compatibility(true);
 				$objWriter->save( $this->fname.".xlsx");
 				echo date("d.m.Y H:i:s ->").$this->fname.'.xlsx  created /n';
 				flush();
-				ob_flush();				
+				ob_flush();
 				break;
 			case ( self::FILEFMT_RTF ):
 
 				$rendererName = 'PHPRtfLite';
 				$rendererLibrary = 'PHPRtfLite/lib';
-				
+
 				$rendererLibraryPath =  $this->rtflibpath.'common/'. $rendererLibrary;
 
 				if (!PHPExcel_Settings::setRtfRenderer(
@@ -194,7 +206,7 @@ class Reporter {
 					' as appropriate for your directory structure'
 					);
 				}
-				$objWriter = new PHPExcel_Writer_RTF($this->wbook);			
+				$objWriter = new PHPExcel_Writer_RTF($this->wbook);
 				if ($aSheet == self::WRITE_ALLSHEETS ) {  $objWriter->writeAllSheets();  };
 				$objWriter->save( $this->fname.".rtf");
 				echo date("d.m.Y H:i:s ->").$this->fname.'.rtf  created \n';
@@ -209,14 +221,14 @@ class Reporter {
 				flush();
 				ob_flush();
 				break;
-		}					
+		}
 		unset ( $objWriter);
 	}
-	
+
 	function addSheet( $idx, $rptTitle, $subTitle, $shortname, $lRegion, $season,  $isLandscape ) {
 
-		if ( $idx > 0 ){ $this->wbook->createSheet(); }	
-		$this->wbook->setActiveSheetIndex( $idx );		
+		if ( $idx > 0 ){ $this->wbook->createSheet(); }
+		$this->wbook->setActiveSheetIndex( $idx );
     	$this->wbook->getActiveSheet()->setTitle($subTitle);
     	if ($isLandscape ) { $this->wbook->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);}
 
@@ -230,46 +242,46 @@ class Reporter {
 		$this->wbook->getActiveSheet()->getPageMargins()->setRight(0.2);
 		$this->wbook->getActiveSheet()->getPageMargins()->setLeft(0.2);
 		$this->wbook->getActiveSheet()->getPageMargins()->setBottom(0.8);
-		
+
 		$this->wbook->getActiveSheet()->getHeaderFooter()->setOddHeader('&C&H '.$rptTitle);
 		$this->wbook->getActiveSheet()->getHeaderFooter()->setOddFooter('&L&B' . $this->wbook->getProperties()->getTitle() . '&RSeite &P von &N');
 
 		$this->wbook->getActiveSheet()->getColumnDimension('A')->setWidth(20);
-		$this->wbook->getActiveSheet()->getColumnDimension('B')->setWidth(10);		
+		$this->wbook->getActiveSheet()->getColumnDimension('B')->setWidth(10);
 		$this->wbook->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
-		
+
 		$this->wbook->getActiveSheet()->getColumnDimension('C')->setWidth(5);
 		//$this->wbook->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
 
 		$this->wbook->getActiveSheet()->getColumnDimension('D')->setWidth(12);
 		//$this->wbook->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
-		
+
 		$this->wbook->getActiveSheet()->getColumnDimension('E')->setWidth(12);
 		//$this->wbook->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
-		
+
 		$this->wbook->getActiveSheet()->getColumnDimension('F')->setWidth(10);
 		$this->wbook->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
-		
-		$this->wbook->getActiveSheet()->getColumnDimension('G')->setWidth(20);		
-		$this->wbook->getActiveSheet()->getColumnDimension('H')->setWidth(20);		
-	
-	
+
+		$this->wbook->getActiveSheet()->getColumnDimension('G')->setWidth(20);
+		$this->wbook->getActiveSheet()->getColumnDimension('H')->setWidth(20);
+
+
 		$this->wbook->getActiveSheet()->setCellValue('A2', 'HBV '.$lRegion );
 		$this->wbook->getActiveSheet()->mergeCells('A2:C2');
-		
+
 		$this->wbook->getActiveSheet()->setCellValue('A3', $rptTitle);
 		$this->wbook->getActiveSheet()->mergeCells('A3:C3');
-		
+
 		$this->wbook->getActiveSheet()->setCellValue ('A4', $subTitle);
 		$this->wbook->getActiveSheet()->setCellValue('G2', $season);
 		$this->wbook->getActiveSheet()->mergeCells('G2:H2');
-		
+
 		$this->wbook->getActiveSheet()->setCellValue('G3', $shortname );
 		$this->wbook->getActiveSheet()->mergeCells('G3:H3');
-		
+
 		$this->wbook->getActiveSheet()->setCellValue('G4', date("d.m.Y"));
 		$this->wbook->getActiveSheet()->mergeCells('G4:H4');
-		
+
 		$styleArray = array(
 			'font' => array(
 				'bold' => true,
@@ -287,49 +299,49 @@ class Reporter {
 					),
 				),
 		);
-	
+
 		//$this->wbook->getActiveSheet()->getStyle('A1:H5')->applyFromArray($styleArray);
-		
+
 		$this->crow = 7;
 		$this->ccol = 0;
 		$this->totalcol = 0;
 		$this->db_ncols =  0;
 		$this->db_nrows = 0;
-	
-	}	
+
+	}
 
 	function createSheetContent ( $type=self::SHEET_LIST, $sqlGroup, $sqlDetail, $sqlCols, $colHdr ) {
  	    $rs = $this->dbconn->Execute($sqlGroup);
-		
+
 		if ($type == self::SHEET_LIST){
-						
-    	
+
+
    		 	while (!$rs->EOF) {
             	$this->db_ncols = $rs->_numOfFields;
               	$this->totalcol = $rs->_numOfFields;
 	     		$this->db_nrows =  $rs->_numOfRows;
-               	$this->InsertRows( $rs, 0 , $colHdr);  
-               	
+               	$this->InsertRows( $rs, 0 , $colHdr);
+
                	$rs->MoveNext();
    		 	}
    		 	$this->wbook->getActiveSheet()->getStyle('A5:H'.$this->crow)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
    		 	//$this->wbook->getActiveSheet()->getStyle('C5:C'.$this->crow)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
-   		 	
+
 		} elseif ($type == self::SHEET_ADRLIST) {
-    	
+
    		 	while (!$rs->EOF) {
             	$this->db_ncols = $rs->_numOfFields;
               	$this->totalcol = $rs->_numOfFields;
 	     		$this->db_nrows =  $rs->_numOfRows;
-               	$this->insertAddressRow( $rs, 0 );  
-               	
+               	$this->insertAddressRow( $rs, 0 );
+
                	$rs->MoveNext();
    		 	}
    		 	$this->wbook->getActiveSheet()->getStyle('A5:H'.$this->crow)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
-   		 	
-   		 	
+
+
 		} elseif ($type == self::SHEET_CONTACTS) {
-		   	
+
    		 	while (!$rs->EOF) {
 
     			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow( 0, $this->crow, $rs->fields["shortname"]);
@@ -337,7 +349,7 @@ class Reporter {
     			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow( 3, $this->crow, $rs->fields["club_url"]);
     			$this->wbook->getActiveSheet()->getCell('D'.$this->crow)->getHyperlink()->setUrl('http://'.$rs->fields["club_url"]);
     			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow( 5, $this->crow, $rs->fields["club_no"]);
-    			
+
     			$styleArray = array(
 					'borders' => array(
 						'outline' => array(
@@ -354,21 +366,21 @@ class Reporter {
 				);
 				$this->wbook->getActiveSheet()->getStyle('A'.$this->crow.':F'.$this->crow)->applyFromArray($styleArray);
     			$hdrrow = $this->crow;
-    			
+
     			foreach ( $sqlDetail as $idx => $detail ) {
-    				
+
     				foreach ( $sqlCols[$idx] as $column ) {
-    					$detail = str_replace( '['.$column.']', $rs->fields[$column]  , $detail  );   					
+    					$detail = str_replace( '['.$column.']', $rs->fields[$column]  , $detail  );
     				}
-    				
+
     				$rs2 =  $this->dbconn->Execute($detail) ;
                   	$this->db_ncols = $rs2->_numOfFields;
                  	$this->totalcol = $rs2->_numOfFields;
 					$this->db_nrows =  $rs2->_numOfRows;
-                  	//$this->InsertRows( $rs2, 1 );  
+                  	//$this->InsertRows( $rs2, 1 );
     				$this->insertAddressRow( $rs2, 0);
-    					
-							                  	
+
+
     			}
     			$styleArray = array(
 					'borders' => array(
@@ -379,60 +391,60 @@ class Reporter {
 					),
 				);
 				$this->wbook->getActiveSheet()->getStyle('A'.$hdrrow.':F'.$this->crow)->applyFromArray($styleArray);
-		
+
     			$this->crow = $this->crow + 2;
 	    		$rs->MoveNext();
     		}
-		
-		
+
+
 		} else {
-		
+
 		}
-		     	
-		
+
+
 	}
-	
-	
+
+
 	// insert address line
 	protected function insertAddressRow( $rs2, $colOffset ){
 		while (!$rs2->EOF) {
         	$this->ccol=$colOffset;
 			$this->crow++;
-			
+
 			//var_dump( $rs2);
 			if (isset($rs2->fields['function'])) { $this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol, $this->crow, $rs2->fields['function']); }
 			if (isset($rs2->fields['function2'])) { $this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol+1, $this->crow, $rs2->fields['function2']); }
-			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol+2, $this->crow, $rs2->fields['firstname'].' '.$rs2->fields['lastname'] ); 
-			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol+3, $this->crow, $rs2->fields['zip'].' '. $rs2->fields['city'] ); 			
-			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol+4, $this->crow, $rs2->fields['email'] ); 
+			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol+2, $this->crow, $rs2->fields['firstname'].' '.$rs2->fields['lastname'] );
+			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol+3, $this->crow, $rs2->fields['zip'].' '. $rs2->fields['city'] );
+			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol+4, $this->crow, $rs2->fields['email'] );
     		if (isset($rs2->fields['email'])){$this->wbook->getActiveSheet()->getCell('E'.$this->crow)->getHyperlink()->setUrl('mailto://'.$rs2->fields["email"]);}
-			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol+5, $this->crow, $rs2->fields['email2'] ); 
+			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol+5, $this->crow, $rs2->fields['email2'] );
 			if (isset($rs2->fields['email2'])){$this->wbook->getActiveSheet()->getCell('F'.$this->crow)->getHyperlink()->setUrl('mailto://'.$rs2->fields["email2"]);}
-    		
+
 			$this->crow++;
-			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol+3, $this->crow, $rs2->fields['street'] );     		
-    		$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol+4, $this->crow, $rs2->fields['phone1'] ); 
-			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol+5, $this->crow, $rs2->fields['phone2'] ); 
+			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol+3, $this->crow, $rs2->fields['street'] );
+    		$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol+4, $this->crow, $rs2->fields['phone1'] );
+			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol+5, $this->crow, $rs2->fields['phone2'] );
 			$this->crow++;
-    		$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol+4, $this->crow, $rs2->fields['mobile'] ); 
-			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol+5, $this->crow, $rs2->fields['fax1'] ); 
-			
-			
+    		$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol+4, $this->crow, $rs2->fields['mobile'] );
+			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol+5, $this->crow, $rs2->fields['fax1'] );
+
+
     		$this->ccol = $colOffset;
 			$rs2->MoveNext();
-		}		
-		
+		}
+
 	}
-	
+
 	// insert rows result of query
 	protected function InsertRows( $rs2, $colOffset, $colHdr ) {
         $this->ccol=$colOffset;
-		
+
 		$this->insertListHeader( $colHdr, $rs2);
-		
-		$colGroup='';		
-		
-		
+
+		$colGroup='';
+
+
 		while (!$rs2->EOF){
         	$this->ccol=$colOffset;
 			$this->crow++;
@@ -440,14 +452,14 @@ class Reporter {
 			// supress repeating values in first column
 			if ( $colGroup <> $rs2->fields[0]) { $colGroup = $rs2->fields[0] ;}
 			else { $rs2->fields[0]=''; }
-			
+
            	for ( $j = 0; $j < $this->db_ncols; $j++ ) {
      	  		$this->InsertText( $rs2->fields[$j], $colOffset );
           	}
            	$rs2->MoveNext();
 		}
     }
-    
+
 
     protected function insertListHeader( $colHdr, $rs ){
 		$this->crow++;
@@ -455,12 +467,12 @@ class Reporter {
     		foreach ( range(0, count($rs->fields)/2, 1) as $key) {
   				unset($rs->fields[$key]);
 			}
-			$colHdr = array_keys($rs->fields);			
+			$colHdr = array_keys($rs->fields);
     	}
-    	    	
-    	
+
+
     	foreach ($colHdr as $header) {
-			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol, $this->crow, $header);		
+			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol, $this->crow, $header);
 			$this->ccol++;
 		}
 
@@ -470,14 +482,14 @@ class Reporter {
 			'borders' => array(
 				'bottom' => array(
 				'style' => PHPExcel_Style_Border::BORDER_MEDIUM ),),
-		);		
+		);
 		$this->wbook->getActiveSheet()->getStyle('A'.$this->crow.':H'.$this->crow)->applyFromArray($styleArray);
-		
-		
-		$this->crow++;   	
+
+
+		$this->crow++;
     	return;
     }
-    
+
 	// insert a cell, increment row,col automatically
 	protected function InsertText($value, $colOffset ) {
 		if ($this->ccol == $this->totalcol+$colOffset) {
@@ -486,13 +498,13 @@ class Reporter {
 		}
 		$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol, $this->crow, $value);
 		// $this->wbook->getActiveSheet()->getStyleByColumnAndRow($this->ccol, $this->crow)->applyFromArray($this->cellFormat);
-		
+
 		$this->ccol++;
 		return;
 	}
-    
-    
-    
+
+
+
 }  // END OF CLASS
 
 ?>

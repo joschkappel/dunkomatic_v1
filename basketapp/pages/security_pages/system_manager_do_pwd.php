@@ -4,6 +4,14 @@ $obj_name="system_manager";
 include_once($ROOT.'libs/basketapp_header.inc.php');
 include_once($ROOT.'libs/basketapp_controller.inc.php');
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require $FW_ROOT.'common/phpmailer/Exception.php';
+require $FW_ROOT.'common/phpmailer/PHPMailer.php';
+require $FW_ROOT.'common/phpmailer/SMTP.php';
+
+
 //----------------viewer definitions--------------
 $handler_name="db_object_handler";
 $handler_path="objects/";
@@ -26,53 +34,75 @@ $obj->update($_REQUEST[$obj_name.'_id_selected'],$sUpdate);
 $send = false;
 
 if (($rs->fields["email"] != '') AND ($_SESSION['CONFIG_mail']!='N')){
-	
-	if ($_SESSION['CONFIG_mail']=='T'){
-		$to = 'jkappel@onlinehome.de'; 
+  $mail = new PHPMailer(true);
+	try {
+	    //Server settings
+	    $mail->SMTPDebug = 0;                                       // Enable verbose debug output
+	    $mail->isSMTP();                                            // Set mailer to use SMTP
+	    $mail->Host       = 'dunkomatic.de';  // Specify main and backup SMTP servers
+	    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+	    $mail->Username   = 'dunkmaster@dunkomatic.de';                     // SMTP username
+	    $mail->Password   = 'W0q6nb6%';                               // SMTP password
+	    $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
+	    $mail->Port       = 587;                                    // TCP port to connect to
+	    $mail->SMTPOptions = array(
+	        'ssl' => array(
+	            'verify_peer' => false,
+	            'verify_peer_name' => false,
+	            'allow_self_signed' => true
+	        )
+	    );
+	    //Recipients
+	    $mail->setFrom('dunkmaster@dunkomatic.de', 'Dunk-O-Matic');
+
+			if ($_SESSION['CONFIG_mail']=='T'){
+				$mail->addAddress('jkappel@onlinehome.de');
+			}
+			else
+			{
+					$mail->addAddress( $rs->fields["email"]);
+			}
+
+	    $mail->isHTML(true);                                  // Set email format to HTML
+	    $mail->Subject = 'HBV: Ihre Benutzerkennung fï¿½r Dunk-O-Matic';
+
+			$mail->Body  = "
+			<html>
+			<head>
+			<meta http-equiv='content-type' content='text/html; charset=utf-8'>
+			<title>Benutzerkennung Dunk-O-Matic</title>
+			</head>
+			<body>
+			<p>Hallo ".$rs->fields["system_manager_name"]."</p>
+			<p>mit dieser Nachricht erhalten Sie Ihre Benutzerkennung fï¿½r Dunk-O-Matic (Spielplanerstellung des HBV).</p>
+			<p></p>
+			<p>Ihr Benutzername: <b>".$rs->fields["username"]."</b></p>
+			<p>Ihr Passwort:     <b>".$pwd."</b></p>
+			<p></p>
+			<p>Hier finden Sie <a href=\"http://www.dunkomatic.de\">Dunk-O-Matic</a></p>
+		    <p></p>
+			<p></p>
+			<p>Viel Basketball-Spass wï¿½nscht</p>
+			<p></p>
+			<p>Ihre HBV Bezirksleitung</p>
+			</body>
+			</html>
+			";
+
+	    $mail->send();
+	    $mail_status = 'Nachricht wurde verschickt';
+
+	} catch (Exception $e) {
+	    $mail_status = "Nachricht konnte NICHT verschickt werden. Mailer Error: ".$mail->ErrorInfo;
 	}
-	else
-	{
-		$to = $rs->fields["email"];
-	}
-	
-	$subject = "HBV: Ihre Benutzerkennung für Dunk-O-Matic";
 
-	$headers  = "MIME-Version: 1.0\n"; 
-	$headers .= "Content-type: text/html; charset=iso-8859-1\n"; 
-	$headers .= "From: Dunk-O-Matic <webmaster@dunkomatic.de>\n"; 
-
-	$message = " 
-	<html> 
-	<head> 
-	<title>Benutzerkennung Dunk-O-Matic</title>
-	</head> 
-	<body> 
-	<p>Hallo ".$rs->fields["system_manager_name"]."</p>
-	<p>mit dieser mail erhalten Sie Ihre Benutzerkennung für Dunk-O-Matic (Spielplanerstellung des HBV).</p>
-	<p></p>
-	<p>Ihr Benutzername: ".$rs->fields["username"]."</p>
-	<p>Ihr Passwort:     ".$pwd."</p>
-	<p></p>
-	<p>Hier finden Sie <a href=\"http://www.dunkomatic.de\">Dunk-O-Matic</a></p>
-    <p></p>
-	<p></p>
-	<p>Viel Basketball-Spass wünscht</p>
-	<p></p>
-	<p>Ihre <a href=\"mailto:geschaeftsstelle@hbv-basketball.de\">HBV Geschäftsstelle</a></p>
-	</body> 
-	</html> 
-	"; 
-
-	$send = mail( $to, $subject, $message, $headers); 
-
-	
 }
 
 ?>
   <td valign="top" bgcolor="<?php echo $cfg['RightBgColor']; ?>">
 
 
-	<?php echo( $send ? "Mail mit Benutzerkennung gesendet" : "Fehler beim Senden der Mail!" ); ?>
+	<?php echo( $mail_status ); ?>
 
   </td>
  </tr>
