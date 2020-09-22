@@ -1,4 +1,4 @@
-<?
+<?php
 include_once($APLICATION_ROOT.'db_objects/db_object.class.php');
 include_once($APLICATION_ROOT.'common/functions/generate_sql.php');
 
@@ -46,6 +46,16 @@ class member extends db_object {
 
 		$this->notifyMember('UPDATE', $record_data, $member, $record_id);
 
+		// handle club_id and league_id FKs
+		$error = "CLUB_ID is: -".$record_data['club_id']."-";
+
+		if (!is_int($record_data['club_id'])){
+			// throw new Exception($error);
+			unset($record_data['club_id']);
+		}
+		if (!is_int($record_data['league_id'])){
+			unset($record_data['league_id']);
+		}
 		parent::update($record_id, $record_data);
 	}
 
