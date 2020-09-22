@@ -1,4 +1,4 @@
-<?
+<?php
 define("BROWSER_TITLE","comments");
 define("PAGE_TITLE","comments");
 

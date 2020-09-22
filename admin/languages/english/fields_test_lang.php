@@ -1,4 +1,4 @@
-<?
+<?php
 define("BROWSER_TITLE","test fields");
 define("PAGE_TITLE","test fields");
 define("ERROR_NO_SELECTED","please select field");

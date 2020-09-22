@@ -51,15 +51,15 @@ include($APLICATION_ROOT."templates/common_tpl/one_to_many_relation.php");
 function remove_team()
 {
     //--------validate selected object
-    if (document.<? echo $obj_name ?>_actions_form.<? echo $obj_name ?>_id_selected.value=="")
+    if (document.<?php echo $obj_name ?>_actions_form.<?php echo $obj_name ?>_id_selected.value=="")
     {
         alert("<?php echo ERROR_NO_SELECTED ?>");
         return;
     }
-    document.<? echo $obj_name ?>_actions_form.className.value="season_handler";
-    document.<? echo $obj_name ?>_actions_form.classPath.value="objects/basketapp/";
-    document.<? echo $obj_name ?>_actions_form.methodName.value="remove_team";
-    document.<? echo $obj_name ?>_actions_form.submit();
+    document.<?php echo $obj_name ?>_actions_form.className.value="season_handler";
+    document.<?php echo $obj_name ?>_actions_form.classPath.value="objects/basketapp/";
+    document.<?php echo $obj_name ?>_actions_form.methodName.value="remove_team";
+    document.<?php echo $obj_name ?>_actions_form.submit();
 }
 
 </script>

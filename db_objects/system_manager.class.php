@@ -1,4 +1,4 @@
-<?
+<?php
 include_once($APLICATION_ROOT.'db_objects/db_object.class.php');
 include_once($APLICATION_ROOT.'common/functions/generate_sql.php');
 

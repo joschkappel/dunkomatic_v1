@@ -2,7 +2,7 @@
 define('DB_DATE_FORMAT','%Y-%m-%d %H:%M:%S');
 define('DB_TIME_FORMAT','%H:%M:%S');
 define('DB_DATE_FORMAT_FOR_PHP_DATE_FUNCTION','Y-m-d H:i:s');
-define('DATE_FORMAT_SHORT', '%d.%m.%Y');  
+define('DATE_FORMAT_SHORT', '%d.%m.%Y');
 define('DATE_FORMAT_WEEKDAY', '%a');
 define('DATE_FORMAT_LONG', '%d.%m.%Y %H:%M:%S');
 define('TIME_FORMAT_SHORT', '%H:%M');
@@ -65,7 +65,7 @@ define("CHANGE_PASSWORD","Passwort ändern");
 define('GUEST', "Gast");
 define('USER', "Benutzer");
 define('ADMIN', "Administrator");
-define('DEVELOER', "Entwickler");
+define('DEVELOPER', "Entwickler");
 $security_group_ids_array=array("0","1","2","3");
 $security_group_values_array=array(GUEST,USER,ADMIN,DEVELOPER);
 
@@ -156,11 +156,11 @@ define("TEST","Testumgebung");
 
 
 // selectlist values
-$league_teams_array=array("4","6","8","10","12","14","24","34","26");
-$league_teams_values_array=array("4","6","8","10","12","14","2*4","3*4","2*6");
+$league_teams_array=array("4","6","8","10","12","14","16","24","34","26");
+$league_teams_values_array=array("4","6","8","10","12","14","16","2*4","3*4","2*6");
 
-$group_id_values_array=array("Senioren","Jugend U14-20","Jugend U10-12","Jugend OL","Jugend OL U14","Oberliga","Landesliga","Regionalliga","Jugendpokal","Doppel 4er");
-$group_id_array=array("1","2","3","4","5","6","7","8","9","11");
+// $group_id_values_array=array("Senioren","Jugend U14-20","Jugend U10-12","Jugend OL","Jugend OL U14","Oberliga","Landesliga","Regionalliga","Jugendpokal","Doppel 4er");
+// $group_id_array=array("1","2","3","4","5","6","7","8","9","11");
 
 $gender_id_values_array=array("Damen","Herren","weiblich","männlich","mixed");
 $gender_id_array=array("1","2","3","4","5");

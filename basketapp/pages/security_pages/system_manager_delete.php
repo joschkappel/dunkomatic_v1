@@ -1,4 +1,4 @@
-<?
+<?php
 include_once('root.inc.php');
 $obj_name="system_manager";
 $page_title="Diesen Benutzer löschen:";

@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 * this is basic method for the model view controller wich the framework is built on
 * This method will include and activate the class method requested.
@@ -25,7 +25,7 @@ function run_handler(){
 				// echo "The requested function is not registered!";
 				// JK new error handling
 				$_SESSION['sErrType'] = "SYSTEM";
-				$_SESSION['sErrMsg'] = "Sie haben keine Berechtigung diese Funktion auszuführen!";
+				$_SESSION['sErrMsg'] = "Sie haben keine Berechtigung diese Funktion auszufï¿½hren!";
 				header("Location:".$_SESSION["main_list_page"]);
 				exit;
 			}

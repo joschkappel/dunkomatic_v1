@@ -19,8 +19,8 @@ if (@file_exists($tmp_file)) {
 */
 //include ('../themes/darkblue_orange/layout.inc.php');
 //include ('../themes/darkblue_orange/css/theme_right.css.php');
-include ('../themes/original/layout.inc.php');
-include ('../themes/original/css/theme_right.css.php');
+//include ($FW_ROOT.'themes/original/layout.inc.php');
+//include ($FW_ROOT.'themes/original/css/theme_right.css.php');
 ?>
 
 

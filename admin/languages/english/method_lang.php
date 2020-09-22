@@ -1,4 +1,4 @@
-<?
+<?php
 define("BROWSER_TITLE","methods");
 define("PAGE_TITLE","methods");
 

@@ -1,6 +1,6 @@
 <?php
+define("BROWSER_TIILE", "Prüfen");
 define("PAGE_TITLE",  BROWSER_TIILE." - Überschneidende Spielansetzungen");
-
 
 define("DGL_ID_HEADING","ID");
 

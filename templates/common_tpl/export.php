@@ -4,17 +4,17 @@
 <!-- --------------------------------- BODY --------------------------------- -->
 
 <br>
-<?
+<?php
 //---------------------------actions---------------------
 foreach ($actions_arr as $action){
-	?><input type="button" name="btn_<?php echo $action['heading']  ?>" onclick="<? echo $action["onclick"] ?>" value="<? echo $action["heading"] ?>" /><?
+	?><input type="button" name="btn_<?php echo $action['heading']  ?>" onclick="<?php echo $action["onclick"] ?>" value="<?php echo $action["heading"] ?>" /><?php 
 	if ($action["row_end"])
 	{
-		?><br><?
+		?><br><?php
 	}
 	else
 	{
-		?>&nbsp;&nbsp;<?
+		?>&nbsp;&nbsp;<?php
 	}
 }
 //---------------------------actions---------------------

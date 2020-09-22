@@ -1,4 +1,4 @@
-<?
+<?php
 define("LOGOUT","exit");
 define("ADMIN_HOME","home");
 define("MAIN_MENU","menu");

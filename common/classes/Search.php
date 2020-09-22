@@ -1,4 +1,4 @@
-<?
+<?php
 /**
 * Search class 
 * To support the creation of where clause on database

@@ -45,6 +45,7 @@ $form_field23->set_table_name("league");
 $form_field23->set_where_clause(" active ='1' AND (region ='".$_SESSION["region"]."' OR region='HBV')");
 $form_field23->set_save_field_name("league_id");
 $form_field23->set_display_field_name("shortname");
+$form_field23->set_show_in_edit(false);
 $fields_arr["league_id"]=$form_field23;
 
 $form_field24=new form_text_field("function");
@@ -52,11 +53,12 @@ $form_field24->set_search_in_field(false);
 $form_field24->set_show_in_list(true);
 $fields_arr["function"]=$form_field24;
 
-$form_field25=new form_text_field("sortorder");
-$form_field25->set_search_in_field(false);
-$form_field25->set_show_in_list(true);
-$form_field25->set_edit_in_list(true);
-$fields_arr["sortorder"]=$form_field25;
+// $form_field25=new form_text_field("sortorder");
+// $form_field25->set_search_in_field(false);
+// $form_field25->set_show_in_list(false);
+// $form_field25->set_edit_in_list(true);
+// $form_field25->set_show_in_edit(false);
+// $fields_arr["sortorder"]=$form_field25;
 
 $form_field4=new form_text_field("lastname");
 $form_field4->set_isMandatory(true);

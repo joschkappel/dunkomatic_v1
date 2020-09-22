@@ -1,4 +1,4 @@
-<?
+<?php
 define("BROWSER_TITLE","users");
 define("PAGE_TITLE","users");
 define("CONFIRM_DELETE_MESSAGE","are you sure you want to delete this record?");

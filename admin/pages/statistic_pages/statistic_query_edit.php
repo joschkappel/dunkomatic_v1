@@ -1,4 +1,4 @@
-<?
+<?php
 include_once('root.inc.php');
 include_once($APLICATION_ROOT.'config.php');
 include_once($APLICATION_ROOT.'common/adodb/adodb.inc.php');

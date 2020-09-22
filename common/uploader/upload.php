@@ -1,4 +1,4 @@
-<?
+<?php
 //Advanced Uploader V1.00b
 //Copyright 2002 ZachWhite.com
 //By using this program you agree with the license provide with it.

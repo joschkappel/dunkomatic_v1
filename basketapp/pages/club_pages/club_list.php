@@ -19,7 +19,7 @@ $show_search_query=false;
 ADD `mem_lastchange` DATETIME NULL ,
 ADD `team_lastchange` DATETIME NULL ,
 ADD `ref_lastchange` DATETIME NULL ;
- 
+
 UPDATE club c set c.gym_lastchange = (select max(g.lastchange) from gymnasium g where g.club_id=c.club_id);
 UPDATE club c set c.mem_lastchange = (select max(m.lastchange) from member m where m.club_id=c.club_id);
 UPDATE club c set c.team_lastchange = (select max(t.lastchange) from team t where t.club_id=c.club_id);
@@ -29,7 +29,7 @@ UPDATE club c set c.ref_lastchange = (select max(r.lastchange) from referee r wh
 
  *
  **/
- 
+
 
 // update lastchanges columns
 $sql = "select club_id, max(lastchange) from gymnasium group by club_id";
@@ -72,7 +72,7 @@ while (!$rs->EOF){
 $sql= "UPDATE club set lastchange=IF(IFNULL(lastchange,'0000-00-00 00:00:00')<ref_lastchange,ref_lastchange,lastchange)";
 $conn->Execute($sql);
 
- 
+
 
 $actions_arr=array();
 //$actions_arr[]=array("type"=>"M","action"=>"delete_all","heading"=>$sDeleteAll,"onclick"=>$obj_name."_delete_all_marked()","row_end"=>false);
@@ -98,7 +98,7 @@ $in_table_actions_arr[]=array("type"=>"R","heading"=>$sGames,"action"=>"games()"
 $in_table_actions_arr[]=array("type"=>"R","heading"=>$sReferees,"action"=>"referees()","image"=>'referee');
 if ($_SESSION['CONFIG_editHomeGame']=='Y') {
 $in_table_actions_arr[]=array("type"=>"R","heading"=>$sExpHomeGame,"action"=>"export_homegame()","image"=>'tblexport');
-$in_table_actions_arr[]=array("type"=>"R","heading"=>$sImpHomeGame,"action"=>"import_homegame()","image"=>'tblimport');
+// $in_table_actions_arr[]=array("type"=>"R","heading"=>$sImpHomeGame,"action"=>"import_homegame()","image"=>'tblimport');
 }
 
 $dont_show_radio=true;
@@ -120,81 +120,81 @@ include($FW_ROOT."templates/common_tpl/pager.php");
 function gymnasiums()
 {
     //--------validate selected object
-    if (document.<? echo $obj_name ?>_actions_form.<? echo $obj_name ?>_id_selected.value=="")
+    if (document.<?php echo $obj_name ?>_actions_form.<?php echo $obj_name ?>_id_selected.value=="")
     {
         alert("<?php echo ERROR_NO_SELECTED ?>");
         return;
     }
-    document.<? echo $obj_name ?>_actions_form.action="gymnasium_list.php";
-    document.<? echo $obj_name ?>_actions_form.submit();
+    document.<?php echo $obj_name ?>_actions_form.action="gymnasium_list.php";
+    document.<?php echo $obj_name ?>_actions_form.submit();
 }
 function members()
 {
     //--------validate selected object
-    if (document.<? echo $obj_name ?>_actions_form.<? echo $obj_name ?>_id_selected.value=="")
+    if (document.<?php echo $obj_name ?>_actions_form.<?php echo $obj_name ?>_id_selected.value=="")
     {
         alert("<?php echo ERROR_NO_SELECTED ?>");
         return;
     }
-    document.<? echo $obj_name ?>_actions_form.action="member_list.php";
-    document.<? echo $obj_name ?>_actions_form.submit();
+    document.<?php echo $obj_name ?>_actions_form.action="member_list.php";
+    document.<?php echo $obj_name ?>_actions_form.submit();
 }
 function referees()
 {
     //--------validate selected object
-    if (document.<? echo $obj_name ?>_actions_form.<? echo $obj_name ?>_id_selected.value=="")
+    if (document.<?php echo $obj_name ?>_actions_form.<?php echo $obj_name ?>_id_selected.value=="")
     {
         alert("<?php echo ERROR_NO_SELECTED ?>");
         return;
     }
-    document.<? echo $obj_name ?>_actions_form.action="referee_list.php";
-    document.<? echo $obj_name ?>_actions_form.submit();
+    document.<?php echo $obj_name ?>_actions_form.action="referee_list.php";
+    document.<?php echo $obj_name ?>_actions_form.submit();
 }
 
 function teams()
 {
     //--------validate selected object
-    if (document.<? echo $obj_name ?>_actions_form.<? echo $obj_name ?>_id_selected.value=="")
+    if (document.<?php echo $obj_name ?>_actions_form.<?php echo $obj_name ?>_id_selected.value=="")
     {
         alert("<?php echo ERROR_NO_SELECTED ?>");
         return;
     }
-    document.<? echo $obj_name ?>_actions_form.action="team_list.php";
-    document.<? echo $obj_name ?>_actions_form.submit();
+    document.<?php echo $obj_name ?>_actions_form.action="team_list.php";
+    document.<?php echo $obj_name ?>_actions_form.submit();
 }
 function games()
 {
     //--------validate selected object
-    if (document.<? echo $obj_name ?>_actions_form.<? echo $obj_name ?>_id_selected.value=="")
+    if (document.<?php echo $obj_name ?>_actions_form.<?php echo $obj_name ?>_id_selected.value=="")
     {
         alert("<?php echo ERROR_NO_SELECTED ?>");
         return;
     }
-    document.<? echo $obj_name ?>_actions_form.action="game_list.php";
-    document.<? echo $obj_name ?>_actions_form.submit();
+    document.<?php echo $obj_name ?>_actions_form.action="game_list.php";
+    document.<?php echo $obj_name ?>_actions_form.submit();
 }
 function export_homegame()
 {
     //--------validate selected object
-    if (document.<? echo $obj_name ?>_actions_form.<? echo $obj_name ?>_id_selected.value=="")
+    if (document.<?php echo $obj_name ?>_actions_form.<?php echo $obj_name ?>_id_selected.value=="")
     {
         alert("<?php echo ERROR_NO_SELECTED ?>");
         return;
     }
-    document.<? echo $obj_name ?>_actions_form.action="<?php echo $FW_ROOT."basketapp/pages/report_pages/export_game_home.php"?>";
-    document.<? echo $obj_name ?>_actions_form.submit();
+    document.<?php echo $obj_name ?>_actions_form.action="<?php echo $FW_ROOT."basketapp/pages/report_pages/export_game_home.php"?>";
+    document.<?php echo $obj_name ?>_actions_form.submit();
 }
 
 function import_homegame()
 {
     //--------validate selected object
-    if (document.<? echo $obj_name ?>_actions_form.<? echo $obj_name ?>_id_selected.value=="")
+    if (document.<?php echo $obj_name ?>_actions_form.<?php echo $obj_name ?>_id_selected.value=="")
     {
         alert("<?php echo ERROR_NO_SELECTED ?>");
         return;
     }
-    document.<? echo $obj_name ?>_actions_form.action="<?php echo $FW_ROOT."basketapp/pages/import_pages/import_game_home.php"?>";
-    document.<? echo $obj_name ?>_actions_form.submit();
+    document.<?php echo $obj_name ?>_actions_form.action="<?php echo $FW_ROOT."basketapp/pages/import_pages/import_game_home.php"?>";
+    document.<?php echo $obj_name ?>_actions_form.submit();
 }
 
 

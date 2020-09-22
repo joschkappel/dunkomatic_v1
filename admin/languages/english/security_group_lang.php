@@ -1,4 +1,4 @@
-<?
+<?php
 define("BROWSER_TITLE","user types");
 define("PAGE_TITLE","user types");
 

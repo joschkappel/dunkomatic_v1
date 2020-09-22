@@ -1,4 +1,4 @@
-<?
+<?php
 include_once($APLICATION_ROOT.'db_objects/db_object.class.php');
 include_once($APLICATION_ROOT.'db_objects/user_approach.class.php');
 include_once($APLICATION_ROOT.'db_objects/message.class.php');

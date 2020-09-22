@@ -1,4 +1,4 @@
-<?
+<?php
 /***************************************************************************
 
 pseudo-cron v1.3
@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 Usually regular tasks like backup up the site's database are run using cron
 jobs. With cron jobs, you can exactly plan when a certain command is to be 
 executed. But most homepage owners can't create cron jobs on their web 
-server – providers demand some extra money for that.
+server ï¿½ providers demand some extra money for that.
 The only thing that's certain to happen quite regularly on a web page are 
 page requests. This is where pseudo-cron comes into play: With every page 
 request it checks if any cron jobs should have been run since the previous 

@@ -1,4 +1,4 @@
-<?
+<?php
 define("BROWSER_TITLE","dictionary");
 define("PAGE_TITLE","dictionary");
 

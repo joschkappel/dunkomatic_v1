@@ -1,4 +1,4 @@
-<?
+<?php
 include_once($APLICATION_ROOT.'common/functions/general.php');
 
 class Uploader{

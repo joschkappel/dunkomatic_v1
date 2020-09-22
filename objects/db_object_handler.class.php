@@ -1,4 +1,4 @@
-<?
+<?php
 include_once($APLICATION_ROOT.'db_objects/db_object.class.php');
 
 /**
@@ -154,9 +154,9 @@ class db_object_handler {
             {
             	$toeval = $GLOBALS['fields_arr'][$fields_names[$i]]->auto_value;
             	$toeval = "\$ffunct = ".$toeval.";";
-          	
+
             	eval($toeval.';');
-                                  	
+
                 $fields[$fields_names[$i]]= $ffunct;
             }
         }
@@ -173,52 +173,52 @@ class db_object_handler {
     }
 
 function validate_input( $fnames, $ftypes, $fvalues ){
-      
+
   $fvalidation = array();
   $valid = false;
   $objname = $_REQUEST["obj_name"];
-  
+
   // include object definition (before the run_handler call in the <obj>_<action>.php )
   require_once ('../../../common/functions/validator.php');
-  	
+
 
   // get validation library
   // include_once( $ROOT . 'libs/validation.lib.php');
-  
+
   // foreach field, call validation function
   /*
    * fname  [i] = attrbute name
    * ftype [i] = attribute type
    * fvalues [i] = value field_arr[ fname[i]] -> validation = validation type
    */
-  
+
   $frules = $GLOBALS['fields_arr'];
   $valid = true;
 
- 
+
   for ($i=0;$i<count($fnames);$i++){
-  	
+
     // print_r($fnames[$i]);
-     	
+
   	if ($frules[ $fnames[$i] ]->validation){
-  		
+
   		$valVal = $fvalues[$fnames[$i]];
-  		
+
   		if ($valVal != ""){
-  			
+
   			$valfunkt = 'isGood'.$frules[$fnames[$i] ]->validation_type.' ($valVal, $valMsg)';
-  		
-  			eval( "\$test = ".$valfunkt.";");  		
-  		
+
+  			eval( "\$test = ".$valfunkt.";");
+
   			if (!$test){
   				$fvalidation[$fnames[$i]] = $valMsg;
   				$valid = false;
   			}
 		}
-  	} 
-	
+  	}
+
   }
-  
+
   if (!$valid){
   	$GLOBALS['validation_results'] = $fvalidation;
   	$GLOBALS['validation_values'] = $fvalues;
@@ -230,14 +230,14 @@ function validate_input( $fnames, $ftypes, $fvalues ){
 
   // if not valid add message to fvalidation, set valid=false
   // set session variables and return
-  
-  
-return $valid;	
+
+
+return $valid;
 
 }
 
 
-	
+
     /**
 	* update_obj method for update object from form
 	* @param $_REQUEST["obj_name"] is the db object name (also table name)
@@ -312,7 +312,7 @@ return $valid;
 				if (isset($_REQUEST[$fields_names[$i]])){
 					list($d, $m, $y) = split('[/.-]', $_REQUEST[$fields_names[$i]]);
 					$sdate = date("Y-m-d", mktime(0, 0, 0, $m, $d, $y));
-				
+
 					 $fields[$fields_names[$i]]= $sdate;
 				}
 			}
@@ -336,15 +336,15 @@ return $valid;
             {
             	$toeval = $GLOBALS['fields_arr'][$fields_names[$i]]->auto_value;
             	$toeval = "\$ffunct = ".$toeval.";";
-          	
+
             	eval($toeval.';');
-                                  	
+
                 $fields[$fields_names[$i]]= $ffunct;
             }
-			
-			
+
+
         }
-        
+
         if ($this->validate_input($fields_names, $fields_types, $fields)) {
 
         $obj->update($_REQUEST[$_REQUEST["id_column_name"]],$fields);
@@ -358,7 +358,7 @@ return $valid;
 
 
     /**
-	* delete_obj method for delete object from db 
+	* delete_obj method for delete object from db
 	* @param $_REQUEST["obj_name"] is the db object name (also table name)
 	* @param $_REQUEST["id_column_name"] is the db object column id name to delete
 	* @param $_SESSION["main_list_page"] is string with the page name of list of object to return to
@@ -376,10 +376,10 @@ return $valid;
 	* This method will relate and delete relations between two objects. It is called from a list of secondary objects with checkboxes
 	* and selection of primary object id (a fixed object)
 	* @param $_REQUEST["obj_name"] is the db object name (also table name)
-	* @param $_REQUEST["secondary_all_ids"] string with all the ids of objects dispalyed on last page seppararted with ',' 
+	* @param $_REQUEST["secondary_all_ids"] string with all the ids of objects dispalyed on last page seppararted with ','
 	* @param $_REQUEST["secondary_pre_selected_ids"] string of ids of relations that are currntly in the db seppararted with ','
 	* @param $_REQUEST["primary_id_column_name"] the id column name of the table functioned as primary (the secondary is the displayed in list and primary fixed)
-	* @param $_REQUEST["primary_id_column_value"] the value of primary id 
+	* @param $_REQUEST["primary_id_column_value"] the value of primary id
 	* @param $_REQUEST["secondary_id_column_name"] the id column name of the object displayed in the list
 	* @param $_REQUEST["secondary_selected_ids_arr"] array of ids selected from the dusplayed list of secondary object
 	**/
@@ -398,7 +398,7 @@ return $valid;
 		{
 			return;
 		}
-		
+
 		$secondary_all_ids_arr=explode(",",$_REQUEST["secondary_all_ids"]);
 		$secondary_pre_selected_ids_arr=explode(",",$_REQUEST["secondary_pre_selected_ids"]);
 		/* --- all the ids that are selected when the page is submitted---*/
@@ -429,15 +429,15 @@ return $valid;
 			}
 		}
     }
-    
-	
+
+
     /**
 	* delete_all_relations method:
 	* This method will delete all relations between two objects. It is called from a list of secondary objects with checkboxes
 	* and selection of primary object id (a fixed object)
 	* @param $_REQUEST["obj_name"] is the db object name (also table name)
 	* @param $_REQUEST["primary_id_column_name"] the id column name of the table functioned as primary (the secondary is the displayed in list and primary fixed)
-	* @param $_REQUEST["primary_id_column_value"] the value of primary id 
+	* @param $_REQUEST["primary_id_column_value"] the value of primary id
 	* @param $_REQUEST["secondary_id_column_name"] the id column name of the object displayed in the list
 	**/
 	function delete_all_relations(){

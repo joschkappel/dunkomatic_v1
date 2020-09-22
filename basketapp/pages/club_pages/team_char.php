@@ -11,18 +11,19 @@ $handler_path="objects/";
 $_SESSION["main_list_page"]="team_list.php";
 
 $actions_arr=array();
-$actions_arr[]=array("heading"=>$sNavBack,"onclick"=>"location.href='".$_SESSION["main_list_page"]."'","row_end"=>true);
+$actions_arr[]=array("heading"=>$sNavBack,"onclick"=>"location.href='".$_SESSION["main_list_page"]."'","row_end"=>false);
+$actions_arr[]=array("heading"=>"Refresh","onclick"=>"location.reload()","row_end"=>true);
 
-$obj=new db_object($conn,$obj_name,$_REQUEST["id_column_name"]);
+
+$obj=new db_object($conn,$obj_name,'team_id');
 $team_id = $_REQUEST[$obj_name.'_id_selected'];
 $rs=$obj->get_record($team_id);
 
 
 
 
-// special treatment of r character selection ----- this kind of treatment should be the exception ! of course :�)
+// special treatment of r character selection ----- this kind of treatment should be the exception ! of course :)
 ?>
-
   <td valign="top" bgcolor="<?php echo $cfg['RightBgColor']; ?>">
    <table border="0" cellpadding="10" cellspacing="0">
     <tr>
@@ -31,7 +32,7 @@ $rs=$obj->get_record($team_id);
 
 <!-- --------------------------------- BODY --------------------------------- -->
 <table class="OTRecord" cellspacing="0">
-<?
+<?php
 foreach ($fields_arr as $field){
 	if (!$field->show_in_view)
 	{
@@ -39,7 +40,7 @@ foreach ($fields_arr as $field){
 	}
     ?>
     <tr>
-    <td class="OTRecordHeadCell"><? echo $field->get_field_heading() ?></td>
+    <td class="OTRecordHeadCell"><?php echo $field->get_field_heading() ?></td>
     <?
 	if ($field->type=="selectboxdb"){
 		if ($rs->fields[$field->name])
@@ -48,12 +49,12 @@ foreach ($fields_arr as $field){
 			if ( isset($_SESSION["select_cache"][$field->table_name.'_'.$field->name.'_'.$field->display_field_name])) {
 				$dispval = $_SESSION["select_cache"][$field->table_name.'_'.$field->name.'_'.$field->display_field_name][$rs->fields[$field->name]];
 			} else {
-        	
+
             	$sql="SELECT `".$field->display_field_name."` FROM ".$field->table_name." WHERE 1 AND `".$field->save_field_name."`='".$rs->fields[$field->name]."'";
             	$rs_select_box=$conn->Execute($sql);
             	$dispval = $rs_select_box->fields[$field->display_field_name];
 			}
-            ?><td class="OTRecordDataCell"><? echo $dispval ; ?></td><?
+            ?><td class="OTRecordDataCell"><?php echo $dispval ; ?></td><?
 		}
 		else
 		{
@@ -65,10 +66,10 @@ foreach ($fields_arr as $field){
 		$list_value=$field->get_value_selected($rs->fields[$field->name]);
 		 ?><td class="OTRecordDataCell"><?  if ($list_value) echo $list_value; else echo "&nbsp;" ?></td><?
 	}
-	    
+
     ?></tr><?php
 }
-?>   
+?>
 	</table>
    </td>
     </tr>
@@ -78,12 +79,12 @@ foreach ($fields_arr as $field){
 
 
 // define new field array
- 
+
 include_once($ROOT.'pages/club_pages/team_char_definition.inc.php');
 
 //  the pager part start here
 
-// the famous select: 
+// the famous select:
 //select team_char, c.shortname, t.team_no from 04league left join team as t on (team_char=t.league_char and t.league_id=1) left join club as c on t.club_Id=c.club_id order by 1
 //
 
@@ -122,30 +123,30 @@ $rs=$conn->Execute($sql);
 ?>
 
 <!-- ------Object table list  -------  -->
-<form method="get" name="<? echo $obj_name ?>_actions_form" action="" target="">
-<input type="hidden" name="<? echo $obj_name ?>_id_selected" value="">
+<form method="get" name="<?php echo $obj_name ?>_actions_form" action="" target="">
+<input type="hidden" name="<?php echo $obj_name ?>_id_selected" value="">
 <input type="hidden" name="methodName" value="">
-<input type="hidden" name="className" value="<? echo $handler_name ?>">
-<input type="hidden" name="classPath" value="<? echo $handler_path ?>">
-<input type="hidden" name="id_column_name" value="<? echo $id_column_name ?>">
-<input type="hidden" name="obj_name" value="<? echo $obj_name ?>">
+<input type="hidden" name="className" value="<?php echo $handler_name ?>">
+<input type="hidden" name="classPath" value="<?php echo $handler_path ?>">
+<input type="hidden" name="id_column_name" value="<?php echo $id_column_name ?>">
+<input type="hidden" name="obj_name" value="<?php echo $obj_name ?>">
 <input type="hidden" name="active" value="">
 <input type="hidden" name="new_team_char" value="">
 <input type="hidden" name="cur_team_char" value="">
 <input type="hidden" name="team_id" value="">
 <table border="<?php echo $cfg['Border']; ?>" cellpadding="2" cellspacing="1">
 <tr>
-<?
+<?php
 foreach  ($fields_arr as $field){
     if ($field->show_in_list)
     {
       if( $field->type != "hidden")
       {
         ?><th>
-         
-		 <span class="OTSortSpan" onMouseOver="this.className='OTSortSpanOnMouse'" onMouseOut="this.className='OTSortSpan'" onclick="<? echo $obj_name ?>_sort_action('<? echo $field->name ?>');">
-		 <? echo $field->get_field_heading() ?>
-		 </span> 
+
+		 <span class="OTSortSpan" onMouseOver="this.className='OTSortSpanOnMouse'" onMouseOut="this.className='OTSortSpan'" onclick="<?php echo $obj_name ?>_sort_action('<?php echo $field->name ?>');">
+		 <?php echo $field->get_field_heading() ?>
+		 </span>
 		 </th>
 		 <?
       }
@@ -153,14 +154,14 @@ foreach  ($fields_arr as $field){
 }
 ?>
 </tr>
-<?
+<?php
 
 $i = 0;
 while (!$rs->EOF){
 
     $i++;
-    $bgcolor          = ($i % 2) ? $cfg['BgcolorOne'] : $cfg['BgcolorTwo'];    
-    
+    $bgcolor          = ($i % 2) ? $cfg['BgcolorOne'] : $cfg['BgcolorTwo'];
+
     if ($GLOBALS['cfg']['BrowsePointerEnable'] == TRUE) {
         $on_mouse = ' onmouseover="setPointer(this, ' . $i . ', \'over\', \'' . $bgcolor . '\', \'' . $GLOBALS['cfg']['BrowsePointerColor'] . '\', \'' . $GLOBALS['cfg']['BrowseMarkerColor'] . '\');"'
                   . ' onmouseout="setPointer(this, ' . $i . ', \'out\', \'' . $bgcolor . '\', \'' . $GLOBALS['cfg']['BrowsePointerColor'] . '\', \'' . $GLOBALS['cfg']['BrowseMarkerColor'] . '\');"';
@@ -172,7 +173,7 @@ while (!$rs->EOF){
     }
 
     $click_mouse = ' onmousedown="document.getElementById(\'checkbox_row_' . $i . '\').checked = (document.getElementById(\'checkbox_row_' . $i . '\').checked ? false : true);" ';
-    
+
     ?>
     <tr <?php echo $on_mouse; ?>>
 <?php
@@ -186,26 +187,26 @@ foreach  ($fields_arr as $field){
 
              if ($field->type=="hidden")
              {
-                ?><td class="<? echo $field->css_class?>" dir="<? echo $field->lang_dir ?>"><? if ($rs->fields[$field->name]) echo html_entity_decode($rs->fields[$field->name]); else echo "&nbsp;";?></td><?
+                ?><td class="<?php echo $field->css_class?>" dir="<?php echo $field->lang_dir ?>"><? if ($rs->fields[$field->name]) echo html_entity_decode($rs->fields[$field->name]); else echo "&nbsp;";?></td><?
              }
-             
+
              if ($field->type=="active")
              {
 
                 	if ($rs->fields["shortname"]=="") {
-	                    ?> 
+	                    ?>
     	                <td bgcolor="<?php echo $bgcolor; ?>">
-        	            <img src="<? echo $ROOT ?>images/icon_active_green.gif">&nbsp;
-            	        <img src="<? echo $ROOT ?>images/icon_inactive_red.gif" style="cursor:hand" onClick="assign_char('<? echo $team_id."','".$rs->fields["team_char"]."','".$cur_team_char ?>','0')">
+        	            <img src="<?php echo $ROOT ?>images/icon_active_green.gif">&nbsp;
+            	        <img src="<?php echo $ROOT ?>images/icon_inactive_red.gif" style="cursor:hand" onClick="assign_char('<?php echo $team_id."','".$rs->fields["team_char"]."','".$cur_team_char ?>','0')">
                 	    </td>
                     	<?
                 	}
-                	
+
                 	else if ($rs->fields["team_id"]==$team_id){
 	                    ?>
     	                <td bgcolor="<?php echo $bgcolor; ?>">
-        	            <img src="<? echo $ROOT ?>images/icon_inactive_green.gif" style="cursor:hand" onClick="assign_char('<? echo $rs->fields["team_id"]."','".$rs->fields["team_char"]."','".$cur_team_char ?>','1')">&nbsp;
-            	        <img src="<? echo $ROOT ?>images/icon_active_red.gif">
+        	            <img src="<?php echo $ROOT ?>images/icon_inactive_green.gif" style="cursor:hand" onClick="assign_char('<?php echo $rs->fields["team_id"]."','".$rs->fields["team_char"]."','".$cur_team_char ?>','1')">&nbsp;
+            	        <img src="<?php echo $ROOT ?>images/icon_active_red.gif">
                 	    </td>
                     	<?
 	                }
@@ -217,7 +218,7 @@ foreach  ($fields_arr as $field){
 	                }
 
              }
-          	
+
         }
 }
 	?>
@@ -233,11 +234,11 @@ foreach  ($fields_arr as $field){
 
 
 <br>
-<?
+<?php
 }
 //---------------------------actions---------------------
 foreach ($actions_arr as $action){
-	?><input type="button" name="btn_<?php echo $action['heading']  ?>" onclick="<? echo $action["onclick"] ?>" value="<? echo $action["heading"] ?>" /><?
+	?><input type="button" name="btn_<?php echo $action['heading']  ?>" onclick="<?php echo $action["onclick"] ?>" value="<?php echo $action["heading"] ?>" /><?
 	if ($action["row_end"])
 	{
 		?><br><?
@@ -257,13 +258,13 @@ foreach ($actions_arr as $action){
 <script language="JavaScript">
 function assign_char(obj_id,new_team_char,cur_team_char,obj_active)
 {
- 	document.<? echo $obj_name ?>_actions_form.<? echo $obj_name ?>_id_selected.value=obj_id;
-    document.<? echo $obj_name ?>_actions_form.active.value=obj_active;
-    document.<? echo $obj_name ?>_actions_form.new_team_char.value=new_team_char;
-    document.<? echo $obj_name ?>_actions_form.cur_team_char.value=cur_team_char;
-    document.<? echo $obj_name ?>_actions_form.team_id.value=obj_id;
-    document.<? echo $obj_name ?>_actions_form.methodName.value="assign_char";
-    document.<? echo $obj_name ?>_actions_form.submit();
+ 	document.<?php echo $obj_name ?>_actions_form.<?php echo $obj_name ?>_id_selected.value=obj_id;
+    document.<?php echo $obj_name ?>_actions_form.active.value=obj_active;
+    document.<?php echo $obj_name ?>_actions_form.new_team_char.value=new_team_char;
+    document.<?php echo $obj_name ?>_actions_form.cur_team_char.value=cur_team_char;
+    document.<?php echo $obj_name ?>_actions_form.team_id.value=obj_id;
+    document.<?php echo $obj_name ?>_actions_form.methodName.value="assign_char";
+    document.<?php echo $obj_name ?>_actions_form.submit();
 }
 
 </script>

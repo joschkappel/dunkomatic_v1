@@ -14,7 +14,7 @@ body{
     background-color: <?php echo $GLOBALS['cfg']['RightBgColor'] . "\n"; ?>;
     margin: 5px;
 }
-	
+
 
 .litem, .litem:active, .litem:hover, .ltblItem, .ltblItem:active{
     font-family:      Verdana, Arial, Helvetica, sans-serif;
@@ -28,7 +28,7 @@ body{
 }
 
 
-	
+
 pre, tt, code{
     font-size:        11px;
 }
@@ -52,7 +52,7 @@ th{
     color:               #000000;
     background-color:    <?php echo $GLOBALS['cfg']['ThBgcolor']; ?>;
     <?php if (isset($js_isDOM) && $js_isDOM != '0') { ?>
-    background-image:    url(../themes/original/img/tbl_th.png);
+    background-image:    url(<?php echo $FW_ROOT ?>basketapp/themes/original/img/tbl_th.png);
     background-repeat:   repeat-x;
     background-position: top;
    <?php } ?>
@@ -78,7 +78,7 @@ th.td{
     color: transparent;
     background-color: transparent;
     background-image: none;
-   
+
 }
 td{
     font-family:      Verdana, Arial, Helvetica, sans-serif;
@@ -243,7 +243,7 @@ div.warning {
 /*
 <?php if($cfg['ErrorIconic'] && isset($js_isDOM) && $js_isDOM != '0') { ?>
 */
-    background-image: url(../themes/original/img/s_warn.png);
+    background-image: url(<?php echo $FW_ROOT ?>basketapp/themes/original/img/s_warn.png);
     background-repeat: no-repeat;
     background-position: 10px 10px;
     padding: 10px 10px 10px 36px;
@@ -272,7 +272,7 @@ div.error div.head {
 /*
 <?php if ($cfg['ErrorIconic'] && isset($js_isDOM) && $js_isDOM != '0') { ?>
 */
-    background-image: url(../themes/original/img/s_error.png);
+    background-image: url(<?php echo $FW_ROOT ?>basketapp/themes/original/img/s_error.png);
     background-repeat: no-repeat;
     background-position: 2px 50%;
     padding: 2px 2px 2px 30px;
@@ -305,7 +305,7 @@ div.tblWarn {
     color:               #000000;
     background-color:    <?php echo $cfg['RightBgColor']; ?>;
     <?php if (isset($js_isDOM) && $js_isDOM != '0') { ?>
-    background-image:    url(../themes/original/img/tbl_header.png);
+    background-image:    url(<?php echo $FW_ROOT ?>basketapp/themes/original/img/tbl_header.png);
     background-repeat:   repeat-x;
     background-position: top;
     <?php } ?>
@@ -320,7 +320,7 @@ div.tblWarn {
     color:               #000000;
     background-color:    <?php echo $cfg['RightBgColor']; ?>;
     <?php if (isset($js_isDOM) && $js_isDOM != '0') { ?>
-    background-image:    url(../themes/original/img/tbl_header.png);
+    background-image:    url(<?php echo $FW_ROOT ?>basketapp/themes/original/img/tbl_header.png);
     background-repeat:   repeat-x;
     background-position: top;
     <?php } ?>
@@ -335,7 +335,7 @@ div.tblWarn {
     color:               #ffffff;
     background-color:    #FF0000;
     <?php if (isset($js_isDOM) && $js_isDOM != '0') { ?>
-    background-image:    url(../themes/original/img/tbl_error.png);
+    background-image:    url(<?php echo $FW_ROOT ?>basketapp/themes/original/img/tbl_error.png);
     background-repeat:   repeat-x;
     background-position: top;
     <?php } ?>
@@ -346,7 +346,7 @@ div.errorhead {
     color: #ffffff;
     text-align: left;
     <?php if (isset($js_isDOM) && $js_isDOM != '0') { ?>
-    background-image: url(../themes/original/img/s_error.png);
+    background-image: url(<?php echo $FW_ROOT ?>basketapp/themes/original/img/s_error.png);
     background-repeat: no-repeat;
     background-position: 2px 50%;
     padding: 2px 2px 2px 20px;
@@ -359,7 +359,7 @@ div.errorhead {
     font-weight:         bold;
     color:               #000000;
     <?php if (isset($js_isDOM) && $js_isDOM != '0') { ?>
-    background-image:    url(../themes/original/img/tbl_th.png);
+    background-image:    url(<?php echo $FW_ROOT ?>basketapp/themes/original/img/tbl_th.png);
     background-repeat:   repeat-x;
     background-position: top;
     <?php } ?>
@@ -370,7 +370,7 @@ div.warnhead {
     color: #ffffff;
     text-align: left;
     <?php if (isset($js_isDOM) && $js_isDOM != '0') { ?>
-    background-image: url(../themes/original/img/s_warn.png);
+    background-image: url(<?php echo $FW_ROOT ?>basketapp/themes/original/img/s_warn.png);
     background-repeat: no-repeat;
     background-position: 2px 50%;
     padding: 2px 2px 2px 20px;
@@ -394,7 +394,7 @@ hr{
     color:               #000000;
     background-color:    <?php echo $cfg['RightBgColor']; ?>;
     <?php if (isset($js_isDOM) && $js_isDOM != '0') { ?>
-    background-image:    url(../themes/original/img/tbl_header.png);
+    background-image:    url(<?php echo $FW_ROOT ?>basketapp/themes/original/img/tbl_header.png);
     background-repeat:   repeat-x;
     background-position: top;
     <?php } ?>
@@ -413,7 +413,7 @@ hr{
     color:               #000000;
     background-color:    #E5E5E5;
     <?php if (isset($js_isDOM) && $js_isDOM != '0') { ?>
-    background-image:    url(../themes/original/img/tbl_header.png);
+    background-image:    url(<?php echo $FW_ROOT ?>basketapp/themes/original/img/tbl_header.png);
     background-repeat:   repeat-x;
     background-position: top;
     <?php } ?>
@@ -427,7 +427,7 @@ hr{
     color:               #000000;
     background-color:    #E5E5E5;
     <?php if (isset($js_isDOM) && $js_isDOM != '0') { ?>
-    background-image:    url(../themes/original/img/tbl_error.png);
+    background-image:    url(<?php echo $FW_ROOT ?>basketapp/themes/original/img/tbl_error.png);
     background-repeat:   repeat-x;
     background-position: top;
     <?php } ?>

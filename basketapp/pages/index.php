@@ -1,6 +1,6 @@
 <?php
 include_once('root.inc.php');
- 	
+
 include_once($FW_ROOT.'config.php');
 include_once($ROOT.'appconfig.php');
 include_once($ROOT.'libs/common.lib.php');
@@ -17,6 +17,7 @@ session_start();
 $conn = ADONewConnection(DB_DRIVER);
 $conn->debug = $db_debug;
 $conn->Connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_NAME);
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 $sql="set character set utf8";
 $conn->Execute($sql);
 
@@ -30,7 +31,7 @@ run_handler();
 
 
 //PMA_setFontSizes();
-$page_title="Bitte wählen Sie eine Aktivität"; 
+$page_title="Bitte wählen Sie eine Aktivität";
 include($FW_ROOT.'templates/basketapp_tpl/header_tpl.php');
 
 include($FW_ROOT.'templates/basketapp_tpl/top_bar_tpl.php');

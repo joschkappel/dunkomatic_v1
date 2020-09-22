@@ -1,4 +1,4 @@
-<?
+<?php
 define("BROWSER_TITLE","clubs");
 define("PAGE_TITLE","admin clubs");
 

@@ -20,10 +20,10 @@ $_SESSION["main_list_page"] = 'team_list.php';
 function add_team()
 {
     //--------validate selected object
-    document.<? echo $obj_name ?>_add_form.className.value="season_handler";
-    document.<? echo $obj_name ?>_add_form.classPath.value="objects/basketapp/";
-    document.<? echo $obj_name ?>_add_form.methodName.value="add_team";
-    document.<? echo $obj_name ?>_add_form.submit();
+    document.<?php echo $obj_name ?>_add_form.className.value="season_handler";
+    document.<?php echo $obj_name ?>_add_form.classPath.value="objects/basketapp/";
+    document.<?php echo $obj_name ?>_add_form.methodName.value="add_team";
+    document.<?php echo $obj_name ?>_add_form.submit();
 
 	
 	}

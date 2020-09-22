@@ -1,4 +1,4 @@
-<?
+<?php
 define("BROWSER_TITLE","statistic queries");
 define("PAGE_TITLE","statistic queries");
 

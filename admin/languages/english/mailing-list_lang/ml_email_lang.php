@@ -1,4 +1,4 @@
-<?
+<?php
 define("BROWSER_TITLE","ml email");
 define("PAGE_TITLE","ml email");
 

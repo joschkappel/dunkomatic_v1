@@ -15,14 +15,22 @@ if (($GLOBALS['cfg']['ThemeManager']) && (@file_exists($tmp_file_lib) && isset($
 }
 
 $pmaTheme = $GLOBALS['cfg']['ThemeDefault'];
-include_once ($ROOT.$GLOBALS ['cfg']['ThemePath']. '/' . $pmaTheme . '/layout.inc.php'); 
+include_once ($ROOT.$GLOBALS ['cfg']['ThemePath']. '/' . $pmaTheme . '/layout.inc.php');
 include_once($FW_ROOT.'objects/basketapp/configuration_handler.class.php');
 
 ?>
 
 <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="TEXT/HTML; CHARSET=<?php echo CHARSET; ?>">
-<?php /* <link href="../css/basketapp.css.php" rel="stylesheet" type="text/css"> */ ?>
-<link rel="stylesheet" type="text/css" href="../css/basketapp.css.php" />
+
+<style type="text/css">
+<?php
+$tmp_file = $ROOT.$GLOBALS ['cfg']['ThemePath']. '/' . $pmaTheme . '/css/basketapp.css.php';
+if (@file_exists($tmp_file)) {
+    include_once($tmp_file);
+    } 
+?>
+</style>
+
 
 <style type="text/css">
 <?php
@@ -36,7 +44,7 @@ if (@file_exists($tmp_file)) {
 
 
 <script language="JavaScript" src="<?php echo $FW_ROOT ?>main.js"></script>
- 
+
 
 <body>
 
@@ -56,7 +64,7 @@ if (@file_exists($tmp_file)) {
 
 
 <?php
-    $pmaThemeImage = $ROOT . $GLOBALS['cfg']['ThemePath'].'/'. $pmaTheme .'/img/'; 
+    $pmaThemeImage = $ROOT . $GLOBALS['cfg']['ThemePath'].'/'. $pmaTheme .'/img/';
     if (@file_exists($pmaThemeImage . 'domlogo.png')) {
 ?>
 
@@ -69,15 +77,15 @@ if (@file_exists($tmp_file)) {
         echo '<img src="' . $GLOBALS['pmaThemeImage'] . 'domlogo.png' . '" height="75" alt="phpMyAdmin" border="0" />';
         echo '</a></div>' . "\n";
     }
-    
+
     if (isset($_REQUEST["region"]) AND ($_REQUEST["region"]<>$_SESSION["region"]) ){
     	$_SESSION["region"] = $_REQUEST["region"];
-    	
+
 		$config = new configuration_handler($conn);
 		$config->reset_configuration($_REQUEST["region_old"]);
 		$config->get_configuration($_REQUEST["region"]);
-    	
-    	
+
+
     	if ($_SESSION["region"] == 'HBVDA'){
 	    	$_SESSION["CONFIG_region"]=HBVDA;
     	} else if ($_SESSION["region"] == 'HBVKS'){
@@ -90,8 +98,8 @@ if (@file_exists($tmp_file)) {
     		$_SESSION["CONFIG_region"]=HBV;
 	    };
     }
-  
-    
+
+
 ?>
      </td>
     </tr>
@@ -106,9 +114,8 @@ if (@file_exists($tmp_file)) {
      </td>
     </tr>
    </table>
-     
-     
+
+
   </td>
-  
+
  </tr>
- 

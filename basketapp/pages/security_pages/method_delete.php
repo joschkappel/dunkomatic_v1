@@ -1,4 +1,4 @@
-<?
+<?php
 include_once('root.inc.php');
 $obj_name="method";
 $page_title="Diese Funktion löschen:";

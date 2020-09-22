@@ -1,4 +1,4 @@
-<?
+<?php
 include_once($APLICATION_ROOT.'common/classes/form_classes/form_field.php');
 
 /*

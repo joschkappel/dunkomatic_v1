@@ -1,0 +1,9 @@
+{
+    "type": "ftp",
+    "host": "susanne.webhoster.ag",
+    "username": "web873",
+    "password": "dunk2001DUNK",
+    "port": 21,
+    "remotePath": "/httpdocs/dunkomatic",
+    "uploadOnSave": false
+}

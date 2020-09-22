@@ -1,4 +1,4 @@
-<?
+<?php
 define("BROWSER_TITLE","Generator tanles");
 define("PAGE_TITLE","Generator tanles");
 

@@ -1,4 +1,4 @@
-<?
+<?php
 function get_insert_fields($arr){
 	$insertFields="";
 	if (is_array($arr)){

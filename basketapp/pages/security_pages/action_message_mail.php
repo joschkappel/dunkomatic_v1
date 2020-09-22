@@ -30,7 +30,8 @@ if (($htmltext != "") AND ($_SESSION['CONFIG_mail']!='N')){
   $mail->Host       = 'dunkomatic.de';  // Specify main and backup SMTP servers
   $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
   $mail->Username   = 'dunkmaster@dunkomatic.de';                     // SMTP username
-  $mail->Password   = 'W0q6nb6%';                               // SMTP password
+  // $mail->Password   = 'W0q6nb6%';                               // SMTP password
+  $mail->Password   = 'dunk2001DUNK';
   $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
   $mail->Port       = 587;                                    // TCP port to connect to
   $mail->SMTPOptions = array(
@@ -50,9 +51,9 @@ if (($htmltext != "") AND ($_SESSION['CONFIG_mail']!='N')){
 
 	//  get all club leads
 	if ($_SESSION['region']=='HBV') {
-		$sql = "SELECT firstname, lastname, email FROM member WHERE member_role_id='0' AND email!='' ";
+		$sql = "SELECT m.firstname, m.lastname, m.email FROM member m, club c WHERE m.member_role_id='0' AND m.email!='' AND m.club_id=c.club_Id and c.active='1'";
 	} else {
-		$sql = "SELECT firstname, lastname, email FROM member WHERE region='".$_SESSION['region']."' AND member_role_id='0' AND email!='' ";
+		$sql = "SELECT m.firstname, m.lastname, m.email FROM member m, club c WHERE m.region='".$_SESSION['region']."' AND m.member_role_id='0' AND m.email!='' AND m.club_id=c.club_Id and c.active='1'";
 	}
 
   $rs=$conn->Execute($sql);
@@ -143,6 +144,7 @@ if (($htmltext != "") AND ($_SESSION['CONFIG_mail']!='N')){
 	}
 
   try {
+      $mail->CharSet = "UTF-8";
       $mail->send();
       $ACTION_RESULT = "Nachricht an ".$i." Vereine verschickt";
       $ACTION_COLOR = "green";

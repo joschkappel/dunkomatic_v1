@@ -1,4 +1,4 @@
-<?
+<?php
 define("BROWSER_TITLE","generator modules");
 define("PAGE_TITLE","generator modules");
 

@@ -5,10 +5,10 @@
 
 <!-- --------------------------------- BODY --------------------------------- -->
 <!-- calendar -->
-<link rel="stylesheet" type="text/css" media="all" href="<? echo $APLICATION_ROOT ?>common/jscalendar-1.0/calendar-blue.css" title="calendar-system" />
-<script type="text/javascript" src="<? echo $APLICATION_ROOT ?>common/jscalendar-1.0/calendar_stripped.js"></script>
-<script type="text/javascript" src="<? echo $APLICATION_ROOT ?>common/jscalendar-1.0/lang/calendar-en.js"></script>
-<script type="text/javascript" src="<? echo $APLICATION_ROOT ?>common/jscalendar-1.0/calendar-setup_stripped.js"></script>
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo $APLICATION_ROOT ?>common/jscalendar-1.0/calendar-blue.css" title="calendar-system" />
+<script type="text/javascript" src="<?php echo $APLICATION_ROOT ?>common/jscalendar-1.0/calendar_stripped.js"></script>
+<script type="text/javascript" src="<?php echo $APLICATION_ROOT ?>common/jscalendar-1.0/lang/calendar-en.js"></script>
+<script type="text/javascript" src="<?php echo $APLICATION_ROOT ?>common/jscalendar-1.0/calendar-setup_stripped.js"></script>
 
 <!-- calendar -->
 <?php
@@ -20,12 +20,12 @@ if (isset($_REQUEST["try_num"]))
 ?>
 <script language="JavaScript">
 
-function handleError() 
+function handleError()
 {
-	<?
+	<?php 
 	if ($trial_number<3)
 	{
-		?>location.href="<? echo $_SERVER['PHP_SELF'] ?>?try_num=<? echo $trial_number ?>&<? echo $obj_name.'_id_selected='.$_REQUEST[$obj_name.'_id_selected'] ?>";<?
+		?>location.href="<?php echo $_SERVER['PHP_SELF'] ?>?try_num=<?php echo $trial_number ?>&<?php echo $obj_name.'_id_selected='.$_REQUEST[$obj_name.'_id_selected'] ?>";<?php 
 	}
 	?>
 }
@@ -40,8 +40,8 @@ function update_object()
     foreach ($fields_arr as $field){
              if (($field->show_in_edit)
                AND ($field->isMandatory))
-               { ?> 
-               if ( document.<?php echo $obj_name ?>_add_form.<? echo $field->name ?>.value=="")
+               { ?>
+               if ( document.<?php echo $obj_name ?>_add_form.<?php echo $field->name ?>.value=="")
                     {
                         alert('<?php echo '"'.$field->get_field_heading(). '" '.$sIsMandatory ?>');
                         return;
@@ -49,21 +49,21 @@ function update_object()
                     <?php
                }
     } ?>
-	document.<? echo $obj_name ?>_add_form.onsubmit();
-    document.<? echo $obj_name ?>_add_form.submit();
+	document.<?php echo $obj_name ?>_add_form.onsubmit();
+    document.<?php echo $obj_name ?>_add_form.submit();
 }
 </script>
 
-<form name="<? echo $obj_name ?>_add_form" method="post" action="" onsubmit="">
+<form name="<?php echo $obj_name ?>_add_form" method="post" action="" onsubmit="">
 <input type="hidden" name="methodName" value="update_obj">
-<input type="hidden" name="className" value="<? echo $handler_name ?>">
-<input type="hidden" name="classPath" value="<? echo $handler_path ?>">
-<input type="hidden" name="obj_name" value="<? echo $obj_name ?>">
-<input type="hidden" name="id_column_name" value="<? echo $_REQUEST["id_column_name"] ?>">
-<input type="hidden" name="<? echo $_REQUEST["id_column_name"] ?>" value="<? echo $_REQUEST[$obj_name.'_id_selected'] ?>">
+<input type="hidden" name="className" value="<?php echo $handler_name ?>">
+<input type="hidden" name="classPath" value="<?php echo $handler_path ?>">
+<input type="hidden" name="obj_name" value="<?php echo $obj_name ?>">
+<input type="hidden" name="id_column_name" value="<?php echo $_REQUEST["id_column_name"] ?>">
+<input type="hidden" name="<?php echo $_REQUEST["id_column_name"] ?>" value="<?php echo $_REQUEST[$obj_name.'_id_selected'] ?>">
 
 <table  cellspacing="0">
-<?
+<?php
 $fields_names=array();
 $fields_types=array();
 
@@ -84,33 +84,33 @@ foreach ($fields_arr as $field){
     if (($field->type=="text" || $field->type=="url" || $field->type=="url_text" )AND (!$field->isAutoCreate))
 	{
         if (!$_SESSION['validation_error']) {
-        	?><td class="OTRecordDataCell"><input type="text" name="<? echo $field->name ?>" class="<? echo $field->css_class ?>" value="<? echo $rs->fields[$field->name]?>" dir="<? echo $field->lang_dir ?>"></td>
+        	?><td class="OTRecordDataCell"><input type="text" name="<?php echo $field->name ?>" class="<?php echo $field->css_class ?>" value="<?php echo $rs->fields[$field->name]?>" dir="<?php echo $field->lang_dir ?>"></td>
            <?php } else {
-           	?><td class="<?php echo ($GLOBALS['validation_results'][$field->name]!="") ? 'tblWarn' : 'OTRecordDataCell'; ?>"><input type="text" class="<? echo $field->css_class ?>" name="<? echo $field->name ?>" value="<? echo $GLOBALS['validation_values'][$field->name] ?>" dir="<? echo $field->lang_dir ?>"></td>
+           	?><td class="<?php echo ($GLOBALS['validation_results'][$field->name]!="") ? 'tblWarn' : 'OTRecordDataCell'; ?>"><input type="text" class="<?php echo $field->css_class ?>" name="<?php echo $field->name ?>" value="<?php echo $GLOBALS['validation_values'][$field->name] ?>" dir="<?php echo $field->lang_dir ?>"></td>
            	<?php
            }
     }
     if (($field->type=="checkbox")AND (!$field->isAutoCreate))
 	{
 		$checked="";
-		
-        if (!$_SESSION['validation_error']) {		
+
+        if (!$_SESSION['validation_error']) {
 			if ($rs->fields[$field->name]) $checked="checked";
         } else {
         	if ($GLOBALS['validation_values'][$field->name]) $checked="checked";
         }
-       	?><td class="OTRecordDataCell"><input <? echo $checked ?>" type="checkbox" name="<? echo $field->name ?>" class="<? echo $field->css_class ?>" value="1"></td><?php        
+       	?><td class="OTRecordDataCell"><input <?php echo $checked ?>" type="checkbox" name="<?php echo $field->name ?>" class="<?php echo $field->css_class ?>" value="1"></td><?php
     }
     if (($field->type=="active")AND (!$field->isAutoCreate))
 	{
         $checked="";
-        
+
         if (!$_SESSION['validation_error']) {
         	if ($rs->fields[$field->name]) $checked="checked";
         } else {
         	if ($GLOBALS['validation_values'][$field->name]) $checked="checked";
         }
-        ?><td class="OTRecordDataCell"><input <? echo $checked ?>" type="checkbox" name="<? echo $field->name ?>" class="<? echo $field->css_class ?>" value="1"></td><?
+        ?><td class="OTRecordDataCell"><input <?php echo $checked ?>" type="checkbox" name="<?php echo $field->name ?>" class="<?php echo $field->css_class ?>" value="1"></td><?php 
     }
     if (($field->type=="textarea")AND (!$field->isAutoCreate)){
         if (!$_SESSION['validation_error']) {
@@ -118,7 +118,7 @@ foreach ($fields_arr as $field){
         } else {
         	$fvaule = html_entity_decode($GLOBALS['validation_values'][$field->name]);
         }
-    	 ?><td class="OTRecordDataCell"><textarea name="<? echo $field->name ?>" cols="<? echo $field->cols ?>" rows="<? echo $field->rows ?>" class="<? echo $field->css_class ?>" dir="<? echo $field->lang_dir ?>"><? echo $fvalue ?></textarea></td><?
+    	 ?><td class="OTRecordDataCell"><textarea name="<?php echo $field->name ?>" cols="<?php echo $field->cols ?>" rows="<?php echo $field->rows ?>" class="<?php echo $field->css_class ?>" dir="<?php echo $field->lang_dir ?>"><?php echo $fvalue ?></textarea></td><?php 
     }
     if (($field->type=="create_uniqe")AND (!$field->isAutoCreate))
     {
@@ -135,11 +135,11 @@ foreach ($fields_arr as $field){
         {
              $hidden_value=$_SESSION[$field->var_name];
         }
-        ?><input type="hidden" name="<? echo $field->name ?>" value="<? echo $hidden_value ?>"><?
+        ?><input type="hidden" name="<?php echo $field->name ?>" value="<?php echo $hidden_value ?>"><?php 
     }
     if (($field->type=="selectboxdb")AND (!$field->isAutoCreate))
 	{
-	
+
         if (!$_SESSION['validation_error']) {
         	$fvalue = $rs->fields[$field->name];
         } else {
@@ -147,29 +147,29 @@ foreach ($fields_arr as $field){
         }
 
 		$dispval = "";
-				
+
 		if ( !isset($_SESSION["select_cache"][$field->table_name.'_'.$field->name.'_'.$field->display_field_name.'_'.$field->where_clause])) {
-		
+
 			if ($field->where_clause==""){ $where_clause = ' 1 ';}
 			else { $where_clause = $field->where_clause ; }
-		
+
 			$sql="SELECT `".$field->display_field_name."`,`".$field->save_field_name."` FROM ".$field->table_name." WHERE ".$where_clause;
 			$rs_select_box=$conn->Execute($sql);
-			
+
 			if (is_array($rs_select_box->fields)){
 			if (!array_search($fvalue, $rs_select_box->fields) AND ($fvalue!='')){
 				$sql="SELECT `".$field->display_field_name."`,`".$field->save_field_name."` FROM ".$field->table_name." WHERE ".$field->save_field_name."=".$fvalue;
 				$rs_select_box2=$conn->Execute($sql);
 			}
-			
+
 			reset($rs_select_box->fields);
 			}
-			
+
 		} ?>
-		
+
 		<td class="OTRecordDataCell">
-		<select name="<? echo $field->name ?>" class="<? echo $field->css_class ?>" dir="<? echo $field->lang_dir ?>">
-        <? if (!$field->isMandatory) echo '<option value=\"\"></option>';
+		<select name="<?php echo $field->name ?>" class="<?php echo $field->css_class ?>" dir="<?php echo $field->lang_dir ?>">
+        <?php if (!$field->isMandatory) echo '<option value=\"\"></option>';
 
 	   if ( isset($_SESSION["select_cache"][$field->table_name.'_'.$field->name.'_'.$field->display_field_name.'_'.$field->where_clause])) {
 
@@ -180,11 +180,11 @@ foreach ($fields_arr as $field){
 				{
 				$selected="selected";
 				}
-				?><option <? echo $selected ?> value="<? echo key($_SESSION["select_cache"][$field->table_name.'_'.$field->name.'_'.$field->display_field_name.'_'.$field->where_clause]) ?>"><? echo $dispval ?></option><?
+				?><option <?php echo $selected ?> value="<?php echo key($_SESSION["select_cache"][$field->table_name.'_'.$field->name.'_'.$field->display_field_name.'_'.$field->where_clause]) ?>"><?php echo $dispval ?></option><?php 
 				next ($_SESSION["select_cache"][$field->table_name.'_'.$field->name.'_'.$field->display_field_name.'_'.$field->where_clause]);
 			}
 		} else {
-		
+
 		while (isset($rs_select_box) AND !$rs_select_box->EOF)
 		{
 			$selected="";
@@ -192,7 +192,7 @@ foreach ($fields_arr as $field){
 			{
 				$selected="selected";
 			}
-			?><option <? echo $selected ?> value="<? echo $rs_select_box->fields[$field->save_field_name] ?>"><? echo $rs_select_box->fields[$field->display_field_name] ?></option><?
+			?><option <?php echo $selected ?> value="<?php echo $rs_select_box->fields[$field->save_field_name] ?>"><?php echo $rs_select_box->fields[$field->display_field_name] ?></option><?php 
 			$rs_select_box->MoveNext();
 		}
 		while (isset($rs_select_box2) AND !$rs_select_box2->EOF)
@@ -202,14 +202,14 @@ foreach ($fields_arr as $field){
 			{
 				$selected="selected";
 			}
-			?><option <? echo $selected ?> value="<? echo $rs_select_box2->fields[$field->save_field_name] ?>"><? echo $rs_select_box2->fields[$field->display_field_name] ?></option><?
+			?><option <?php echo $selected ?> value="<?php echo $rs_select_box2->fields[$field->save_field_name] ?>"><?php echo $rs_select_box2->fields[$field->display_field_name] ?></option><?php 
 			$rs_select_box2->MoveNext();
 		}
-		
+
 	   }
 		?>
 		</select>
-		</td><?
+		</td><?php 
     }
 
 
@@ -217,21 +217,21 @@ foreach ($fields_arr as $field){
     if (($field->type=="selectboxlist")AND (!$field->isAutoCreate))
     {
         ?>
-        
+
         <td class="OTRecordDataCell">
-        <select name="<? echo $field->name ?>" class="<? echo $field->css_class ?>" dir="<? echo $field->lang_dir ?>"> 
-        <?php 
+        <select name="<?php echo $field->name ?>" class="<?php echo $field->css_class ?>" dir="<?php echo $field->lang_dir ?>">
+        <?php
         if (!$field->isMandatory) {
         	echo '<option value=\"\"></option>';
         	}
-        	
+
         if (!$_SESSION['validation_error']) {
         	$fvalue = $rs->fields[$field->name];
         } else {
         	$fvalue = $GLOBALS['validation_values'][$field->name];
         }
 
-             
+
       for ($i=0;$i<count($field->list_id_values);$i++)
         {
 			$selected="";
@@ -239,26 +239,26 @@ foreach ($fields_arr as $field){
 			{
 				$selected="selected";
 			}
-            ?><option <? echo $selected ?> value="<? echo $field->list_id_values[$i] ?>"><? echo $field->list_display_values[$i] ?></option><?
+            ?><option <?php echo $selected ?> value="<?php echo $field->list_id_values[$i] ?>"><?php echo $field->list_display_values[$i] ?></option><?php 
         }
         ?>
         </select>
-        </td><?
+        </td><?php 
     }
 
     if (($field->type=="selectboxenum")AND (!$field->isAutoCreate))
     {
         ?>
         <td class="OTRecordDataCell">
-        <select name="<? echo $field->name ?>" class="<? echo $field->css_class ?>" dir="<? echo $field->lang_dir ?>">
-        <? if (!$field->isMandatory) echo '<option value=\"\"></option>';
+        <select name="<?php echo $field->name ?>" class="<?php echo $field->css_class ?>" dir="<?php echo $field->lang_dir ?>">
+        <?php if (!$field->isMandatory) echo '<option value=\"\"></option>';
 
         if (!$_SESSION['validation_error']) {
         	$fvalue = $rs->fields[$field->name];
         } else {
         	$fvalue = $GLOBALS['validation_values'][$field->name];
         }
-        
+
        for ($i=0;$i<count($field->list_values);$i++)
         {
 			$selected="";
@@ -266,25 +266,25 @@ foreach ($fields_arr as $field){
 			{
 				$selected="selected";
 			}
-            ?><option <? echo $selected ?> value="<? echo $field->list_values[$i] ?>"><? echo $field->list_values[$i] ?></option><?
+            ?><option <?php echo $selected ?> value="<?php echo $field->list_values[$i] ?>"><?php echo $field->list_values[$i] ?></option><?php 
         }
         ?>
         </select>
-        </td><?
+        </td><?php 
     }
-    
+
     if (($field->type=="password")AND (!$field->isAutoCreate)){
-        ?><td class="OTRecordDataCell"><input type="password" name="<? echo $field->name ?>" class="<? echo $field->css_class ?>" value="" dir="<? echo $field->lang_dir ?>">
-		<?
+        ?><td class="OTRecordDataCell"><input type="password" name="<?php echo $field->name ?>" class="<?php echo $field->css_class ?>" value="" dir="<?php echo $field->lang_dir ?>">
+		<?php 
 		if ($field->use_repassword)
 		{
 			?>
 			&nbsp;&nbsp;&nbsp;
-			<span class="RePasswordHeading"><? echo $field->get_repassword_heading(); ?></span>&nbsp;<input type="password" name="re_<? echo $field->name ?>" class="<? echo $field->css_class ?>" value="" dir="<? echo $field->lang_dir ?>">
-			<?
+			<span class="RePasswordHeading"><?php echo $field->get_repassword_heading(); ?></span>&nbsp;<input type="password" name="re_<?php echo $field->name ?>" class="<?php echo $field->css_class ?>" value="" dir="<?php echo $field->lang_dir ?>">
+			<?php 
 		}
 		?>
-		<br><input class="FormCheckbox" type="checkbox" name="change_<? echo $field->name ?>" value="1">&nbsp;<? echo CHANGE_PASSWORD?></td><?
+		<br><input class="FormCheckbox" type="checkbox" name="change_<?php echo $field->name ?>" value="1">&nbsp;<?php echo CHANGE_PASSWORD?></td><?php 
     }
     if (($field->type=="datetime")AND (!$field->isAutoCreate)){
 
@@ -298,22 +298,22 @@ foreach ($fields_arr as $field){
 		?>
 		<td class="OTRecordDataCell">
 		<table cellspacing="0" cellpadding="0" style="border-collapse: collapse"><tr>
-		 <td><input type="text" name="<? echo $field->name ?>" class="<? echo $field->css_class ?>" dir="ltr" id="<? echo $field->name ?>" value="<? echo (format_from_db_date($fvalue,$field->date_format, $field->date_type)) ?>" readonly="1" /></td>
-		 <td><img src="<? echo $APLICATION_ROOT ?>common/jscalendar-1.0/img.gif" id="<? echo $field->name ?>_cal" style="cursor: pointer; border: 1px solid red;" title="Datum auswählen"
+		 <td><input type="text" name="<?php echo $field->name ?>" class="<?php echo $field->css_class ?>" dir="ltr" id="<?php echo $field->name ?>" value="<?php echo (format_from_db_date($fvalue,$field->date_format, $field->date_type)) ?>" readonly="1" /></td>
+		 <td><img src="<?php echo $APLICATION_ROOT ?>common/jscalendar-1.0/img.gif" id="<?php echo $field->name ?>_cal" style="cursor: pointer; border: 1px solid red;" title="Datum auswï¿½hlen"
 			  onmouseover="this.style.background='red';" onmouseout="this.style.background=''" /></td>
-		</table>		
+		</table>
 		<script type="text/javascript">
 			Calendar.setup({
-				inputField     :    "<? echo $field->name ?>",      // id of the input field
-				ifFormat       :    "<? echo $field->date_format ?>",       // format of the input field
+				inputField     :    "<?php echo $field->name ?>",      // id of the input field
+				ifFormat       :    "<?php echo $field->date_format ?>",       // format of the input field
 				showsTime      :    false,            // will display a time selector
-				button         :    "<? echo $field->name ?>_cal",   // trigger for the calendar (button ID)
+				button         :    "<?php echo $field->name ?>_cal",   // trigger for the calendar (button ID)
 				singleClick    :    true,           // double-click mode
 				step           :    1                // show all years in drop-down boxes (instead of every other year as default)
 			});
 		</script>
 		</td>
-		<?
+		<?php 
     }
 
     if (($field->show_heading)AND (!$field->isAutoCreate))
@@ -321,8 +321,8 @@ foreach ($fields_arr as $field){
      	?>
 		<td class="OTRecordRemarkCell"><?php echo $field->get_field_remark() ?></td>
 		<?php
-    } 
-    
+    }
+
 
     if ($_SESSION['validation_error'])
     {
@@ -332,33 +332,33 @@ foreach ($fields_arr as $field){
 		<?php
     	}
     } ?>
-    
-		</tr>    
+
+		</tr>
     <?php
     $fields_names[]=$field->name;
     $fields_types[]=$field->type;
 }
 ?>
 </table>
-<input type="hidden" name="fields_names" value="<? echo  implode(",", $fields_names); ?>">
-<input type="hidden" name="fields_types" value="<? echo  implode(",", $fields_types); ?>">
+<input type="hidden" name="fields_names" value="<?php echo  implode(",", $fields_names); ?>">
+<input type="hidden" name="fields_types" value="<?php echo  implode(",", $fields_types); ?>">
 </form>
 
 <br>
-<?
+<?php
 //---------------------------actions---------------------
 foreach ($actions_arr as $action){
-	?><input type="button" name="btn_<?php echo $action['heading']  ?>" onclick="<? echo $action["onclick"] ?>" value="<? echo $action["heading"] ?>" /><?
+	?><input type="button" name="btn_<?php echo $action['heading']  ?>" onclick="<?php echo $action["onclick"] ?>" value="<?php echo $action["heading"] ?>" /><?php 
 
 	if ($action["row_end"])
 	{
-		?><br><?
+		?><br><?php 
 	}
 	else
 	{
-		?>&nbsp;&nbsp;<?
+		?>&nbsp;&nbsp;<?php 
 	}
-} 
+}
 //---------------------------actions---------------------
 ?>
 

@@ -1,4 +1,4 @@
-<?
+<?php
 define("BROWSER_TITLE","table fields");
 define("PAGE_TITLE","table fields");
 

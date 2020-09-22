@@ -5,7 +5,7 @@
  * To change the template for this generated file go to
  * Window - Preferences - PHPeclipse - PHP - Code Templates
  */
- 
+
 include_once($FW_ROOT."/config.php");
 include_once($ROOT.'appconfig.php');
 include_once($ROOT.'libs/common.lib.php');
@@ -19,6 +19,7 @@ $conn = ADONewConnection(DB_DRIVER);
 //$conn->debug = $db_debug;
 $conn->debug = true;
 $conn->Connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_NAME);
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 $sql="set character set utf8";
 $conn->Execute($sql);
 
@@ -29,5 +30,5 @@ $_SESSION['validation_error'] = false;
 run_handler();
 //-------------------------run class method and security check------------------
 
- 
+
 ?>

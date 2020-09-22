@@ -1,4 +1,4 @@
-<?
+<?php
 define("BROWSER_TITLE","system managers");
 define("PAGE_TITLE","system managers");
 

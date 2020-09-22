@@ -41,7 +41,6 @@ $pre_condition="AND (region ='".$_SESSION["region"]."' OR region='HBV')";
 
 $_SESSION["main_list_page"]="league_list.php";
 
-$page_title=PAGE_TITLE;
 
 include($FW_ROOT."templates/common_tpl/pager.php");
 //----------------definitions end--------------
@@ -50,65 +49,65 @@ include($FW_ROOT."templates/common_tpl/pager.php");
 function members()
 {
     //--------validate selected object
-    if (document.<? echo $obj_name ?>_actions_form.<? echo $obj_name ?>_id_selected.value=="")
+    if (document.<?php echo $obj_name ?>_actions_form.<?php echo $obj_name ?>_id_selected.value=="")
     {
         alert("<?php echo ERROR_NO_SELECTED ?>");
         return;
     }
-    document.<? echo $obj_name ?>_actions_form.action="member_list.php";
-    document.<? echo $obj_name ?>_actions_form.submit();
+    document.<?php echo $obj_name ?>_actions_form.action="member_list.php";
+    document.<?php echo $obj_name ?>_actions_form.submit();
 }
 
 function teams()
 {
     //--------validate selected object
-    if (document.<? echo $obj_name ?>_actions_form.<? echo $obj_name ?>_id_selected.value=="")
+    if (document.<?php echo $obj_name ?>_actions_form.<?php echo $obj_name ?>_id_selected.value=="")
     {
         alert("<?php echo ERROR_NO_SELECTED ?>");
         return;
     }
-    document.<? echo $obj_name ?>_actions_form.action="team_list.php";
-    document.<? echo $obj_name ?>_actions_form.submit();
+    document.<?php echo $obj_name ?>_actions_form.action="team_list.php";
+    document.<?php echo $obj_name ?>_actions_form.submit();
 }
 
 function games()
 {
     //--------validate selected object
-    if (document.<? echo $obj_name ?>_actions_form.<? echo $obj_name ?>_id_selected.value=="")
+    if (document.<?php echo $obj_name ?>_actions_form.<?php echo $obj_name ?>_id_selected.value=="")
     {
         alert("<?php echo ERROR_NO_SELECTED ?>");
         return;
     }
-    document.<? echo $obj_name ?>_actions_form.className.value="season_handler";
-    document.<? echo $obj_name ?>_actions_form.classPath.value="objects/basketapp/";
-    document.<? echo $obj_name ?>_actions_form.methodName.value="generate_league_games";
-    document.<? echo $obj_name ?>_actions_form.submit();
+    document.<?php echo $obj_name ?>_actions_form.className.value="season_handler";
+    document.<?php echo $obj_name ?>_actions_form.classPath.value="objects/basketapp/";
+    document.<?php echo $obj_name ?>_actions_form.methodName.value="generate_league_games";
+    document.<?php echo $obj_name ?>_actions_form.submit();
 }
 
 function cleanup()
 {
     //--------validate selected object
-    if (document.<? echo $obj_name ?>_actions_form.<? echo $obj_name ?>_id_selected.value=="")
+    if (document.<?php echo $obj_name ?>_actions_form.<?php echo $obj_name ?>_id_selected.value=="")
     {
         alert("<?php echo ERROR_NO_SELECTED ?>");
         return;
     }
-    document.<? echo $obj_name ?>_actions_form.className.value="season_handler";
-    document.<? echo $obj_name ?>_actions_form.classPath.value="objects/basketapp/";
-    document.<? echo $obj_name ?>_actions_form.methodName.value="clean_up";
-    document.<? echo $obj_name ?>_actions_form.submit();
+    document.<?php echo $obj_name ?>_actions_form.className.value="season_handler";
+    document.<?php echo $obj_name ?>_actions_form.classPath.value="objects/basketapp/";
+    document.<?php echo $obj_name ?>_actions_form.methodName.value="clean_up";
+    document.<?php echo $obj_name ?>_actions_form.submit();
 }
 
 function leaguegames()
 {
     //--------validate selected object
-    if (document.<? echo $obj_name ?>_actions_form.<? echo $obj_name ?>_id_selected.value=="")
+    if (document.<?php echo $obj_name ?>_actions_form.<?php echo $obj_name ?>_id_selected.value=="")
     {
         alert("<?php echo ERROR_NO_SELECTED ?>");
         return;
     }
-    document.<? echo $obj_name ?>_actions_form.action="game_list.php";
-    document.<? echo $obj_name ?>_actions_form.submit();
+    document.<?php echo $obj_name ?>_actions_form.action="game_list.php";
+    document.<?php echo $obj_name ?>_actions_form.submit();
 }
 
 </script>

@@ -1,4 +1,4 @@
-<?
+<?php
 /**
 * SqlAnalizer class to support sql string analizing
 **/

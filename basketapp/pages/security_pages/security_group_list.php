@@ -42,13 +42,13 @@ include($FW_ROOT."templates/common_tpl/pager.php");
 function permissions()
 {
     //--------validate selected object
-    if (document.<? echo $obj_name ?>_actions_form.<? echo $obj_name ?>_id_selected.value=="")
+    if (document.<?php echo $obj_name ?>_actions_form.<?php echo $obj_name ?>_id_selected.value=="")
     {
         alert("<?php echo ERROR_NO_SELECTED ?>");
         return;
     }
-    document.<? echo $obj_name ?>_actions_form.action="security_group_permission_relation.php";
-    document.<? echo $obj_name ?>_actions_form.submit();
+    document.<?php echo $obj_name ?>_actions_form.action="security_group_permission_relation.php";
+    document.<?php echo $obj_name ?>_actions_form.submit();
 }
 </script>
 <?php

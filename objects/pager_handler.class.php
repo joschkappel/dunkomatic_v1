@@ -1,4 +1,4 @@
-<?
+<?php
 include_once($APLICATION_ROOT.'db_objects/db_object.class.php');
 
 /**
@@ -66,21 +66,21 @@ class pager_handler {
 			$obj->activate($_REQUEST[$_REQUEST["obj_name"].'_id_selected']);
 		else
 			$obj->inactivate($_REQUEST[$_REQUEST["obj_name"].'_id_selected']);
-			
+
 		//deactive system user...
-		$sql = "SELECT system_manager_id FROM user_allowed_id WHERE dbobj_name='".$_REQUEST["obj_name"]."' AND allowed_id=".$_REQUEST[$_REQUEST["obj_name"].'_id_selected'];	
+		$sql = "SELECT system_manager_id FROM user_allowed_id WHERE dbobj_name='".$_REQUEST["obj_name"]."' AND allowed_id=".$_REQUEST[$_REQUEST["obj_name"].'_id_selected'];
 		$rs = $this->conn->Execute($sql);
-		
+
 		while (!$rs->EOF){
 			$obj=$this->get_db_object('system_manager','system_manager_id');
-			
+
 			if ($_REQUEST['active']=="1")
 				$obj->activate($rs->fields['system_manager_id']);
 			else
 				$obj->inactivate($rs->fields['system_manager_id']);
-			$rs->MoveNext();	
-		}	
-			
+			$rs->MoveNext();
+		}
+
 	}
 
 	function assign_char(){
@@ -88,11 +88,12 @@ class pager_handler {
         $team_id = $_REQUEST['team_id'];
         $new_team_char= $_REQUEST['new_team_char'];
         $cur_team_char= $_REQUEST['cur_team_char'];
-        
-//        print_r($team_id);
-//        print_r($new_team_char);
-// 	      print_r($cur_team_char);
-        
+
+        // print_r($team_id);
+        // print_r($new_team_char);
+ 	      // print_r($cur_team_char);
+				// print_r($_REQUEST['active']);
+
 		if ($_REQUEST['active']=="1"){
 			$this->conn->Execute("UPDATE team SET league_char = '', lastuser='".$_SESSION['system_manager_name']."', lastchange='".date(DB_DATE_FORMAT_FOR_PHP_DATE_FUNCTION)."' WHERE `team_id`='".$team_id."'");
 			$this->conn->Execute("INSERT INTO `team_char_log` ( `lastuser`, `team_id`,`char_before`, `char_after`, `lastchange`) VALUES ('".$_SESSION['system_manager_name']."', ".$team_id.", '".$cur_team_char."','-', '".date(DB_DATE_FORMAT_FOR_PHP_DATE_FUNCTION)."' )");}
@@ -101,12 +102,12 @@ class pager_handler {
 			$this->conn->Execute("UPDATE team SET league_char = '".$new_team_char."', lastuser='".$_SESSION['system_manager_name']."', lastchange='".date(DB_DATE_FORMAT_FOR_PHP_DATE_FUNCTION)."' WHERE `team_id`='".$team_id."'");
 			$this->conn->Execute("INSERT INTO `team_char_log` ( `lastuser`, `team_id`,`char_before`, `char_after`, `lastchange`) VALUES ( '".$_SESSION['system_manager_name']."', ".$team_id.",'".$cur_team_char."', '".$new_team_char."', '".date(DB_DATE_FORMAT_FOR_PHP_DATE_FUNCTION)."'  )");}
 
-	
+
 	}
 
 
 
-	
+
 	/**
 	* sort_by set the session sort by column name.
 	* @param $_REQUEST["obj_name"] the db object name
@@ -129,7 +130,7 @@ class pager_handler {
 		$_SESSION[$_REQUEST["obj_name"].'_sort_by_session']=$_REQUEST['sort_by'];
 	}
 
-	
+
 	/**
 	* change_page_num set the session sort by column name.
 	* @param $_REQUEST["obj_name"] the db object name
@@ -140,18 +141,18 @@ class pager_handler {
 		$page_number=$_REQUEST['page_num'];
 		$_SESSION[$_REQUEST["obj_name"].'_page_num_session']=$_REQUEST['page_num'];
 	}
-	
+
 	/**
 	* search_in_field  will set the where for the object with new search or refine it
 	* @param $_REQUEST["obj_name"] is string with the object name
-	* @param $_REQUEST["search_field"] is the search field 
+	* @param $_REQUEST["search_field"] is the search field
 	* @param $_REQUEST["search_string"] is the string with search terms
 	* @param $_REQUEST["search_operator"] the operator to make
 	* @param $_REQUEST["refine_search"] to refine search or new search
 	* @return set the$_SESSION[$_REQUEST["obj_name"].'_where_search_session'] with the new search string
 	**/
 	function search_in_field(){
-		if (!isset($_REQUEST["search_field"]) 
+		if (!isset($_REQUEST["search_field"])
 			|| $_REQUEST["search_field"]==""
 			|| !isset($_REQUEST["search_string"])
 			|| $_REQUEST["search_string"]==""
@@ -208,16 +209,16 @@ class pager_handler {
 			{
 				$_SESSION[$_REQUEST["obj_name"].'_where_search_session']=$where;
 			}
-		}		
+		}
 	}
-	
+
 	/**
-	* reset_search unset the where search session 
+	* reset_search unset the where search session
 	**/
 	function reset_search(){
 		unset($_SESSION[$_REQUEST["obj_name"].'_where_search_session']);
 	}
-	
+
 	/**
 	* delete all marked records - works only with checkboxes
 	**/
@@ -228,7 +229,7 @@ class pager_handler {
 			return;
 		}
         $obj=$this->get_db_object($_REQUEST["obj_name"],$_REQUEST["id_column_name"]);
-		
+
 		$ids_arr=$_REQUEST["records_ids"];
 		foreach ($ids_arr as $id)
 		{
@@ -242,17 +243,17 @@ class pager_handler {
 		{
 			return;
 		}
-		
+
        $fields_names=explode(",",$_REQUEST['fields_names']);
        $fields_types=explode(",",$_REQUEST['fields_types']);
        $edit_field_names=explode(",",$_REQUEST['edit_field_names']);
 
-	
+
         $obj=$this->get_db_object($_REQUEST["obj_name"],$_REQUEST["id_column_name"]);
-			
+
 		$ids_arr=$_REQUEST["records_ids"];
 	    $fields= array();
-	    
+
 		foreach ($ids_arr as $id)
 		{
 
@@ -265,13 +266,13 @@ class pager_handler {
 				if ($fields_types[$i]=="text" || $fields_types[$i]=="url" || $fields_types[$i]=="url_text" )
 				{
 					if (isset($_REQUEST[$fields_names[$i].'_'.$id]))
-					  $fields[$fields_names[$i]] = $_REQUEST[$fields_names[$i].'_'.$id];	
+					  $fields[$fields_names[$i]] = $_REQUEST[$fields_names[$i].'_'.$id];
 				}
-				
+
 				if ($fields_types[$i]=="datetime")
 				{
 					if (isset($_REQUEST[$fields_names[$i].'_'.$id]))
-				 	  
+
   				 	  $dateval= $_REQUEST[$fields_names[$i].'_'.$id];
   				 	  if (strpos($dateval,":")){
   				 	  	sscanf( $dateval, "%d:%d:%d", $hour, $minute, $sec );
@@ -282,14 +283,14 @@ class pager_handler {
   				 	  	sscanf( $dateval, $df, $d, $m, $y );
   				 	  	$dateval = get_mysql_formatted_date(0,0,0,$d,$m,$y);
 
-  				 	  }	
-//  				 	  	print_r($dateval);  				 	  
+  				 	  }
+//  				 	  	print_r($dateval);
 				 	  $fields[$fields_names[$i]]= $dateval;
 				}
 			  }
 			}
-				
-/*			
+
+/*
 			print ("fields:---->");print_r ($fields);
 			print ("<br> field names:---->");print_r ($fields_names);
 			print ("<br> request:--->");print_r ($_REQUEST);
@@ -297,12 +298,12 @@ class pager_handler {
 
 */
 	       	$obj->update($id, $fields);
-	       	
+
 		}
 	}
-	
-	
-	
+
+
+
 }
 
 ?>

@@ -6,8 +6,8 @@
      <td>
 
 		<form method="post" name="selectregion_form" action="">
-		<input type="hidden" name="region" value="<? echo $region ?>">
-		<input type="hidden" name="region_old" value="<? echo $_SESSION["region"] ?>">
+		<input type="hidden" name="region" value="<?php echo $region ?>">
+		<input type="hidden" name="region_old" value="<?php echo $_SESSION["region"] ?>">
 
 		<div>
 

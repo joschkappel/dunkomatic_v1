@@ -1,4 +1,4 @@
-<?
+<?php
 
 define("PAGE_TITLE",BROWSER_TITLE." - Rechte");
 

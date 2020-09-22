@@ -1,4 +1,4 @@
-<?
+<?php
 include_once('root.inc.php');
 $obj_name="method";
 include_once($ROOT.'libs/basketapp_header.inc.php');

@@ -1,3 +1,4 @@
 /logs
 /ddl
 **/*config.php
+**/.DS_Store

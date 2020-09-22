@@ -1,4 +1,4 @@
-<?
+<?php
 $allow_url_override = 1; // Set to 0 to not allow changed VIA POST or GET
 if(!$allow_url_override || !isset($file_to_include))
 {

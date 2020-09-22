@@ -30,24 +30,23 @@ $handler_path="objects/";
 $show_search=false;
 $show_search_query=false;
 
-
 $actions_arr=array();
-$actions_arr[]=array(type=>"M","action"=>"delete_all","heading"=>$sDeleteAll,"onclick"=>$obj_name."_delete_all_marked()","row_end"=>false);
-$actions_arr[]=array(type=>"M","action"=>"add","heading"=>$sAddObject,"onclick"=>$obj_name."_perform_action('add')","row_end"=>false);
-$actions_arr[]=array(type=>"D","action"=>"select_all","heading"=>$sSelectAll,"onclick"=>"select_all_checkboxes('records_ids[]','". $obj_name."_actions_form',true)","row_end"=>false);
-$actions_arr[]=array(type=>"D","action"=>"clear_all","heading"=>$sClearAll,"onclick"=>"select_all_checkboxes('records_ids[]','". $obj_name."_actions_form',false)","row_end"=>false);
+$actions_arr[]=array("type"=>"M","action"=>"delete_all","heading"=>$sDeleteAll,"onclick"=>$obj_name."_delete_all_marked()","row_end"=>false);
+$actions_arr[]=array("type"=>"M","action"=>"add","heading"=>$sAddObject,"onclick"=>$obj_name."_perform_action('add')","row_end"=>false);
+$actions_arr[]=array("type"=>"D","action"=>"select_all","heading"=>$sSelectAll,"onclick"=>"select_all_checkboxes('records_ids[]','". $obj_name."_actions_form',true)","row_end"=>false);
+$actions_arr[]=array("type"=>"D","action"=>"clear_all","heading"=>$sClearAll,"onclick"=>"select_all_checkboxes('records_ids[]','". $obj_name."_actions_form',false)","row_end"=>false);
 $actions_arr[]=array("type"=>"D","action"=>"navback","heading"=>$sNavBack,"onclick"=>"location.href='".$_SESSION["main_list_page"]."'","row_end"=>true);
 
 $in_table_lactions_arr=array();
-$in_table_lactions_arr[]=array(type=>"M","heading"=>$sUpdateObject,"action"=>$obj_name."_perform_action('edit')","image"=>'edit');
-$in_table_lactions_arr[]=array(type=>"M","heading"=>$sDeleteObject,"action"=>$obj_name."_perform_action('delete')","image"=>'drop',"lockmode"=>"Y");
+$in_table_lactions_arr[]=array("type"=>"M","heading"=>$sUpdateObject,"action"=>$obj_name."_perform_action('edit')","image"=>'edit');
+$in_table_lactions_arr[]=array("type"=>"M","heading"=>$sDeleteObject,"action"=>$obj_name."_perform_action('delete')","image"=>'drop',"lockmode"=>"Y");
 
-$in_table_lactions_arr[]=array(type=>"R","heading"=>$sViewObject,"action"=>$obj_name."_perform_action('view')","image"=>'view');
+$in_table_lactions_arr[]=array("type"=>"R","heading"=>$sViewObject,"action"=>$obj_name."_perform_action('view')","image"=>'view');
 //$in_table_lactions_arr[]=array(type=>"M","heading"=>$sDuplicateObject,"action"=>$obj_name."_perform_action('duplicate')","image"=>'duplicate');
 
 $in_table_actions_arr=array();
 if (($_SESSION['CONFIG_selectno']=='Y') OR ((isset($_SESSION["session_security_level"])) AND ($_SESSION["session_security_level"]== 0) ) ){
-	$in_table_actions_arr[]=array(type=>"M","heading"=>$sSelectNo,"action"=>"select_char()","image"=>'props',"lockmode"=>"Y");
+	$in_table_actions_arr[]=array("type"=>"M","heading"=>$sSelectNo,"action"=>"select_char()","image"=>'props',"lockmode"=>"Y");
 }
 
 
@@ -64,13 +63,13 @@ include($APLICATION_ROOT."templates/common_tpl/one_to_many_relation.php");
 function select_char()
 {
     //--------validate selected object
-    if (document.<? echo $obj_name ?>_actions_form.<? echo $obj_name ?>_id_selected.value=="")
+    if (document.<?php echo $obj_name ?>_actions_form.<?php echo $obj_name ?>_id_selected.value=="")
     {
         alert("<?php echo ERROR_NO_SELECTED ?>");
         return;
     }
-    document.<? echo $obj_name ?>_actions_form.action="team_char.php";
-    document.<? echo $obj_name ?>_actions_form.submit();
+    document.<?php echo $obj_name ?>_actions_form.action="team_char.php";
+    document.<?php echo $obj_name ?>_actions_form.submit();
 }
 
 </script>

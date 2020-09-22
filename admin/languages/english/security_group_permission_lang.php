@@ -1,4 +1,4 @@
-<?
+<?php
 define("BROWSER_TITLE","permissions");
 define("PAGE_TITLE","permissions");
 

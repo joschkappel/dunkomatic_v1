@@ -38,7 +38,7 @@ function handleError()
 	<?
 	if ($trial_number<3)
 	{
-		?>location.href="<? echo $_SERVER['PHP_SELF'] ?>?try_num=<? echo $trial_number ?>&<? echo $obj_name.'_id_selected='.$_REQUEST[$obj_name.'_id_selected'] ?>";<?
+		?>location.href="<?php echo $_SERVER['PHP_SELF'] ?>?try_num=<?php echo $trial_number ?>&<?php echo $obj_name.'_id_selected='.$_REQUEST[$obj_name.'_id_selected'] ?>";<?
 	}
 	?>
 }
@@ -56,8 +56,8 @@ function update_object()
 
 <form name="league_rollback" method="post" action="" onsubmit="">
 <input type="hidden" name="methodName" value="rollback">
-<input type="hidden" name="className" value="<? echo $handler_name ?>">
-<input type="hidden" name="classPath" value="<? echo $handler_path ?>">
+<input type="hidden" name="className" value="<?php echo $handler_name ?>">
+<input type="hidden" name="classPath" value="<?php echo $handler_path ?>">
 <input type="hidden" name="obj_name" value="league">
 <input type="hidden" name="selected_id" value="">
 
@@ -65,7 +65,7 @@ function update_object()
 <table  cellspacing="0">
 
 		<td class="OTRecordDataCell">
-		<select name="leagues" id="leaguesSB" class="<? echo $field->css_class ?>">
+		<select name="leagues" id="leaguesSB" class="<?php echo $field->css_class ?>">
         <option value=\"\"></option>
 
 <?php
@@ -74,7 +74,7 @@ function update_object()
 				
 		while (!$rsb->EOF)
 		{
-			?><option value="<? echo $rsb->fields["league_id"] ?>"><? echo $rsb->fields["shortname"] ?></option><?
+			?><option value="<?php echo $rsb->fields["league_id"] ?>"><?php echo $rsb->fields["shortname"] ?></option><?
 			$rsb->MoveNext();
 		}
 		?>
@@ -101,15 +101,15 @@ function update_object()
     $fields_types[]=$field->type;
 ?>
 </table>
-<input type="hidden" name="fields_names" value="<? echo  implode(",", $fields_names); ?>">
-<input type="hidden" name="fields_types" value="<? echo  implode(",", $fields_types); ?>">
+<input type="hidden" name="fields_names" value="<?php echo  implode(",", $fields_names); ?>">
+<input type="hidden" name="fields_types" value="<?php echo  implode(",", $fields_types); ?>">
 </form>
 
 <br>
-<?
+<?php
 //---------------------------actions---------------------
 foreach ($actions_arr as $action){
-	?><input type="button" name="btn_<?php echo $action['heading']  ?>" onclick="<? echo $action["onclick"] ?>" value="<? echo $action["heading"] ?>" /><?
+	?><input type="button" name="btn_<?php echo $action['heading']  ?>" onclick="<?php echo $action["onclick"] ?>" value="<?php echo $action["heading"] ?>" /><?
 
 	if ($action["row_end"])
 	{

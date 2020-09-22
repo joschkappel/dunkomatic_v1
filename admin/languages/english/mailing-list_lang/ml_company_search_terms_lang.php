@@ -1,4 +1,4 @@
-<?
+<?php
 define("BROWSER_TITLE","ml company search terms");
 define("PAGE_TITLE","ml company search terms");
 

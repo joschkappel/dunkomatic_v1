@@ -15,7 +15,7 @@ try {
     $mail->Host       = 'dunkomatic.de';  // Specify main and backup SMTP servers
     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
     $mail->Username   = 'dunkmaster@dunkomatic.de';                     // SMTP username
-    $mail->Password   = 'dunk2001DUNK!';                               // SMTP password
+    $mail->Password   = 'dunk2001DUNK';                               // SMTP password
     $mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
     $mail->Port       = 587;                                    // TCP port to connect to
     $mail->SMTPOptions = array(
@@ -31,9 +31,11 @@ try {
 
     $mail->isHTML(true);                                  // Set email format to HTML
     $mail->Subject = 'Here is the subject';
-    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    $mail->Body    = 'This is the HTML message body äáóœ <b>in bold!</b>';
+    $mail->AltBody = 'This is the body in plain text for äúó Ä non-HTML mail clients';
 
+
+    $mail->CharSet = "UTF-8";
     $mail->send();
     echo 'Message has been sent';
 } catch (Exception $e) {

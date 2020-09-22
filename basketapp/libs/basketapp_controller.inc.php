@@ -6,6 +6,7 @@ include_once ($obj_name.'_definition.inc.php');
 $conn = ADONewConnection(DB_DRIVER);
 $conn->debug = $db_debug;
 $conn->Connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_NAME);
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 $sql="set character set utf8";
 $conn->Execute($sql);
 

@@ -1,4 +1,5 @@
 <?php
+define("BROWSER_TIILE", "Prüfen");
 define("PAGE_TITLE",  BROWSER_TIILE." - Prüfung der Schiedsrichteransetzung");
 
 

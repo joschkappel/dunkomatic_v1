@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Language and charset conversion settings

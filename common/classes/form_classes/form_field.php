@@ -1,4 +1,4 @@
-<?
+<?php
 /**
 * form_field class
 * object that helps admin definition and running of object management
