@@ -106,7 +106,7 @@ $form_field6=new form_selectboxlist_field("training_day");
 $form_field6->set_list_id_values($weekday_ids_array);
 $form_field6->set_list_display_values($weekday_values_array);
 $form_field6->set_search_in_field(false);
-$form_field6->set_show_in_list(true);			
+$form_field6->set_show_in_list(true);
 $form_field6->set_isMandatory(false);
 $form_field6->set_list_default("-1");
 $obj2_display_columns["training_day"]=$form_field6;
@@ -172,7 +172,7 @@ $obj2_display_columns["email"]=$form_field14;
 $form_field16=new form_active_field("active");
 $form_field16->set_show_in_list(false);
 $form_field16->set_show_in_add(false);
-$form_field16->set_auto_value ("Y");
+$form_field16->set_auto_value ("1");
 $form_field16->set_isAutoCreate (true);
 $obj2_display_columns["active"]=$form_field16;
 

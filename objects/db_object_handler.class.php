@@ -239,7 +239,7 @@ return $valid;
 
 
     /**
-	* update_obj method for update object from form
+	* _obj method for update object from form
 	* @param $_REQUEST["obj_name"] is the db object name (also table name)
 	* @param $_REQUEST["id_column_name"] is the db object column id name
 	* @param $_REQUEST['fields_names'] is string of field names sepparated with ',' to add to record data array
@@ -271,34 +271,42 @@ return $valid;
 			{
 
 				if (isset($_REQUEST[$fields_names[$i]])){
-				 $fields[$fields_names[$i]]= $_REQUEST[$fields_names[$i]];
+				 $fields[$fields_names[$i]]= 1;
 				}
 				else
 				{
-				 	$fields[$fields_names[$i]]= "0";
+				 	$fields[$fields_names[$i]]= 0;
 				}
 			}
             if ($fields_types[$i]=="active")
             {
 
                 if (isset($_REQUEST[$fields_names[$i]])){
-                 $fields[$fields_names[$i]]= $_REQUEST[$fields_names[$i]];
+                 $fields[$fields_names[$i]]= 1;
                 }
                 else
                 {
-                     $fields[$fields_names[$i]]= "0";
+                     $fields[$fields_names[$i]]= 0;
                 }
             }
 			if ($fields_types[$i]=="selectboxdb")
 			{
 				if (isset($_REQUEST[$fields_names[$i]])){
-				 $fields[$fields_names[$i]]= $_REQUEST[$fields_names[$i]];
+          if (is_int($_REQUEST[$fields_names[$i]])){
+				        $fields[$fields_names[$i]]= $_REQUEST[$fields_names[$i]];
+          } else {
+            unset($fields[$fields_names[$i]]);
+          }
 				}
 			}
 			if (($fields_types[$i]=="selectboxlist")||($fields_types[$i]=="selectboxenum"))
 			{
 				if (isset($_REQUEST[$fields_names[$i]])){
-				 $fields[$fields_names[$i]]= $_REQUEST[$fields_names[$i]];
+          if (is_int($_REQUEST[$fields_names[$i]])){
+				        $fields[$fields_names[$i]]= $_REQUEST[$fields_names[$i]];
+          } else {
+            unset($fields[$fields_names[$i]]);
+          }
 				}
 			}
 			if ($fields_types[$i]=="image")
@@ -331,6 +339,7 @@ return $valid;
                 $fields[$fields_names[$i]]= $_REQUEST[$fields_names[$i]];
             }
 */
+      //throw new Exception($fields);
 			/*--auto create fields- overwrite any previos value-*/
 			if ($GLOBALS['fields_arr'][$fields_names[$i]]->isAutoCreate)
             {
