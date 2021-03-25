@@ -1,4 +1,4 @@
-ADODB - 3.5
+ADODB - 5.2
 SMarty 2.6.2
 PhpMailer 1.71
 

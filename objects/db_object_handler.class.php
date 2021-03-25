@@ -7,15 +7,19 @@ include_once($APLICATION_ROOT.'db_objects/db_object.class.php');
 * or the specific object
 **/
 class db_object_handler {
-    var $conn;
+    public $conn;
 
 	/**
 	* Constructor
 	* @param conn adodb connection
-	**/
     function db_object_handler(&$conn){
         $this->conn=&$conn;
     }
+	**/
+    public function __construct($conn){
+		$this->conn = $conn;
+	}
+
 
     //------------------------getters---------------------------
 
@@ -80,11 +84,11 @@ class db_object_handler {
 			{
 
 				if (isset($_REQUEST[$fields_names[$i]])){
-				 $fields[$fields_names[$i]]= $_REQUEST[$fields_names[$i]];
+				 $fields[$fields_names[$i]]= 1;
 				}
 				else
 				{
-				 	$fields[$fields_names[$i]]= "0";
+				 	$fields[$fields_names[$i]]= 0;
 				}
 			}
  			/*-- active field type --*/
@@ -92,25 +96,33 @@ class db_object_handler {
             {
 
                 if (isset($_REQUEST[$fields_names[$i]])){
-                 $fields[$fields_names[$i]]= $_REQUEST[$fields_names[$i]];
+                 $fields[$fields_names[$i]]= 1;
                 }
                 else
                 {
-                     $fields[$fields_names[$i]]= "0";
+                     $fields[$fields_names[$i]]= 0;
                 }
             }
  			/*-- selectboxdb field type --*/
 			if ($fields_types[$i]=="selectboxdb")
 			{
 				if (isset($_REQUEST[$fields_names[$i]])){
-				 $fields[$fields_names[$i]]= $_REQUEST[$fields_names[$i]];
-				}
+          if ($_REQUEST[$fields_names[$i]] != "empty" ){
+            $fields[$fields_names[$i]] = $_REQUEST[$fields_names[$i]];
+          } else {
+            unset($fields[$fields_names[$i]]);
+          }
+        }
 			}
  			/*-- selectboxlist field type --*/
 			if (($fields_types[$i]=="selectboxlist")||($fields_types[$i]=="selectboxenum"))
 			{
 				if (isset($_REQUEST[$fields_names[$i]])){
-				 $fields[$fields_names[$i]]= $_REQUEST[$fields_names[$i]];
+          if ($_REQUEST[$fields_names[$i]] != "empty" ){
+            $fields[$fields_names[$i]] = $_REQUEST[$fields_names[$i]];
+          } else {
+            unset($fields[$fields_names[$i]]);
+          }
 				}
 			}
  			/*-- image field type --*/
@@ -292,22 +304,20 @@ return $valid;
 			if ($fields_types[$i]=="selectboxdb")
 			{
 				if (isset($_REQUEST[$fields_names[$i]])){
-          if (is_int($_REQUEST[$fields_names[$i]])){
-				        $fields[$fields_names[$i]]= $_REQUEST[$fields_names[$i]];
+          if ($_REQUEST[$fields_names[$i]] != "empty" ){
+		        $fields[$fields_names[$i]] = $_REQUEST[$fields_names[$i]];
           } else {
-            unset($fields[$fields_names[$i]]);
+            $fields[$fields_names[$i]] = 0;
           }
 				}
 			}
 			if (($fields_types[$i]=="selectboxlist")||($fields_types[$i]=="selectboxenum"))
 			{
-				if (isset($_REQUEST[$fields_names[$i]])){
-          if (is_int($_REQUEST[$fields_names[$i]])){
-				        $fields[$fields_names[$i]]= $_REQUEST[$fields_names[$i]];
-          } else {
-            unset($fields[$fields_names[$i]]);
-          }
-				}
+        if ($_REQUEST[$fields_names[$i]] != "empty" ){
+          $fields[$fields_names[$i]] = $_REQUEST[$fields_names[$i]];
+        } else {
+          unset($fields[$fields_names[$i]]);
+        }
 			}
 			if ($fields_types[$i]=="image")
 			{

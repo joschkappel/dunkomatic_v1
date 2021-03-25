@@ -170,7 +170,7 @@ foreach ($fields_arr as $field){
 
 		<td class="OTRecordDataCell">
 		<select name="<?php echo $field->name ?>" class="<?php echo $field->css_class ?>" dir="<?php echo $field->lang_dir ?>">
-        <?php if (!$field->isMandatory) echo '<option value=\"\"></option>';
+        <?php if (!$field->isMandatory) echo '<option value="empty"></option>';
 
 	   if ( isset($_SESSION["select_cache"][$field->table_name.'_'.$field->name.'_'.$field->display_field_name.'_'.$field->where_clause])) {
 
@@ -223,7 +223,7 @@ foreach ($fields_arr as $field){
         <select name="<?php echo $field->name ?>" class="<?php echo $field->css_class ?>" dir="<?php echo $field->lang_dir ?>">
         <?php
         if (!$field->isMandatory) {
-        	echo '<option value=\"\"></option>';
+        	echo '<option value="empty"></option>';
         	}
 
         if (!$_SESSION['validation_error']) {

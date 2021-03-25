@@ -13,15 +13,15 @@ include_once($FW_ROOT.'objects/db_object_handler.class.php');
 	* Constructor for configuration_handler
 	* @param $conn adodb connection
 	*/
-    function configuration_handler($conn){
-        parent::db_object_handler($conn);
+    public function __construct($conn){
+        parent::__construct($conn);
     }
 
 
 	/**
 	 * read all settings
 	 */
-	 function get_configuration($region){
+	function get_configuration($region){
 	 	$sql="SELECT setting_value, setting_var, setting_default FROM settings where (region='".$region."' OR region='ALL')";
 		$rs = $this->conn->Execute($sql);
 
@@ -47,7 +47,7 @@ include_once($FW_ROOT.'objects/db_object_handler.class.php');
 		return;
 	 }
 
-function reset_configuration($region){
+	function reset_configuration($region){
 	 	$sql="SELECT setting_value, setting_var, setting_default FROM settings where (region='".$region."')";
 		$rs = $this->conn->Execute($sql);
 

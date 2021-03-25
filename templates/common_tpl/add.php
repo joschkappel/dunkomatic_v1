@@ -136,9 +136,9 @@ foreach ($fields_arr as $field){
     }
     if (($field->type=="textarea") AND (!$field->isAutoCreate))
 	{
-        ?><td class="OTRecordDataCell"><textarea name="<?php echo $field->name ?>" cols="<?php echo $field->cols ?>" rows="<?php echo $field->rows ?>" class="<?php echo $field->css_class ?>" dir="<?php echo $field->lang_dir ?>"></textarea></td><?php
-    }
-    if (($field->type=="selectboxdb") AND (!$field->isAutoCreate))
+        ?><td class="OTRecordDataCell"><textarea name="<?php echo $field->name ?>" cols="<?php echo $field->cols ?>" rows="<?php echo $field->rows ?>" class="<?php echo $field->css_class ?>" dir="<?php echo $field->lang_dir ?>"></textarea></td>
+  <?php }
+  if (($field->type=="selectboxdb") AND (!$field->isAutoCreate))
 	{
 		$dispval = "";
 		// print_r($_SESSION["select_cache"]);
@@ -153,7 +153,7 @@ foreach ($fields_arr as $field){
 		} ?>
 		<td class="OTRecordDataCell">
 		<select name="<?php echo $field->name ?>" class="<?php echo $field->css_class ?>" dir="<?php echo $field->lang_dir ?>">
-        <?php if (!$field->isMandatory) echo '<option value=\"\"></option>';
+        <?php if (!$field->isMandatory) echo '<option value="empty"></option>';
 
  	   if ( isset($_SESSION["select_cache"][$field->table_name.'_'.$field->name.'_'.$field->display_field_name.'_'.$field->where_clause])) {
 
@@ -179,7 +179,7 @@ foreach ($fields_arr as $field){
         ?>
         <td class="OTRecordDataCell">
         <select name="<?php echo $field->name ?>" class="<?php echo $field->css_class ?>" dir="<?php echo $field->lang_dir ?>">
-        <?php if (!$field->isMandatory) echo '<option value=\"\"></option>';
+        <?php if (!$field->isMandatory) echo '<option value="empty"></option>';
 
        for ($i=0;$i<count($field->list_id_values);$i++)
         {
