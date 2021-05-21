@@ -12,7 +12,7 @@ class form_selectboxenum_field extends form_field{
     var $list_default;
 
     function form_selectboxenum_field($name){
-		 parent:: form_field($name);
+		 parent::__construct($name);
 		 parent::set_type("selectboxenum");
          $this->list_values=array();
    		 parent::set_css_class(FORM_SELECTBOX_FIELD_DEFAULT_CSS_CLASS);

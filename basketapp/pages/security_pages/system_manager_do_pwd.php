@@ -61,11 +61,11 @@ if (($rs->fields["email"] != '') AND ($_SESSION['CONFIG_mail']!='N')){
 			}
 			else
 			{
-					$mail->addAddress( $rs->fields["email"]);
+				$mail->addAddress( $rs->fields["email"]);
 			}
 
 	    $mail->isHTML(true);                                  // Set email format to HTML
-	    $mail->Subject = 'HBV: Ihre Benutzerkennung f�r Dunk-O-Matic';
+	    $mail->Subject = 'HBV: Ihre Benutzerkennung für Dunk-O-Matic';
 
 			$mail->Body  = "
 			<html>

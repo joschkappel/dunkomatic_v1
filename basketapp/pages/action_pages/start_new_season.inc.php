@@ -1,14 +1,14 @@
 <?php
 
 $success=true;
-// set all leagues to changeable
+// set all junior leagues to changeable
 $success=$conn->Execute("UPDATE league SET changeable='Y', lastuser='".$_SESSION['system_manager_name']."', lastchange='".date(DB_DATE_FORMAT_FOR_PHP_DATE_FUNCTION)."'" );
 // clean club assignment for junior leagues
-$success=$conn->Execute("UPDATE league SET club_id_A=NULL,club_id_B=NULL,club_id_C=NULL,club_id_D=NULL,club_id_E=NULL,club_id_F=NULL,club_id_G=NULL,club_id_H=NULL,club_id_I=NULL,club_id_K=NULL WHERE group_id IN (2,3,4,5) " );
+$success=$conn->Execute("UPDATE league SET club_id_A=NULL,club_id_B=NULL,club_id_C=NULL,club_id_D=NULL,club_id_E=NULL,club_id_F=NULL,club_id_G=NULL,club_id_H=NULL,club_id_I=NULL,club_id_K=NULL WHERE gender_id > 2 " );
 
-//reset teams
-$success=$success AND $conn->Execute("UPDATE team t SET t.league_prev = (SELECT l.shortname from league l WHERE l.league_id = t.league_id)");
-$success=$success AND $conn->Execute("UPDATE team SET league_id=NULL, league_char=NULL, changeable='Y', lastuser='".$_SESSION['system_manager_name']."', lastchange='".date(DB_DATE_FORMAT_FOR_PHP_DATE_FUNCTION)."'");
+//reset teams for junior leagues
+$success=$success AND $conn->Execute("UPDATE team t SET t.league_prev = (SELECT l.shortname from league l WHERE l.league_id = t.league_id) WHERE t.team_id IN (SELECT tl.team_id from team tl, league l WHERE tl.league_id=l.league_id AND l.gender_id >2)");
+$success=$success AND $conn->Execute("UPDATE team t SET t.league_id=NULL, t.league_char=NULL, t.changeable='Y', t.lastuser='".$_SESSION['system_manager_name']."', t.lastchange='".date(DB_DATE_FORMAT_FOR_PHP_DATE_FUNCTION)."' WHERE t.team_id IN (SELECT tl.team_id from team tl, league l WHERE tl.league_id=l.league_id AND l.gender_id >2) ");
 //empty games
 $success=$success AND $conn->Execute("DELETE FROM game");
 // update schedules to next year

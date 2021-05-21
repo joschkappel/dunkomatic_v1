@@ -17,7 +17,7 @@ class form_hidden_field extends form_field{
 
 
     function form_hidden_field($name){
-		parent:: form_field($name);
+		parent:: __construct($name);
 		parent::set_type("hidden");
         $this->var_name="";
 		parent::set_show_heading(false);

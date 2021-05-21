@@ -12,11 +12,12 @@ $rptTitle = 'HBV Handbuch Bezirk '.$sSQLregion;
 $desc = 'Alle Adressen von Vereins-, Runden-, und Bezirksveratnwortlichen';
 $lRegions = array( 'HBVDA'=>"Darmstadt", 'HBVF'=>"Frankfurt", 'HBVGI'=>"Giesen", 'HBVKS'=>"Kassel", 'HBV'=>"HBV");
 $lRegion = $lRegions[$sSQLregion];
+$sRegion = $sSQLregion;
 $report = new Reporter();
 $wbook = $report->createWorkbook( $filename, $rptTitle, '', $desc );
 
 //  create tab for clubs of first region
-$report->addSheet( 0, $rptTitle, 'Vereine '.$sRegion, $sRegion, $lRegion, $season, false );
+$report->addSheet( 0, $rptTitle, 'Vereine '.$sRegion, $sRegion, $lRegion, $season, true );
 $sqlGroup = "SELECT shortname, name, club_no, club_url, club_id from club WHERE active=1 AND region='".$sSQLregion."' ORDER BY shortname";
 $sqlDetail[0] = 'SELECT CASE member_role_id  WHEN 0 THEN \'Abteilungsleiter\' WHEN 1 THEN \'Schiriwart\' WHEN 4 THEN \'Maedchenverantw\' END as function , firstname, lastname, zip, city , street,  email, phone1, phone2, mobile, fax1, email2 FROM member WHERE member_role_id IN (0,1,4) AND club_id=[club_id] Order by member_role_id';
 $sqlCols[0] = array ( "club_id" );

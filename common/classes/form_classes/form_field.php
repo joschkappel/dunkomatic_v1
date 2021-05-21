@@ -50,7 +50,7 @@ class form_field{
 	* This setting may be overidden in the objects extending this class
 	* @name string the name of field in the database
 	**/
-	function form_field($name){
+	function __construct($name){
 		$this->name=$name;
 		$this->type="text";
 		$this->show_heading=true;

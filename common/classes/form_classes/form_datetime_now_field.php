@@ -10,7 +10,7 @@ class form_datetime_now_field extends form_field{
     var $date_format;
 
     function form_datetime_now_field($name){
-		 parent:: form_field($name);
+		 parent::__construct($name);
 		 parent::set_type("datetime_now");
 		 parent::set_show_heading(false);		
 		 $this->date_format=DATE_FORMAT_LONG;

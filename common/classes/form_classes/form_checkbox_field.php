@@ -10,7 +10,7 @@ class form_checkbox_field extends form_field{
 	var $default_selected;
 	
     function form_checkbox_field($name){
-             parent:: form_field($name);
+             parent::__construct($name);
              parent::set_type("checkbox");
 			 parent::set_css_class(FORM_CHECKBOX_FIELD_DEFAULT_CSS_CLASS);
         	$this->default_selected=false;

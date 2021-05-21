@@ -8,7 +8,7 @@ include_once($ROOT.'libs/basketapp_controller.inc.php');
 $pre_condition=" (sg.region='".$_SESSION['region']."' OR sg.region='HBV') ";
 
 // prepare data
-$sql2="SELECT sg.group_name, s.game_day, s.game_date,sg.region, s.weekend, DATE_FORMAT(s.game_date,'%d.%m.%Y') as gamedate, DAYOFWEEK(s.game_date) as dow FROM `schedule` s, schedule_group sg WHERE s.group_id = sg.group_id AND " . $pre_condition .  " ORDER BY 4,6, 1, 2";
+$sql2="SELECT sg.group_name, s.game_day, s.game_date,sg.region, s.weekend, DATE_FORMAT(s.game_date,'%d.%m.%Y') as gamedate, DAYOFWEEK(s.game_date) as dow FROM `schedule` s, schedule_group sg WHERE s.group_id = sg.group_id AND " . $pre_condition .  " ORDER BY 4,3, 1, 2";
 // print ($sql2);
 $rs2 = $conn->Execute($sql2);
 

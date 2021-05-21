@@ -5,7 +5,6 @@
 /**
  * DEFINES VARIABLES & CONSTANTS
  * Overview:
- *    PMA_VERSION              (string) - phpMyAdmin version string
  *    PMA_THEME_VERSION        (int)    - phpMyAdmin theme version integer
  *    PMA_THEME_GENERATION     (int)    - phpMyAdmin theme generation integer
  *    PMA_PHP_INT_VERSION      (int)    - eg: 30017 instead of 3.0.17 or
@@ -18,10 +17,6 @@
  *    PMA_USR_BROWSER_AGENT    (string) - the browser of the user
  *    PMA_USR_BROWSER_VER      (double) - the version of this browser
  */
-// phpMyAdmin release
-if (!defined('PMA_VERSION')) {
-    define('PMA_VERSION', '2.6.0-pl1');
-}
 
 if (!defined('PMA_THEME_VERSION')) {
     define('PMA_THEME_VERSION', 1);

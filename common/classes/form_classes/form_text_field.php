@@ -12,8 +12,8 @@ $fields_arr[]=$form_field2;
 
 class form_text_field extends form_field{
 
-    function form_text_field($name){
-		 parent:: form_field($name);
+    function __construct($name){
+		 parent:: __construct($name);
 		 parent::set_type("text");
 		 parent::set_css_class(FORM_TEXT_FIELD_DEFAULT_CSS_CLASS);
     }

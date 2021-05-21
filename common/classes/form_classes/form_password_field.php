@@ -10,7 +10,7 @@ class form_password_field extends form_field{
 	var $use_repassword;
 
     function form_password_field($name){
-		 parent:: form_field($name);
+		 parent::__construct($name);
 		 parent::set_type("password");
 		 parent::set_css_class(FORM_PASSWORD_FIELD_DEFAULT_CSS_CLASS);
 		 $this->set_use_repassword(true);

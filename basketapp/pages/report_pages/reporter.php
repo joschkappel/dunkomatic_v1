@@ -83,7 +83,7 @@ class Reporter {
 		//-------------------------run class method and security check------------------
 		$this->dbconn = ADONewConnection(DB_DRIVER);
 		//$db_debug = true;
-		$this->dbconn->debug = $db_debug;
+		$this->dbconn->debug = false;
 		$this->dbconn->Connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_NAME);
 		$sql="set character set utf8";
 		$this->dbconn->Execute($sql);
@@ -114,20 +114,22 @@ class Reporter {
 		if (!$validLocale) {
 			echo 'Unable to set locale to '.$locale." - reverting to en_us<br />\n";
 		}
-		$cacheMethod = PHPExcel_CachedObjectStorageFactory:: cache_to_phpTemp;
+		$cacheMethod = PHPExcel_CachedObjectStorageFactory::cache_to_phpTemp;
 		$cacheSettings = array( 'memoryCacheSize'  => '8MB');
 		PHPExcel_Settings::setCacheStorageMethod($cacheMethod, $cacheSettings);
-		PHPExcel_Shared_Font::setAutoSizeMethod(PHPExcel_Shared_Font::AUTOSIZE_METHOD_EXACT);
+
+//		PHPExcel_Shared_Font::setTrueTypeFontPath($this->pdflibpath.'common/fonts/');
+//		PHPExcel_Shared_Font::setAutoSizeMethod(PHPExcel_Shared_Font::AUTOSIZE_METHOD_EXACT);
 
 		// Create new PHPExcel object
 		$this->wbook = new PHPExcel();
 
 
-		$this->wbook->getProperties()->setCreator("Jochen Kappel");
-		$this->wbook->getProperties()->setLastModifiedBy("Dunc-o-Matic");
-		$this->wbook->getProperties()->setTitle( $title );
-		$this->wbook->getProperties()->setSubject( $subtitle );
-		$this->wbook->getProperties()->setDescription( $desc );
+		$this->wbook->getProperties()->setCreator("Jochen Kappel")
+									 ->setLastModifiedBy("Dunc-o-Matic")
+									 ->setTitle( $title )
+									 ->setSubject( $subtitle )
+									 ->setDescription( $desc );
 		$this->fname = $filename;
 
 		return  $this->wbook;
@@ -138,9 +140,10 @@ class Reporter {
 
 		switch ($format){
 			case ( self::FILEFMT_PDF ):
-
-				$rendererName = PHPExcel_Settings::PDF_RENDERER_MPDF;
-				$rendererLibrary = 'MPDF54';
+				//$rendererName = PHPExcel_Settings::PDF_RENDERER_MPDF;
+				$rendererName = PHPExcel_Settings::PDF_RENDERER_TCPDF;
+				//
+				$rendererLibrary = 'TCPDF';
 
 				$rendererLibraryPath =  $this->pdflibpath.'common/'. $rendererLibrary;
 
@@ -165,7 +168,7 @@ class Reporter {
 				$objWriter = new PHPExcel_Writer_HTML($this->wbook);
 				if ($aSheet == self::WRITE_ALLSHEETS ) {  $objWriter->writeAllSheets();  };
 				$objWriter->save( $this->fname.".html");
-				echo date("d.m.Y H:i:s ->").$this->fname.'.html  created /n';
+				echo date("d.m.Y H:i:s ->").$this->fname.'.html  created ';
 				flush();
 				ob_flush();
 				break;
@@ -177,7 +180,7 @@ class Reporter {
 				$objWriter = new PHPExcel_Writer_EXCEL2007($this->wbook);
 				$objWriter->setOffice2003Compatibility(true);
 				$objWriter->save('php://output');
-				echo date("d.m.Y H:i:s ->").$this->fname.'.xlsx  created /n';
+				echo date("d.m.Y H:i:s ->").$this->fname.'.xlsx  created ';
 				flush();
 				ob_flush();
 				break;
@@ -185,7 +188,7 @@ class Reporter {
 				$objWriter = new PHPExcel_Writer_EXCEL2007($this->wbook);
 				$objWriter->setOffice2003Compatibility(true);
 				$objWriter->save( $this->fname.".xlsx");
-				echo date("d.m.Y H:i:s ->").$this->fname.'.xlsx  created /n';
+				echo date("d.m.Y H:i:s ->").$this->fname.'.xlsx  created \n';
 				flush();
 				ob_flush();
 				break;
@@ -247,23 +250,26 @@ class Reporter {
 		$this->wbook->getActiveSheet()->getHeaderFooter()->setOddFooter('&L&B' . $this->wbook->getProperties()->getTitle() . '&RSeite &P von &N');
 
 		$this->wbook->getActiveSheet()->getColumnDimension('A')->setWidth(20);
-		$this->wbook->getActiveSheet()->getColumnDimension('B')->setWidth(10);
+		//$this->wbook->getActiveSheet()->getColumnDimension('B')->setWidth(10);
 		$this->wbook->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
 
-		$this->wbook->getActiveSheet()->getColumnDimension('C')->setWidth(5);
-		//$this->wbook->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+		//$this->wbook->getActiveSheet()->getColumnDimension('C')->setWidth(5);
+		$this->wbook->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
 
-		$this->wbook->getActiveSheet()->getColumnDimension('D')->setWidth(12);
-		//$this->wbook->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+		//$this->wbook->getActiveSheet()->getColumnDimension('D')->setWidth(12);
+		$this->wbook->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
 
-		$this->wbook->getActiveSheet()->getColumnDimension('E')->setWidth(12);
-		//$this->wbook->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
+		//$this->wbook->getActiveSheet()->getColumnDimension('E')->setWidth(12);
+		$this->wbook->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
 
-		$this->wbook->getActiveSheet()->getColumnDimension('F')->setWidth(10);
+		//$this->wbook->getActiveSheet()->getColumnDimension('F')->setWidth(10);
 		$this->wbook->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
 
-		$this->wbook->getActiveSheet()->getColumnDimension('G')->setWidth(20);
-		$this->wbook->getActiveSheet()->getColumnDimension('H')->setWidth(20);
+		//$this->wbook->getActiveSheet()->getColumnDimension('G')->setWidth(20);
+		$this->wbook->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
+
+		//$this->wbook->getActiveSheet()->getColumnDimension('H')->setWidth(20);
+		$this->wbook->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
 
 
 		$this->wbook->getActiveSheet()->setCellValue('A2', 'HBV '.$lRegion );
@@ -273,18 +279,19 @@ class Reporter {
 		$this->wbook->getActiveSheet()->mergeCells('A3:C3');
 
 		$this->wbook->getActiveSheet()->setCellValue ('A4', $subTitle);
-		$this->wbook->getActiveSheet()->setCellValue('G2', $season);
-		$this->wbook->getActiveSheet()->mergeCells('G2:H2');
+		$this->wbook->getActiveSheet()->setCellValue('F2', $season);
+		$this->wbook->getActiveSheet()->mergeCells('F2:H2');
 
-		$this->wbook->getActiveSheet()->setCellValue('G3', $shortname );
-		$this->wbook->getActiveSheet()->mergeCells('G3:H3');
+		$this->wbook->getActiveSheet()->setCellValue('F3', $shortname );
+		$this->wbook->getActiveSheet()->mergeCells('F3:H3');
 
-		$this->wbook->getActiveSheet()->setCellValue('G4', date("d.m.Y"));
-		$this->wbook->getActiveSheet()->mergeCells('G4:H4');
+		$this->wbook->getActiveSheet()->setCellValue('F4', date("d.m.Y"));
+		$this->wbook->getActiveSheet()->mergeCells('F4:H4');
 
 		$styleArray = array(
 			'font' => array(
 				'bold' => true,
+				'name' => 'Arial',
 				),
 			'borders' => array(
 				'outline' => array(
@@ -344,6 +351,12 @@ class Reporter {
 
    		 	while (!$rs->EOF) {
 
+				if (!isset($rs->fields["club_url"])){
+					$rs->fields["club_url"] = '';
+				}
+				if (!isset($rs->fields["club_no"])){
+					$rs->fields["club_no"] = '';
+				}				
     			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow( 0, $this->crow, $rs->fields["shortname"]);
     			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow( 2, $this->crow, $rs->fields["name"]);
     			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow( 3, $this->crow, $rs->fields["club_url"]);
@@ -412,6 +425,32 @@ class Reporter {
 			$this->crow++;
 
 			//var_dump( $rs2);
+			if (!isset($rs2->fields['firstname'])){
+				$rs2->fields['firstname']='';
+			}
+			if (!isset($rs2->fields['email'])){
+				$rs2->fields['email']='';
+			}
+			if (!isset($rs2->fields['email2'])){
+				$rs2->fields['email2']='';
+			}
+			if (!isset($rs2->fields['street'])){
+				$rs2->fields['street']='';
+			}	
+			if (!isset($rs2->fields['phone1'])){
+				$rs2->fields['phone1']='';
+			}		
+			if (!isset($rs2->fields['phone2'])){
+				$rs2->fields['phone2']='';
+			}
+			if (!isset($rs2->fields['mobile'])){
+				$rs2->fields['mobile']='';
+			}
+			if (!isset($rs2->fields['fax1'])){
+				$rs2->fields['fax1']='';
+			}
+													
+
 			if (isset($rs2->fields['function'])) { $this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol, $this->crow, $rs2->fields['function']); }
 			if (isset($rs2->fields['function2'])) { $this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol+1, $this->crow, $rs2->fields['function2']); }
 			$this->wbook->getActiveSheet()->setCellValueByColumnAndRow($this->ccol+2, $this->crow, $rs2->fields['firstname'].' '.$rs2->fields['lastname'] );
@@ -478,7 +517,8 @@ class Reporter {
 
 		$styleArray = array(
 			'font' => array(
-				'bold' => true,),
+				'bold' => true,
+				'name' => 'Arial'),
 			'borders' => array(
 				'bottom' => array(
 				'style' => PHPExcel_Style_Border::BORDER_MEDIUM ),),

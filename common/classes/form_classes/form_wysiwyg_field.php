@@ -12,7 +12,7 @@ class form_wysiwyg_field extends form_field{
 
 
     function form_wysiwyg_field($name){
-         parent:: form_field($name);
+         parent::__construct($name);
          parent::set_type("wysiwyg");
          $this->rows=FORM_FIELD_DEFAULT_WYSIWYG_ROWS;
          $this->cols=FORM_FIELD_DEFAULT_WYSIWYG_COLS;

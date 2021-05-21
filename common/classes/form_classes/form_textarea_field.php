@@ -12,7 +12,7 @@ class form_textarea_field extends form_field{
 
 
     function form_textarea_field($name){
-         parent:: form_field($name);
+         parent::__construct($name);
          parent::set_type("textarea");
          $this->rows=FORM_FIELD_DEFAULT_ROWS;
          $this->cols=FORM_FIELD_DEFAULT_COLS;

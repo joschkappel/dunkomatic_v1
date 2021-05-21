@@ -14,7 +14,7 @@ class form_selectboxlist_field extends form_field{
     var $list_default;
 
     function form_selectboxlist_field($name){
-		 parent:: form_field($name);
+		 parent::__construct($name);
 		 parent::set_type("selectboxlist");
          $this->list_id_values=array();
          $this->list_display_values=array();

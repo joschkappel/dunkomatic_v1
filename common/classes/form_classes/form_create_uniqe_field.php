@@ -12,7 +12,7 @@ class form_create_uniqe_field extends form_field{
 
 
     function form_create_uniqe_field($name){
-		parent:: form_field($name);
+		parent::__construct($name);
 		parent::set_type("create_uniqe");
 		parent::set_show_heading(false);		
 		$this->number_of_digits=FORM_FIELD_DEFAULT_NUMBER_OF_DIGITS;

@@ -11,7 +11,7 @@ class form_url_field extends form_field{
 	var $protocol;
 
     function form_url_field($name){
-		 parent:: form_field($name);
+		 parent::__construct($name);
 		 parent::set_type("url");
 		 $this->protocol="http";
 		 parent::set_css_class(FORM_TEXT_FIELD_DEFAULT_CSS_CLASS);
