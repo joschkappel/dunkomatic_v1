@@ -13,8 +13,8 @@ class season_handler extends db_object_handler {
 	* Constructor for season_handler
 	* @param $conn adodb connection
 	*/
-	function season_handler($conn) {
-		parent :: db_object_handler($conn);
+	function __construct($conn) {
+		parent::__construct($conn);
 	}
 
 	/**
@@ -374,7 +374,7 @@ class season_handler extends db_object_handler {
 
 		if ($leagueAboveRegion == '0'){
 			//update team data
-			$sql = "UPDATE team SET changeable='Y', league_char=NULL, league_id=NULL WHERE team_id=".$team_id;
+			$sql = "UPDATE team SET changeable='Y', league_char=0, league_id=0 WHERE team_id=".$team_id;
 			$rs = $this->conn->Execute($sql);
 		}
 		
@@ -490,8 +490,18 @@ class season_handler extends db_object_handler {
 			$fields['lastchange'] = date(DB_DATE_FORMAT_FOR_PHP_DATE_FUNCTION);
 			$fields['changeable'] = 'N';
 
-			$insobj = $this->get_db_object('team', 'team_id');
-			$team_id = $insobj->insert($fields);
+			// check available team
+			$sql3 = "SELECT team_id from team WHERE club_id=".$club_id."  and league_id=0 and team_no='".$team_no."'";
+			$rs3 = $this->conn->Execute($sql3);
+			if ($rs3->EOF){
+				$insobj = $this->get_db_object('team', 'team_id');
+				$team_id = $insobj->insert($fields);
+			} else {
+				$team_id = $rs3->fields['team_id'];
+				// update team
+				$sql = "UPDATE team set league_id=".$league_id.", league_char=".$league_char.", changeable='N' where team_id=".$team_id; 
+				$rs = $this->conn->Execute($sql);	
+			}
 
 			if (($isGenerated) AND (!$isCleanedup)) {
 				// games have been created, update games and team
@@ -504,15 +514,15 @@ class season_handler extends db_object_handler {
 			} else if (($isGenerated) AND ($isCleanedup)) {
 				$this->add_team_to_cleanedup($league_id, $league_char);
 								
+			} 
+
+			// add club to league
+			
+			$key  = array_search(0, $clubs); // search empty place
+			if ($key != false){
+				$sql = "UPDATE league set club_id_".$key." = ".$club_id." WHERE league_id=".$league_id;
+				$rs = $this->conn->Execute($sql);
 			}
-				
-				// add club to league
-				
-				$key  = array_search(0, $clubs); // search empty place
-				if ($key != false){
-					$sql = "UPDATE league set club_id_".$key." = ".$club_id." WHERE league_id=".$league_id;
-					$rs = $this->conn->Execute($sql);
-				}
 				
 				
 			}
