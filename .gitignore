@@ -3,3 +3,5 @@ ddl/
 config/
 **/*config.php
 **/.DS_Store
+deployment-config.json
+deployment-config.test.json
