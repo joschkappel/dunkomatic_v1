@@ -5,7 +5,7 @@ include_once($APLICATION_ROOT.'common/functions/generate_sql.php');
 class gen_table extends db_object {
 
 	function gen_table($conn){
-		parent::db_object($conn,"gen_table","gen_table_id");
+		parent::__construct($conn,"gen_table","gen_table_id");
 	}
 	
 	function delete($record_id){

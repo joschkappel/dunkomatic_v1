@@ -71,11 +71,11 @@ foreach ( $leaguelist as $leaguename){
 		
 
 
-for ($i=1; $i<=14; $i++){
+for ($i=1; $i<=16; $i++){
 		echo "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp</td>";
 	foreach ($leaguelist as $leaguename){
 		$reg=false;
-		for ($ii=1; $ii<=14; $ii++){
+		for ($ii=1; $ii<=16; $ii++){
 			if ($rleagueclub[$leaguename][$ii] == $club[$league[$leaguename][$i]]){
 				$reg=true;
 			}
@@ -111,7 +111,7 @@ foreach ( $leaguelist as $leaguename){
 	<?php
 }
 
-for ($i=1; $i<=14; $i++){
+for ($i=1; $i<=16; $i++){
 	echo "<tr><td>".$i."</td>";
 	foreach ($leaguelist as $leaguename){
 	    $bgcolor          = ($i % 2) ? $cfg['BgcolorOneBgcolorOne'] : $cfg['BgcolorTwo'];

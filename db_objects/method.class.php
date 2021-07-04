@@ -5,7 +5,7 @@ include_once($APLICATION_ROOT.'common/functions/generate_sql.php');
 class method extends db_object {
 
 	function method($conn){
-		parent::db_object($conn,"method","method_id");
+		parent::__construct($conn,"method","method_id");
 	}
 	
 	function delete($record_id){

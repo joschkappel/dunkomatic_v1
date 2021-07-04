@@ -6,7 +6,7 @@ include_once($APLICATION_ROOT.'db_objects/gen_table.class.php');
 class gen_module extends db_object {
 
 	function gen_module($conn){
-		parent::db_object($conn,"gen_module","gen_module_id");
+		parent::__construct($conn,"gen_module","gen_module_id");
 	}
 	
 	function delete($record_id){

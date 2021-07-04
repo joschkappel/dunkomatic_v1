@@ -96,7 +96,7 @@ $sql.="WHERE 1 ".$where_search." ";
 
 if ($sort_by!="" && $sort_type!="")
 {
-    $sql.="ORDER BY `".$sort_by."` ".$sort_type."  ";
+    $sql.="ORDER BY `".$sort_by."` ".$sort_type.",  ".$id_column_name;
 }
 
 $rs=$conn->Execute($sql);

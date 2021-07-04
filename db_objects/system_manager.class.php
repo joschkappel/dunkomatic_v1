@@ -5,7 +5,7 @@ include_once($APLICATION_ROOT.'common/functions/generate_sql.php');
 class system_manager extends db_object {
 
 	function system_manager($conn){
-		parent::db_object($conn,"system_manager","system_manager_id");
+		parent::__construct($conn,"system_manager","system_manager_id");
 	}
 	
 

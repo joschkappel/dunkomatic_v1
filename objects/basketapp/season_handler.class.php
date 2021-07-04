@@ -14,6 +14,7 @@ class season_handler extends db_object_handler {
 	* @param $conn adodb connection
 	*/
 	function __construct($conn) {
+		$ADODB_FORCE_TYPE = ADODB_FORCE_NULL;
 		parent::__construct($conn);
 	}
 
@@ -131,12 +132,20 @@ class season_handler extends db_object_handler {
 			}
 
 			$fields['game_no'] = $rs->fields['game_no'];
-			$fields['club_id'] = $team_club[$rs->fields['team_home']];
-			$fields['team_id_home'] = $team_id[$rs->fields['team_home']];
+			if ($team_club[$rs->fields['team_home']] != null) {
+				$fields['club_id'] = $team_club[$rs->fields['team_home']];
+			}
+			if ($team_id[$rs->fields['team_home']] != null){
+				$fields['team_id_home'] = $team_id[$rs->fields['team_home']];
+			}
 			$fields['game_team_home'] = $team_name[$rs->fields['team_home']];
 			$fields['char_team_home'] = $rs->fields['team_home'];
-			$fields['club_id_guest'] = $team_club[$rs->fields['team_guest']];
-			$fields['team_id_guest'] = $team_id[$rs->fields['team_guest']];
+			if ($team_club[$rs->fields['team_guest']] != null){
+				$fields['club_id_guest'] = $team_club[$rs->fields['team_guest']];
+			}
+			if ($team_id[$rs->fields['team_guest']] != null){
+				$fields['team_id_guest'] = $team_id[$rs->fields['team_guest']];
+			}
 			$fields['game_team_guest'] = $team_name[$rs->fields['team_guest']];
 			$fields['char_team_guest'] = $rs->fields['team_guest'];
 			$fields['game_gym'] = 1;

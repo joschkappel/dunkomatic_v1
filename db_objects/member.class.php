@@ -5,7 +5,7 @@ include_once($APLICATION_ROOT.'common/functions/generate_sql.php');
 class member extends db_object {
 
 	function member($conn){
-		parent::db_object($conn,"member","member_id");
+		parent::__construct($conn,"member","member_id");
 	}
 
 
